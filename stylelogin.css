@@ -29,6 +29,7 @@
 }
 .icons {
     font-size: 2em;
+    padding: 30px;
 }
 .slogan {
     color: rgb(13, 40, 75);
@@ -118,8 +119,19 @@ a {
   }
 
 /* RESPONSIVE */
-@media (max-width:600px){
-    .col-5 {
-        
+@media (max-width:768px) {
+    .slogan {
+        display: none;
+    }
+    img {
+        padding-bottom: 20px;
+        width: 50%;
+    }
+    .div-logo{
+        display: flex;
+        justify-content: center;
+    }
+    .icons {
+        padding: 10px;
     }
 }

@@ -30,7 +30,7 @@ if(isset($user) && isset($pass)){
 
     if($auth){
         session_start();
-        header("Location: Principal.php?" . session_id());
+        header("Location: PaginaPrincipal.php?" . session_id());
         exit();
     }else{
         $mensajeError = "El usuario o contraseña son incorrectos, verifique.";

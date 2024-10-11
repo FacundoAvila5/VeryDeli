@@ -17,7 +17,7 @@
         <div class="container-fluid d-flex justify-content-between">
             <!-- logo -->
             <div class="col-2 ms-5">
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="PaginaPrincipal.php">
                     <img id="logo" src="img/logo-negro.svg" alt="Very Deli: Inicio">
                 </a>
             </div>
@@ -46,10 +46,12 @@
         <!-- user -->
         <div class="col-lg-3 d-none d-lg-block">
             <!-- info -->
-            <div class="user d-flex justify-content-start p-2">
-                <img class="userImg rounded-circle me-2" src="img/ala.jpg" alt="">
-                Nombre Usuario
-            </div>
+             <a href="perfildeusuario.php" class="link">
+                <div class="user d-flex justify-content-start p-2">
+                    <img class="userImg rounded-circle me-2" src="img/ala.jpg" alt="">
+                    Nombre Usuario
+                </div>
+             </a>
             <!-- botones -->
             <div class="userBtn d-flex justify-content-end ms-5">
                 <!-- publicar -->
@@ -67,13 +69,13 @@
                 <!-- vehiculos -->
                 <div class="row">
                     <div class="col">
-                        <a href="#" class="link"><i class="fa-solid fa-car"></i> Mis vehículos</a>
+                        <a href="perfildeusuario.php#misVehiculos" class="link"><i class="fa-solid fa-car"></i> Mis vehículos</a>
                     </div>
                 </div>
                 <!-- verif -->
                 <div class="row">
                     <div class="col">
-                        <a href="#" class="link"><i class="fa-solid fa-user-check"></i> Verificar mi cuenta</a>
+                        <a href="perfildeusuario.php#verificarCuenta" class="link"><i class="fa-solid fa-user-check"></i> Verificar mi cuenta</a>
                     </div>
                 </div>
                 <br>

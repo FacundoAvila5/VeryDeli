@@ -17,17 +17,17 @@
         <div class="container-fluid d-flex justify-content-between">
             <!-- logo -->
             <div class="col-2 ms-5">
-                <a class="navbar-brand" href="PaginaPrincipal.php">
-                    <img id="logo" src="img/logo-negro.svg" alt="Very Deli: Inicio">
+                <a class="navbar-brand" href="index.html">
+                    <img id="logo" src="logos/logo-negro.svg">
                 </a>
             </div>
             <!-- searchbar -->
             <div class=" d-flex search-box">
                 <div class="form-container input-group search-bar">
                     <!-- <form class="d-flex" role="search"> -->
-                    <input class="form-control " type="search" placeholder="Buscar una publicación" aria-label="Search">
+                    <input class="form-control" type="search" placeholder="Buscar una publicación" aria-label="Search">
                     <button class="btn btn-search" type="submit">
-                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <i class="lupa fa-solid fa-magnifying-glass"></i>
                     </button>
                     <!-- </form> -->
                 </div>
@@ -40,45 +40,44 @@
         </div>
     </nav>
     <!-- CONTENIDO -->
-    <div class="container-fluid">
-      <div class="row p-2">
+    <div class="contenedor container-fluid">
+      <div class="row p-2 pt-3">
 
-        <!-- user -->
+        <!-- columna: user -->
         <div class="col-lg-3 d-none d-lg-block">
             <!-- info -->
-             <a href="perfildeusuario.php" class="link">
-                <div class="user d-flex justify-content-start p-2">
-                    <img class="userImg rounded-circle me-2" src="img/ala.jpg" alt="">
-                    Nombre Usuario
-                </div>
-             </a>
-            <!-- botones -->
-            <div class="userBtn d-flex justify-content-end ms-5">
+            <div class="user d-flex justify-content-start p-2">
+                <img class="userImg rounded-circle me-2" src="img/1.jpg">
+                Nombre Usuario
+            </div>
+            <!-- botones justify-content-end-->
+            <div class="userBtn d-flex ms-5">
                 <!-- publicar -->
-                <div class="row">
+                <div class="row mb-1">
                     <div class="col">
                         <a href="#" class="link"><i class="fa-solid fa-pen-to-square"></i> Publicar</a>
-                    </div>
-                </div>
-                <!-- actividad -->
-                <div class="row">
-                    <div class="col">
-                        <a href="#" class="link"><i class="fa-solid fa-clock-rotate-left"></i> Actividad</a>
+                        <!-- <button class="btn btn-small btn-publi"><i class="fa-solid fa-pen-to-square"></i> Publicar</button> -->
                     </div>
                 </div>
                 <!-- vehiculos -->
-                <div class="row">
+                <div class="row mb-1">
                     <div class="col">
-                        <a href="perfildeusuario.php#misVehiculos" class="link"><i class="fa-solid fa-car"></i> Mis vehículos</a>
+                        <a href="#" class="link"><i class="fa-solid fa-car"></i> Mis vehículos</a>
+                    </div>
+                </div>
+                <!-- actividad -->
+                <div class="row mb-1">
+                    <div class="col">
+                        <a href="#" class="link"><i class="fa-solid fa-clock-rotate-left"></i> Actividad</a>
                     </div>
                 </div>
                 <!-- verif -->
                 <div class="row">
                     <div class="col">
-                        <a href="perfildeusuario.php#verificarCuenta" class="link"><i class="fa-solid fa-user-check"></i> Verificar mi cuenta</a>
+                        <a href="#" class="link"><i class="fa-solid fa-user-check"></i> Verificar mi cuenta</a>
                     </div>
                 </div>
-                <br>
+                <hr>
                 <!-- cerrar sesion -->
                 <div class="row">
                     <div class="col">
@@ -88,24 +87,25 @@
             </div>
 
         </div>
-
-        <!-- publicaciones -->
+ 
+        <!-- columna: publicaciones -->
         <div class="publicaciones col-lg-6 col-md-">
             <!-- post -->
             <div class="post card">
                 <div class="card-body">
                   <div class="user d-flex justify-content-start">
-                      <img class="userImgPost rounded-circle me-2" src="img/ala.jpg" alt="">
+                      <img class="postUserImg rounded-circle me-2" src="img/1.jpg">
                       Nombre Usuario
                   </div>
 
                   <div class="postDetails ms-5">
                       <h6 class="card-title">Titulo de publicación</h6>
                       <div class="card-text">
-                          <i class="fa-solid fa-location-dot"></i> Origen: Provincia, Localidad <br>
-                          <i class="fa-solid fa-route"></i> Destino: Provincia, Localidad <br>
-                          <i class="fa-solid fa-ruler"></i> Volumen: 00 x 00 x 00 <br>
-                          <i class="fa-solid fa-weight-scale"></i> Peso: 00.00kg <br>
+                          <i class="i fa-solid fa-location-dot"></i> Origen: Provincia, Localidad, Barrio <br>
+                          <i class="i fa-solid fa-route"></i> Destino: Provincia, Localidad, Barrio <br>
+                          <i class="i fa-solid fa-ruler"></i> Volumen: 00 x 00 x 00 <br>
+                          <i class="i fa-solid fa-weight-scale"></i> Peso: 00.00kg <br>
+                          FRAGIL <br>
 
                           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                           incididunt ut labore et dolore magna aliqua.
@@ -119,111 +119,31 @@
                 </div>
 
                 <div class="card-footer d-flex">
-                    <div class="text-center" style="width: 50%;">
-                        <a href="#" class="link">
+                    <div class="postBottom text-center txt">
                             <i class="fa-solid fa-comments"></i> 0 comentarios
-                        </a>
                     </div>
-                    <div class="text-center" style="width: 50%;">
+                    <div class="postBottom text-center txt">
                         <i class="fa-solid fa-address-card"></i> 0 postulaciones
                     </div>
                 </div>
-
             </div>
-
-            <!-- post -->
-            <div class="post card">
-              <div class="card-body" style="transform: rotate(0);">
-                  <div class="user d-flex justify-content-start">
-                      <img class="userImgPost rounded-circle me-2" src="img/ala.jpg" alt="">
-                      Nombre Usuario
-                  </div>
-                  <div class="postDetails ms-5">
-                      <h6 class="card-title">Titulo de publicación</h6>
-
-                      <h6 class="card-subtitle text-body-secondary mt-2">
-                          <i class="fa-solid fa-location-dot"></i> Ubicación
-                      </h6>
-                      <div class="postText">
-                          Origen: Provincia, Localidad <br>
-                          Destino: Provincia, Localidad <br>
-                      </div>
-                      <h6 class="card-subtitle text-body-secondary">
-                          <i class="fa-solid fa-ruler"></i> Medidas
-                      </h6>
-                      <div class="postText">
-                          Volumen: 00 x 00 x 00 <br>
-                          Peso: 00.00 kg<br>
-                      </div>
-                      <h6 class="card-subtitle text-body-secondary">
-                          <i class="fa-regular fa-note-sticky"></i> Descripción
-                      </h6>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                      labore et dolore magna aliqua.
-                  </div>
-                  <div class="d-flex justify-content-end align-items-center me-3">
-                      <a href="https://argentina.gridohelado.com/" class="link stretched-link">
-                          Ver más <i class="fa-solid fa-chevron-right"></i></a>
-                  </div>
-              </div>
-
-              <div class="card-footer d-flex">
-                  <div class="text-center" style="width: 50%;">
-                      <a href="https://www.pedidosya.com.ar/" class="link">
-                          <i class="fa-solid fa-comments"></i> 0 comentarios
-                      </a>
-                  </div>
-                  <div class="text-center" style="width: 50%;">
-                      <i class="fa-solid fa-address-card"></i> 0 postulaciones
-                  </div>
-              </div>
-
-          </div>
-
-            <!-- post -->
-            <div class="post bg-white rounded">
-                <div class="postInfo">
-                    <div class="user d-flex justify-content-start p-2">
-                        <img class="userImgPost rounded-circle me-2" src="img/ala.jpg" alt="">
-                        Nombre Usuario
-                    </div>
-                    <span class="txt ms-5">Titulo de publicación</span>
-                    <div class="postDetails ms-5">
-                        <span>
-                            <i class="fa-solid fa-location-dot"></i>
-                            Origen: Provincia, Localidad
-                        </span>
-                        <br>
-                        <span>
-                            <i class="fa-solid fa-magnifying-glass-location"></i>
-                            <!-- <i class="fa-solid fa-location-pin"></i> -->
-                            Destino: Provincia, Localidad</span>
-                        <br>
-                        <span>
-                            <i class="fa-solid fa-up-right-and-down-left-from-center"></i>
-                            Volumen: 00 x 00 x 00
-                        </span>
-                        <br>
-                        <span>
-                            <i class="fa-solid fa-weight-hanging"></i>
-                            Peso: 00.00kg
-                        </span>
-                        <br>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua.
-                    </div>
-                    <div class="d-flex justify-content-end align-items-center me-3">
-                        <a href="" class="link">Ver más <i class="fa-solid fa-chevron-right"></i></a>
-                    </div>
-                    <hr>
-                    other stuff
-                </div>
-            </div>
+            
         </div>
 
-        <!-- notif -->
+        <!-- columna: notificaciones -->
         <div class="col-lg-3 col-md-3 col-3 d-none d-lg-block">
             <p class="txt">Notificaciones</p>
+
+            <div class="row">
+                <div class="notificaciones col rounded" style="padding: 5px;">
+                    <div class="notif bg-white rounded text-center">
+                        notif
+                    </div>
+                    <div class="notif bg-white rounded text-center">
+                        notif
+                    </div>
+                </div>
+            </div>
         </div>
 
       </div>
@@ -231,30 +151,30 @@
     </div>
 
     <!-- BOTTOM NAV -->
-    <div class="bottomNavbar container-fluid bg-body-tertiary d-block d-lg-none">
-      <div class="navIcons d-flex">
+    <div class="bNav container-fluid bg-body-tertiary d-block d-lg-none">
+      <div class="bNavIcons d-flex">
         <!-- home -->
-        <div class="opcionMenu">
-          <i class="fa-solid fa-house"></i>
+        <div class="opcionbNav">
+            <a href="" class="link"><i class="fa-solid fa-house"></i></a>
         </div>
         <!-- busqueda -->
-        <div class="opcionMenu">
-          <i class="fa-solid fa-magnifying-glass"></i>
+        <div class="opcionbNav">
+            <a href="" class="link"><i class="fa-solid fa-magnifying-glass"></i></a>
         </div>
         <!-- postear -->
-        <div class="opcionMenu">
-          <i class="fa-solid fa-square-plus"></i>
+        <div class="opcionbNav">
+            <a href="" class="link"><i class="fa-regular fa-square-plus"></i></a>
         </div>
-        <!-- idk -->
-        <div class="opcionMenu">
-          <i class="fa-solid fa-face-smile"></i>
+        <!-- notifs -->
+        <div class="opcionbNav">
+            <a href="" class="link"><i class="fa-regular fa-bell"></i></a>
         </div>
         <!-- perfil -->
-        <div class="opcionMenu">
-          <i class="fa-solid fa-user"></i>
+        <div class="opcionbNav">
+            <a href="https://github.com/candazed" class="link"><i class="fa-regular fa-user"></i></a>
         </div>
       </div>
-    </div>    
+    </div>       
 
     <script src="https://kit.fontawesome.com/0ce357c188.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

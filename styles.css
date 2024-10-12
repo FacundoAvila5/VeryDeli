@@ -1,23 +1,23 @@
 body{
-    background-color: gainsboro !important;
+    background-color: rgb(238, 238, 238) !important;
 }
 #logo{
     height: 50px;
     width: auto;
+    margin: 5px;
 }
 
 /* TEXTO */
-.link, .user{ 
+.link, .user, .txt, .denunciar{ 
     font-weight: 500;
 }
 .link{
     text-decoration: none;
-    color: rgb(23, 23, 23);
+    color: rgb(29, 29, 29);
 }
 
 /* BUSQUEDA */
-.search-box{ width: fit-content;}
-.search-bar{ flex-direction: row;}
+.search-bar{ flex-direction: row; }
 
 /* USER MENU */
 .userBtn{
@@ -29,15 +29,16 @@ body{
     align-items: center;
     font-size: large;
     text-align: right !important;
-    /* font-weight: 500; */
 }
 .userImg{
     width: 16%;
     height: 16%;
 }
 
-
 /* PUBLICACIONES */
+.card-content{
+    margin: 1rem;
+}
 .post{
     margin-bottom: 1.5rem;
 }
@@ -45,30 +46,52 @@ body{
     margin-left: 1rem;
     padding-bottom: 0.8rem;
 }
-.userImgPost{
-    width: 6%;
-    height: 6%;
+.postUserImg{
+    width: 2.5rem; 
+    height: 2.5rem
 }
-.denunciar{
-    font-size: small;
-    text-decoration: none;
-    color: rgb(140, 24, 24);
+.postBottom{ 
+    width: 50%;
 }
 
-/* NAVBAR */
-.bottomNavbar{
-    position: fixed;
+/* UNA PUBLICACION */
+.btnVolver{
+    width: 40px;
+    height: 40px;
+}
+.redLink{
+    text-decoration: none;
+    color: rgb(194, 22, 22) !important;
+}
+
+/* COMENTARIOS */
+.comment{
+    border-radius: 14px;
+}
+.cInput{
+    border-color: transparent !important;
+}
+
+/* NOTIFICACIONES */
+.notif{
+    margin: 10px 2px;
+}
+
+/* BOTTOM MENU - NAV */
+.bNav{
+    position: fixed !important;
     bottom: 0;
     width: 100%;
     height: 4rem;
+    z-index: 2;
 }
-.navIcons{
+.bNavIcons{
     width: 100%;
     height: 100%;
     display: flex !important;
     flex-direction: row;
 }
-.opcionMenu{
+.opcionbNav{
     width: 20%;
     height: auto;
     display: flex;

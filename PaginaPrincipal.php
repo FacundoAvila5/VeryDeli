@@ -8,10 +8,17 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="shortcut icon" href="img\icons\loguito-fondoAzulV2.ico" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
         <title>Inicio</title>
 </head>
 
+<?php
+session_start();
+?>
+
 <body>
+
     <!-- NAV -->
     <nav class="navbar bg-body-tertiary d-none d-lg-block">
         <div class="container-fluid d-flex justify-content-between">
@@ -174,12 +181,208 @@
             <a href="https://github.com/candazed" class="link"><i class="fa-regular fa-user"></i></a>
         </div>
       </div>
-    </div>       
+    </div>    
+    
+       <!-- Modal para publicar -->
+       <div class="modal fade" id="publicarmodal" tabindex="-1" aria-labelledby="publishModalLabel" aria-hidden="true">
+    <?php
+     include "ConexionBS.php";
+    ?>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="publishModalLabel">Publicar Necesidad de Envio</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="publicacion" action="guardarPublicacion.php" method="post" class="needs-validation" novalidate>
+            
+          <div class="mb-3">
+            <label for="tituloPubli" class="form-label">Título de la Publicación</label>
+            <input type="text" class="form-control" id="tituloPubli" name="tituloPubli" placeholder="Título" required>
+            <div class="invalid-feedback">
+                 El título de la publicación es obligatorio.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="origenPubli" class="form-label"><i class="fa-solid fa-location-dot"></i> Desde</label><br>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="provinciaorigen" class="form-label"> Provincia</label>
+                    <input type="text" class="form-control" id="provinciaorigen" name="provinciaorigen" placeholder="Provincia" required>
+                    <div class="invalid-feedback">
+                        Por favor, ingrese la provincia de origen.
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="Localidadorigen" class="form-label">Localidad</label>
+                    <input type="text" class="form-control" id="Localidadorigen" name="Localidadorigen" placeholder="Localidad" required>  
+                    <div class="invalid-feedback">
+                        Por favor, ingrese la localidad de origen.
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="barrioorigen" class="form-label"> Barrio</label>
+                    <input type="text" class="form-control" id="barrioorigen" name="barrioorigen" placeholder="Barrio" required>
+                    <div class="invalid-feedback">
+                        Por favor, ingrese el barrio de origen.
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="direccionorigen" class="form-label"> Dirección</label>
+                    <input type="text" class="form-control" id="direccionorigen" name="direccionorigen" placeholder="Dirección de calle" required>
+                    <div class="invalid-feedback">
+                        Por favor, ingrese la dirección de origen.
+                    </div>
+                </div>
+            </div>
+          </div>
+
+        <div class="mb-3">
+            <label for="destinoPubli" class="form-label"><i class="fa-solid fa-location-dot"></i> Hasta</label><br>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="provinciadestino" class="form-label">Provincia</label>
+                    <input type="text" class="form-control" id="provinciadestino" name="provinciadestino" placeholder="Provincia" required>
+                    <div class="invalid-feedback">
+                        Por favor, ingrese la provincia de destino.
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="Localidaddestino" class="form-label"> Localidad</label>
+                    <input type="text" class="form-control" id="Localidaddestino" name="Localidaddestino" placeholder="Localidad" required>
+                    <div class="invalid-feedback">
+                        Por favor, ingrese la localidad de destino.
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="barriodestino" class="form-label"> Barrio</label>
+                    <input type="text" class="form-control" id="barriodestino" name="barriodestino" placeholder="Barrio" required>
+                    <div class="invalid-feedback">
+                        Por favor, ingrese el barrio de destino.
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="direcciondestino" class="form-label"> Dirección</label>
+                    <input type="text" class="form-control" id="direcciondestino" name="direcciondestino" placeholder="Dirección de calle" required>    
+                    <div class="invalid-feedback">
+                        Por favor, ingrese la dirección de destino.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="fechaLimite" class="form-label">Fecha Limite</label>
+            <input type="date" class="form-control" id="fechaLimite" name="fechaLimite" placeholder="Fecha" required>
+            <div class="invalid-feedback">
+                Por favor, ingrese una fecha límite.
+            </div>
+          </div>
+
+      <div class="mb-3">
+        <label for="medidas" class="form-label"><i class="fa-solid fa-up-right-and-down-left-from-center"></i> Medidas del paquete</label>
+        <div class="row">
+            <div class="col-6">
+                <input type="number" class="form-control" id="alto" name="alto" placeholder="Alto (cm)" required>
+                <div class="invalid-feedback">
+                    Por favor, ingrese la altura del paquete.
+                </div>
+            </div>
+            <div class="col-6">
+                <input type="number" class="form-control" id="ancho" name="ancho" placeholder="Ancho (cm)" required>
+                <div class="invalid-feedback">
+                    Por favor, ingrese el ancho del paquete.
+                </div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-6">
+                <input type="number" class="form-control" id="largo" name="largo" placeholder="Largo (cm)" required>
+                <div class="invalid-feedback">
+                    Por favor, ingrese el largo del paquete.
+                </div>
+            </div>
+            <div class="col-6">
+                <input type="number" class="form-control" id="peso" name="peso" placeholder="Peso (gr)" required>
+                <div class="invalid-feedback">
+                    Por favor, ingrese el peso del paquete.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">¿Es frágil?</label>
+        <div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="fragil" id="fragilSi" value="sí" required>
+                <label class="form-check-label" for="fragilSi">Sí</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="fragil" id="fragilNo" value="no" required>
+                <label class="form-check-label" for="fragilNo">No</label>
+            </div>
+            <div class="invalid-feedback">
+                Por favor, seleccione si el paquete es frágil.
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="descripcion" class="form-label">Descripción</label>
+        <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
+        <div class="invalid-feedback">
+            Por favor, ingrese una descripción.
+        </div>
+    </div> 
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="submit" form="publicacion" class="btn text-white" style="background-color: rgb(18, 146, 154);">Publicar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Script de Bootstrap para mensaje de error en formulario -->
+<script>
+  (function () {
+    'use strict'
+    var forms = document.querySelectorAll('.needs-validation')
+    Array.prototype.slice.call(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
+</script>
 
     <script src="https://kit.fontawesome.com/0ce357c188.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+        <?php
+        include "DesconexionBS.php";
+        ?>
 </body>
 
 </html>

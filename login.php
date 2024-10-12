@@ -10,22 +10,24 @@
 </head>
 <body>
 <?php
-
+session_start();
 include "ConexionBS.php";
 $auth = false;
 extract($_POST);
 
-if(isset($user) && isset($pass)){
+if(isset($correo) && isset($pass)){
 
-    $consulta = "SELECT NombreUsuario FROM usuarios WHERE NombreUsuario = '".$user."' ";
+    $consulta = "SELECT * FROM usuarios WHERE EmailUsuario = '".$correo."' ";
     $resultado = mysqli_query($conexion, $consulta);
 
     if(mysqli_num_rows($resultado) > 0){
-        // $row = mysqli_fetch_assoc($resultado);
-        // $clave = $row(['Contrasenia']);
-        // if(password_verify($pass, $clave)){
+        $row = mysqli_fetch_assoc($resultado);
+        $clave = $row['Contrasenia'];
+        $_SESSION["usuario"] = $row['NombreUsuario'] ." ". $row['ApellidoUsuario'];
+        $_SESSION["idUser"] = $row['IdUsuario'];
+        if(password_verify($pass, $clave)){
             $auth = true;
-        // }
+        }
     }
 
     if($auth){
@@ -33,7 +35,7 @@ if(isset($user) && isset($pass)){
         header("Location: PaginaPrincipal.php?" . session_id());
         exit();
     }else{
-        $mensajeError = "El usuario o contraseña son incorrectos, verifique.";
+        $mensajeError = "El correo o contraseña son incorrectos, verifique.";
         ?>
         <div class="container-fluid p-0">
         <div class="gradient-bg-animation d-flex justify-content-center align-items-center vh-100">
@@ -47,7 +49,7 @@ if(isset($user) && isset($pass)){
 
                     <form class="p-2" method="post" id="loginform">
                         <div class="mb-3">
-                          <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Usuario" name="user">
+                          <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Correo" name="correo">
                         </div>
                         <div class="mb-3">
                           <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña" name="pass">
@@ -99,11 +101,11 @@ if(isset($user) && isset($pass)){
                     <h5 class="text-center pb-3"><strong>Inicia Sesión</strong></h5>
                     <form class="p-2">
                         <div class="mb-3">
-                          <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Usuario">
+                          <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Correo" name="correo">
                           <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
                         </div>
                         <div class="mb-3">
-                          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña">
+                          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña" name="pass">
                           <p> <a href="recuperacion.html" class="link-offset-2 link-underline link-underline-opacity-0 small">Olvidé mi contraseña</a> </p>
                         </div>
                         <!-- <div class="mb-3 form-check">
@@ -135,6 +137,7 @@ if(isset($user) && isset($pass)){
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
  <?php
 }
+include "DesconexionBS.php";
 ?>
 </body>
 </html>

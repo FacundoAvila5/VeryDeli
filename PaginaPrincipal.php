@@ -62,7 +62,7 @@ session_start();
                 <!-- publicar -->
                 <div class="row mb-1">
                     <div class="col">
-                        <a href="#" class="link"><i class="fa-solid fa-pen-to-square"></i> Publicar</a>
+                        <a href="#" class="link" data-bs-toggle="modal" data-bs-target="#publicarmodal"><i class="fa-solid fa-pen-to-square"></i> Publicar</a>
                         <!-- <button class="btn btn-small btn-publi"><i class="fa-solid fa-pen-to-square"></i> Publicar</button> -->
                     </div>
                 </div>

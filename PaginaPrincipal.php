@@ -15,6 +15,7 @@
 
 <?php
 session_start();
+include "ConexionBS.php";
 ?>
 
 <body>
@@ -32,7 +33,7 @@ session_start();
             <div class=" d-flex search-box">
                 <div class="form-container input-group search-bar">
                     <!-- <form class="d-flex" role="search"> -->
-                    <input class="form-control" type="search" placeholder="Buscar una publicación" aria-label="Search">
+                    <input class="form-control" type="search" placeholder="Busca una publicación" aria-label="Search">
                     <button class="btn btn-search" type="submit">
                         <i class="lupa fa-solid fa-magnifying-glass"></i>
                     </button>
@@ -97,43 +98,76 @@ session_start();
  
         <!-- columna: publicaciones -->
         <div class="publicaciones col-lg-6 col-md-">
-            <!-- post -->
-            <div class="post card">
-                <div class="card-body">
-                  <div class="user d-flex justify-content-start">
-                      <img class="postUserImg rounded-circle me-2" src="img/1.jpg">
-                      Nombre Usuario
-                  </div>
+            
+        <?php
+            $sql = "SELECT * FROM publicaciones ORDER BY IdPublicacion DESC";
+            $publicaciones = mysqli_query($conexion, $sql);
+            $content = false;
 
-                  <div class="postDetails ms-5">
-                      <h6 class="card-title">Titulo de publicación</h6>
-                      <div class="card-text">
-                          <i class="i fa-solid fa-location-dot"></i> Origen: Provincia, Localidad, Barrio <br>
-                          <i class="i fa-solid fa-route"></i> Destino: Provincia, Localidad, Barrio <br>
-                          <i class="i fa-solid fa-ruler"></i> Volumen: 00 x 00 x 00 <br>
-                          <i class="i fa-solid fa-weight-scale"></i> Peso: 00.00kg <br>
-                          FRAGIL <br>
+            while ($row = mysqli_fetch_row($publicaciones)) {
+                $content = true;
+                ?>
 
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                          incididunt ut labore et dolore magna aliqua.
-                      </div>
-                  </div>
-                  
-                  <div class="d-flex justify-content-end align-items-center me-3">
-                      <a href="post.html" class="link stretched-link">
-                          Ver más <i class="fa-solid fa-chevron-right"></i></a>
-                  </div>
-                </div>
+                <div class="post card">
+                    <div class="card-body">
+                        <div class="user d-flex justify-content-start">
+                            <img class="postUserImg rounded-circle me-2" src="img/1.jpg">
+                            Nombre Usuario
+                        </div>
 
-                <div class="card-footer d-flex">
-                    <div class="postBottom text-center txt">
+                        <div class="postDetails ms-5">
+                            <h6 class="card-title"><?php echo "$row[2]" ?></h6>
+                            <div class="card-text">
+                                <i class="i fa-solid fa-location-dot"></i>
+                                Origen: <?php echo "$row[3], $row[4], $row[5]" ?> <br>
+                                <i class="i fa-solid fa-route"></i>
+                                Destino: <?php echo "$row[7], $row[8], $row[9]" ?> <br>
+                                <i class="i fa-solid fa-ruler"></i>
+                                Volumen: <?php echo "$row[19]x$row[18]x$row[17]" ?> <br>
+                                <i class="i fa-solid fa-weight-scale"></i>
+                                Peso: <?php echo "$row[15]kg <br>";
+                                if ($row[14] == 'sí') { ?>
+                                    <span class="txt redLink">FRAGIL</span><br>
+                                    <?php
+                                }
+
+                                echo "$row[11]";
+                                ?>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-end align-items-center me-3">
+                            <a href="post.html" class="link stretched-link">
+                                Ver más <i class="fa-solid fa-chevron-right"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="card-footer d-flex">
+                        <div class="postBottom text-center txt">
                             <i class="fa-solid fa-comments"></i> 0 comentarios
-                    </div>
-                    <div class="postBottom text-center txt">
-                        <i class="fa-solid fa-address-card"></i> 0 postulaciones
+                        </div>
+                        <div class="postBottom text-center txt">
+                            <i class="fa-solid fa-address-card"></i> 0 postulaciones
+                        </div>
                     </div>
                 </div>
-            </div>
+
+                <?php
+            } //aca se termina el while
+                
+            if (!$content) { ?>
+
+                <div class="text-center pt-5">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <img class="imgMensaje" width="30%" src="img/cajas.png"
+                            alt="Imagen de gstudioimagen1 en Freepik">
+                    </div>
+                    <p>Parece que aquí no hay nada... por ahora</p>
+                </div>
+
+                <?php
+            } //aca se termina el if
+            ?>
             
         </div>
 
@@ -178,181 +212,178 @@ session_start();
         </div>
         <!-- perfil -->
         <div class="opcionbNav">
-            <a href="https://github.com/candazed" class="link"><i class="fa-regular fa-user"></i></a>
+            <a href="" class="link"><i class="fa-regular fa-user"></i></a>
         </div>
       </div>
     </div>    
     
        <!-- Modal para publicar -->
        <div class="modal fade" id="publicarmodal" tabindex="-1" aria-labelledby="publishModalLabel" aria-hidden="true">
-    <?php
-     include "ConexionBS.php";
-    ?>
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="publishModalLabel">Publicar Necesidad de Envio</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form id="publicacion" action="guardarPublicacion.php" method="post" class="needs-validation" novalidate>
-            
-          <div class="mb-3">
-            <label for="tituloPubli" class="form-label">Título de la Publicación</label>
-            <input type="text" class="form-control" id="tituloPubli" name="tituloPubli" placeholder="Título" required>
-            <div class="invalid-feedback">
-                 El título de la publicación es obligatorio.
-            </div>
-          </div>
-
-          <div class="mb-3">
-            <label for="origenPubli" class="form-label"><i class="fa-solid fa-location-dot"></i> Desde</label><br>
-
-            <div class="row">
-                <div class="col-md-6">
-                    <label for="provinciaorigen" class="form-label"> Provincia</label>
-                    <input type="text" class="form-control" id="provinciaorigen" name="provinciaorigen" placeholder="Provincia" required>
-                    <div class="invalid-feedback">
-                        Por favor, ingrese la provincia de origen.
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <label for="Localidadorigen" class="form-label">Localidad</label>
-                    <input type="text" class="form-control" id="Localidadorigen" name="Localidadorigen" placeholder="Localidad" required>  
-                    <div class="invalid-feedback">
-                        Por favor, ingrese la localidad de origen.
-                    </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="publishModalLabel">Publicar necesidad de envio</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form id="publicacion" action="guardarPublicacion.php" method="post" class="needs-validation" novalidate>
+                
+            <div class="mb-3">
+                <label for="tituloPubli" class="form-label">Título de la publicación</label>
+                <input type="text" class="form-control" id="tituloPubli" name="tituloPubli" placeholder="Título" required>
+                <div class="invalid-feedback">
+                    El título de la publicación es obligatorio.
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-md-6">
-                    <label for="barrioorigen" class="form-label"> Barrio</label>
-                    <input type="text" class="form-control" id="barrioorigen" name="barrioorigen" placeholder="Barrio" required>
-                    <div class="invalid-feedback">
-                        Por favor, ingrese el barrio de origen.
+            <div class="mb-3">
+                <label for="origenPubli" class="form-label"><i class="fa-solid fa-location-dot"></i> Desde</label><br>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="provinciaorigen" class="form-label"> Provincia</label>
+                        <input type="text" class="form-control" id="provinciaorigen" name="provinciaorigen" placeholder="Provincia" required>
+                        <div class="invalid-feedback">
+                            Por favor, ingrese la provincia de origen.
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Localidadorigen" class="form-label">Localidad</label>
+                        <input type="text" class="form-control" id="Localidadorigen" name="Localidadorigen" placeholder="Localidad" required>  
+                        <div class="invalid-feedback">
+                            Por favor, ingrese la localidad de origen.
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <label for="direccionorigen" class="form-label"> Dirección</label>
-                    <input type="text" class="form-control" id="direccionorigen" name="direccionorigen" placeholder="Dirección de calle" required>
-                    <div class="invalid-feedback">
-                        Por favor, ingrese la dirección de origen.
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="barrioorigen" class="form-label"> Barrio</label>
+                        <input type="text" class="form-control" id="barrioorigen" name="barrioorigen" placeholder="Barrio" required>
+                        <div class="invalid-feedback">
+                            Por favor, ingrese el barrio de origen.
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="direccionorigen" class="form-label"> Dirección</label>
+                        <input type="text" class="form-control" id="direccionorigen" name="direccionorigen" placeholder="Dirección de calle" required>
+                        <div class="invalid-feedback">
+                            Por favor, ingrese la dirección de origen.
+                        </div>
                     </div>
                 </div>
             </div>
-          </div>
+
+            <div class="mb-3">
+                <label for="destinoPubli" class="form-label"><i class="fa-solid fa-location-dot"></i> Hasta</label><br>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="provinciadestino" class="form-label">Provincia</label>
+                        <input type="text" class="form-control" id="provinciadestino" name="provinciadestino" placeholder="Provincia" required>
+                        <div class="invalid-feedback">
+                            Por favor, ingrese la provincia de destino.
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Localidaddestino" class="form-label"> Localidad</label>
+                        <input type="text" class="form-control" id="Localidaddestino" name="Localidaddestino" placeholder="Localidad" required>
+                        <div class="invalid-feedback">
+                            Por favor, ingrese la localidad de destino.
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="barriodestino" class="form-label"> Barrio</label>
+                        <input type="text" class="form-control" id="barriodestino" name="barriodestino" placeholder="Barrio" required>
+                        <div class="invalid-feedback">
+                            Por favor, ingrese el barrio de destino.
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="direcciondestino" class="form-label"> Dirección</label>
+                        <input type="text" class="form-control" id="direcciondestino" name="direcciondestino" placeholder="Dirección de calle" required>    
+                        <div class="invalid-feedback">
+                            Por favor, ingrese la dirección de destino.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="fechaLimite" class="form-label">Fecha Limite</label>
+                <input type="date" class="form-control" id="fechaLimite" name="fechaLimite" placeholder="Fecha" required>
+                <div class="invalid-feedback">
+                    Por favor, ingrese una fecha límite.
+                </div>
+            </div>
 
         <div class="mb-3">
-            <label for="destinoPubli" class="form-label"><i class="fa-solid fa-location-dot"></i> Hasta</label><br>
-
+            <label for="medidas" class="form-label"><i class="fa-solid fa-up-right-and-down-left-from-center"></i> Medidas del paquete</label>
             <div class="row">
-                <div class="col-md-6">
-                    <label for="provinciadestino" class="form-label">Provincia</label>
-                    <input type="text" class="form-control" id="provinciadestino" name="provinciadestino" placeholder="Provincia" required>
+                <div class="col-6">
+                    <input type="number" class="form-control" id="alto" name="alto" placeholder="Alto (cm)" required>
                     <div class="invalid-feedback">
-                        Por favor, ingrese la provincia de destino.
+                        Por favor, ingrese la altura del paquete.
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <label for="Localidaddestino" class="form-label"> Localidad</label>
-                    <input type="text" class="form-control" id="Localidaddestino" name="Localidaddestino" placeholder="Localidad" required>
+                <div class="col-6">
+                    <input type="number" class="form-control" id="ancho" name="ancho" placeholder="Ancho (cm)" required>
                     <div class="invalid-feedback">
-                        Por favor, ingrese la localidad de destino.
+                        Por favor, ingrese el ancho del paquete.
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <label for="barriodestino" class="form-label"> Barrio</label>
-                    <input type="text" class="form-control" id="barriodestino" name="barriodestino" placeholder="Barrio" required>
+            <div class="row mt-2">
+                <div class="col-6">
+                    <input type="number" class="form-control" id="largo" name="largo" placeholder="Largo (cm)" required>
                     <div class="invalid-feedback">
-                        Por favor, ingrese el barrio de destino.
+                        Por favor, ingrese el largo del paquete.
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <label for="direcciondestino" class="form-label"> Dirección</label>
-                    <input type="text" class="form-control" id="direcciondestino" name="direcciondestino" placeholder="Dirección de calle" required>    
+                <div class="col-6">
+                    <input type="number" class="form-control" id="peso" name="peso" placeholder="Peso (gr)" required>
                     <div class="invalid-feedback">
-                        Por favor, ingrese la dirección de destino.
+                        Por favor, ingrese el peso del paquete.
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="mb-3">
-            <label for="fechaLimite" class="form-label">Fecha Limite</label>
-            <input type="date" class="form-control" id="fechaLimite" name="fechaLimite" placeholder="Fecha" required>
+            <label class="form-label">¿Es frágil?</label>
+            <div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="fragil" id="fragilSi" value="sí" required>
+                    <label class="form-check-label" for="fragilSi">Sí</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="fragil" id="fragilNo" value="no" required>
+                    <label class="form-check-label" for="fragilNo">No</label>
+                </div>
+                <div class="invalid-feedback">
+                    Por favor, seleccione si el paquete es frágil.
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="descripcion" class="form-label">Descripción</label>
+            <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
             <div class="invalid-feedback">
-                Por favor, ingrese una fecha límite.
+                Por favor, ingrese una descripción.
             </div>
-          </div>
+        </div> 
 
-      <div class="mb-3">
-        <label for="medidas" class="form-label"><i class="fa-solid fa-up-right-and-down-left-from-center"></i> Medidas del paquete</label>
-        <div class="row">
-            <div class="col-6">
-                <input type="number" class="form-control" id="alto" name="alto" placeholder="Alto (cm)" required>
-                <div class="invalid-feedback">
-                    Por favor, ingrese la altura del paquete.
-                </div>
-            </div>
-            <div class="col-6">
-                <input type="number" class="form-control" id="ancho" name="ancho" placeholder="Ancho (cm)" required>
-                <div class="invalid-feedback">
-                    Por favor, ingrese el ancho del paquete.
-                </div>
-            </div>
+            </form>
         </div>
-        <div class="row mt-2">
-            <div class="col-6">
-                <input type="number" class="form-control" id="largo" name="largo" placeholder="Largo (cm)" required>
-                <div class="invalid-feedback">
-                    Por favor, ingrese el largo del paquete.
-                </div>
-            </div>
-            <div class="col-6">
-                <input type="number" class="form-control" id="peso" name="peso" placeholder="Peso (gr)" required>
-                <div class="invalid-feedback">
-                    Por favor, ingrese el peso del paquete.
-                </div>
-            </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="submit" form="publicacion" class="btn text-white" style="background-color: rgb(18, 146, 154);">Publicar</button>
+        </div>
         </div>
     </div>
-
-    <div class="mb-3">
-        <label class="form-label">¿Es frágil?</label>
-        <div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="fragil" id="fragilSi" value="sí" required>
-                <label class="form-check-label" for="fragilSi">Sí</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="fragil" id="fragilNo" value="no" required>
-                <label class="form-check-label" for="fragilNo">No</label>
-            </div>
-            <div class="invalid-feedback">
-                Por favor, seleccione si el paquete es frágil.
-            </div>
-        </div>
-    </div>
-
-    <div class="mb-3">
-        <label for="descripcion" class="form-label">Descripción</label>
-        <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
-        <div class="invalid-feedback">
-            Por favor, ingrese una descripción.
-        </div>
-    </div> 
-
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="submit" form="publicacion" class="btn text-white" style="background-color: rgb(18, 146, 154);">Publicar</button>
-      </div>
-    </div>
-  </div>
 </div>
 
 <!-- Script de Bootstrap para mensaje de error en formulario -->

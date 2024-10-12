@@ -53,6 +53,10 @@ body{
 .postBottom{ 
     width: 50%;
 }
+.imgMensaje{
+    width: 30%;
+    height: auto;
+}
 
 /* UNA PUBLICACION */
 .btnVolver{

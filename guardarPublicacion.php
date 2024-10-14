@@ -23,7 +23,7 @@ $fechaFormateada = $fech ? $fech-> format('d/m/Y'): '';
      '".$Localidaddestino."', '".$barriodestino."', '".$direcciondestino."', '".$fragil."', '".$peso."', '".$alto."', '".$ancho."',
      '".$largo."' )";
      mysqli_query($conexion, $guardaPubli);
-     header("location: Principal.php?".session_id());
+     header("location: PaginaPrincipal.php?".session_id());
                                                               
 }
 include "DesconexionBS.php";

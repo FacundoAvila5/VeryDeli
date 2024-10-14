@@ -16,7 +16,24 @@
 <?php
 session_start();
 include "ConexionBS.php";
+
+// Obtener el ID del usuario desde la sesión
+$usuario_id = $_SESSION['idUser'];
+
+// Realizar la consulta para obtener la imagen del usuario
+$sql = "SELECT ImagenUsuario FROM usuarios WHERE IdUsuario = '$usuario_id'";
+$result = $conexion->query($sql);
+
+// Verificar si se encontró el usuario
+if ($result->num_rows > 0) {
+    // Obtener la fila resultante como un arreglo asociativo
+    $row = $result->fetch_assoc();
+    $imagen = $row['ImagenUsuario'];
+} else {
+    $imagen = 'ruta/imagen/default.jpg'; // Imagen por defecto si no se encuentra el usuario
+}
 ?>
+
 
 <body>
 
@@ -56,7 +73,7 @@ include "ConexionBS.php";
             <!-- info -->
             <a href="perfildeusuario.php" class="link">
                 <div class="user d-flex justify-content-start p-2">
-                    <img class="userImg rounded-circle me-2" src="img/1.jpg" alt="">
+                    <img class="userImg rounded-circle me-2" src="<?php echo $imagen; ?>" alt="">
                     <?php
                         $nombre = $_SESSION['usuario'];
                         echo $nombre;
@@ -105,7 +122,7 @@ include "ConexionBS.php";
         <div class="publicaciones col-lg-6 col-md-">
             
         <?php
-            $sql = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario
+            $sql = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario
             FROM publicaciones p
             INNER JOIN usuarios u ON p.IdUsuario = u.IdUsuario 
             ORDER BY p.IdPublicacion DESC";
@@ -119,7 +136,7 @@ include "ConexionBS.php";
                 <div class="post card">
                     <div class="card-body">
                         <div class="user d-flex justify-content-start">
-                            <img class="postUserImg rounded-circle me-2" src="img/1.jpg">
+                            <img class="postUserImg rounded-circle me-2" src="<?php echo $row['ImagenUsuario']; ?>">
                             <?php
                             echo $row['NombreUsuario']. " " . $row['ApellidoUsuario'];
                             ?>
@@ -160,7 +177,7 @@ include "ConexionBS.php";
                         </div>
 
                         <div class="d-flex justify-content-end align-items-center me-3">
-                            <a href="post.php" class="link stretched-link">
+                            <a href="post.php?id=<?php echo urlencode($row['IdPublicacion']); ?>" class="link stretched-link">
                                 Ver más <i class="fa-solid fa-chevron-right"></i></a>
                         </div>
                     </div>

@@ -121,7 +121,7 @@ include "ConexionBS.php";
                         <div class="user d-flex justify-content-start">
                             <img class="postUserImg rounded-circle me-2" src="img/1.jpg">
                             <?php
-                            echo $row['NombreUsuario']. " " . $row['Apellido'];
+                            echo $row['NombreUsuario']. " " . $row['ApellidoUsuario'];
                             ?>
                         </div>
 

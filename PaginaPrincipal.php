@@ -105,7 +105,10 @@ include "ConexionBS.php";
         <div class="publicaciones col-lg-6 col-md-">
             
         <?php
-            $sql = "SELECT * FROM publicaciones ORDER BY IdPublicacion DESC";
+            $sql = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario
+            FROM publicaciones p
+            INNER JOIN usuarios u ON p.IdUsuario = u.IdUsuario 
+            ORDER BY p.IdPublicacion DESC";
             $publicaciones = mysqli_query($conexion, $sql);
             $content = false;
 
@@ -118,7 +121,7 @@ include "ConexionBS.php";
                         <div class="user d-flex justify-content-start">
                             <img class="postUserImg rounded-circle me-2" src="img/1.jpg">
                             <?php
-                            echo $nombre;
+                            echo $row['NombreUsuario']. " " . $row['Apellido'];
                             ?>
                         </div>
 

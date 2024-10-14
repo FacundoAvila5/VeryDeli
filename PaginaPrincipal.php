@@ -25,7 +25,7 @@ include "ConexionBS.php";
         <div class="container-fluid d-flex justify-content-between">
             <!-- logo -->
             <div class="col-2 ms-5">
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="PaginaPrincipal.php">
                     <img id="logo" src="logos/logo-negro.svg">
                 </a>
             </div>
@@ -54,10 +54,15 @@ include "ConexionBS.php";
         <!-- columna: user -->
         <div class="col-lg-3 d-none d-lg-block">
             <!-- info -->
-            <div class="user d-flex justify-content-start p-2">
-                <img class="userImg rounded-circle me-2" src="img/1.jpg">
-                Nombre Usuario
-            </div>
+            <a href="perfildeusuario.php" class="link">
+                <div class="user d-flex justify-content-start p-2">
+                    <img class="userImg rounded-circle me-2" src="img/1.jpg" alt="">
+                    <?php
+                        $nombre = $_SESSION['usuario'];
+                        echo $nombre;
+                    ?>
+                </div>
+            </a>
             <!-- botones justify-content-end-->
             <div class="userBtn d-flex ms-5">
                 <!-- publicar -->
@@ -70,7 +75,7 @@ include "ConexionBS.php";
                 <!-- vehiculos -->
                 <div class="row mb-1">
                     <div class="col">
-                        <a href="#" class="link"><i class="fa-solid fa-car"></i> Mis vehículos</a>
+                        <a href="perfildeusuario.php#misVehiculos" class="link"><i class="fa-solid fa-car"></i> Mis vehículos</a>
                     </div>
                 </div>
                 <!-- actividad -->
@@ -82,7 +87,7 @@ include "ConexionBS.php";
                 <!-- verif -->
                 <div class="row">
                     <div class="col">
-                        <a href="#" class="link"><i class="fa-solid fa-user-check"></i> Verificar mi cuenta</a>
+                        <a href="perfildeusuario.php#verificarCuenta" class="link"><i class="fa-solid fa-user-check"></i> Verificar mi cuenta</a>
                     </div>
                 </div>
                 <hr>
@@ -104,7 +109,7 @@ include "ConexionBS.php";
             $publicaciones = mysqli_query($conexion, $sql);
             $content = false;
 
-            while ($row = mysqli_fetch_row($publicaciones)) {
+            while ($row = mysqli_fetch_assoc($publicaciones)) {
                 $content = true;
                 ?>
 
@@ -112,32 +117,47 @@ include "ConexionBS.php";
                     <div class="card-body">
                         <div class="user d-flex justify-content-start">
                             <img class="postUserImg rounded-circle me-2" src="img/1.jpg">
-                            Nombre Usuario
+                            <?php
+                            echo $nombre;
+                            ?>
                         </div>
 
                         <div class="postDetails ms-5">
-                            <h6 class="card-title"><?php echo "$row[2]" ?></h6>
+                            <h6 class="card-title"><?php $titulo = $row['Titulo']; echo $titulo; ?></h6>
                             <div class="card-text">
                                 <i class="i fa-solid fa-location-dot"></i>
-                                Origen: <?php echo "$row[3], $row[4], $row[5]" ?> <br>
+                                Origen: <?php
+                                        $prov = $row['ProvinciaOrigen']; $localidad = $row['LocalidadOrigen']; $barrio = $row['BarrioOrigen'];
+                                        echo $prov .",". $localidad  .",". $barrio;
+                                        // printf("%s, %s, %s", $row['ProvinciaOrigen'], $row['LocalidadOrigen'], $row['BarrioOrigen']); 
+                                    ?> <br>
                                 <i class="i fa-solid fa-route"></i>
-                                Destino: <?php echo "$row[7], $row[8], $row[9]" ?> <br>
+                                Destino: <?php 
+                                        $prov = $row['ProvinciaDestino']; $localidad = $row['LocalidadDestino']; $barrio = $row['BarrioDestino'];
+                                        echo $prov .",". $localidad  .",". $barrio;
+                                    ?> <br>
+                                <i class="fa-solid fa-calendar-days"></i>
+                                Fecha límite para completar entrega: <?php $date = $row['FechaLimite']; echo $date; ?> <br>
                                 <i class="i fa-solid fa-ruler"></i>
-                                Volumen: <?php echo "$row[19]x$row[18]x$row[17]" ?> <br>
+                                Volumen: <?php 
+                                    $largo = $row['Largo']; $ancho = $row['Ancho']; $alto = $row['Alto'];
+                                    echo $largo .' x '. $ancho .' x '. $alto;
+                                    // printf("%f x %f x %f", $row['Largo'], $row['Ancho'], $row['Alto']); 
+                                    ?> <br>
                                 <i class="i fa-solid fa-weight-scale"></i>
-                                Peso: <?php echo "$row[15]kg <br>";
-                                if ($row[14] == 'sí') { ?>
+                                Peso: <?php $peso=$row['Peso']; echo $peso. 'g <br>';
+                                if ($row['Fragil'] == 'sí') { ?>
                                     <span class="txt redLink">FRAGIL</span><br>
                                     <?php
                                 }
 
-                                echo "$row[11]";
+                                $desc = $row['Descripcion']; echo $desc;
                                 ?>
                             </div>
                         </div>
 
                         <div class="d-flex justify-content-end align-items-center me-3">
-                            <a href="post.html" class="link stretched-link">
+                            <a href="post.php" class="link stretched-link">
                                 Ver más <i class="fa-solid fa-chevron-right"></i></a>
                         </div>
                     </div>
@@ -229,7 +249,7 @@ include "ConexionBS.php";
             <form id="publicacion" action="guardarPublicacion.php" method="post" class="needs-validation" novalidate>
                 
             <div class="mb-3">
-                <label for="tituloPubli" class="form-label">Título de la publicación</label>
+                <label for="tituloPubli" class="form-label">Título de la publicación*</label>
                 <input type="text" class="form-control" id="tituloPubli" name="tituloPubli" placeholder="Título" required>
                 <div class="invalid-feedback">
                     El título de la publicación es obligatorio.

@@ -89,13 +89,6 @@
 
         <!-- publicaciones -->
         <div class="publicaciones col-lg-6 col-md-">
-            <!-- volver -->
-            <!-- <div class="d-flex justify-content-start mb-2">
-                <div class="btnVolver rounded d-flex justify-content-center align-items-center bg-white">
-                    <a class="link" href="index.html"><i class="fa-solid fa-arrow-left"></i></a>
-                </div>
-            </div> -->
-
             <!-- post -->
             <div class="post card">
                 <div class="card-header bg-transparent" style="padding: 3px;">
@@ -104,8 +97,7 @@
                         <div class="col p-0">
                             <div class="d-flex ">
                                 <div class="btnVolver rounded d-flex justify-content-center align-items-center">
-                                    <a class="link" href="index.html"><i class="fa-solid fa-arrow-left"></i></a>
-                                    <!-- <span class="txt">  Publicación</span> -->
+                                    <a class="link" href="PaginaPrincipal.php"><i class="fa-solid fa-arrow-left"></i></a>
                                 </div>
                             </div>
                         </div>

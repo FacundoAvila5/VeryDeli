@@ -122,7 +122,7 @@ if ($result->num_rows > 0) {
         <div class="publicaciones col-lg-6 col-md-">
             
         <?php
-            $sql = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario
+            $sql = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario
             FROM publicaciones p
             INNER JOIN usuarios u ON p.IdUsuario = u.IdUsuario 
             ORDER BY p.IdPublicacion DESC";

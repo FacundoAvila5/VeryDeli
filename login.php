@@ -67,7 +67,7 @@ if(isset($correo) && isset($pass)){
                     </form>
                     <div class="m-0 pt-2 text-center">
                         <hr>
-                        <p>¿No tienes una cuenta? <a href="registro.html" class="link-offset-2 link-underline link-underline-opacity-0">Registrarse</a> </p>
+                        <p>¿No tienes una cuenta? <a href="registro.php" class="link-offset-2 link-underline link-underline-opacity-0">Registrarse</a> </p>
                     </div>
                     <div class="icons-div text-center">
                         <a href="www.facebook.com" class="icons p-4"><i class="fa-brands fa-square-facebook"></i></a>

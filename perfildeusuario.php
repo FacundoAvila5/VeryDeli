@@ -16,7 +16,7 @@
             <!-- logo -->
             <div class="col-2 ms-5">
                 <a class="navbar-brand" href="PaginaPrincipal.php">
-                    <img id="logo" src="img/logo-negro.svg" alt="Very Deli: Inicio">
+                    <img id="logo" src="logos/logo-negro.svg" alt="Very Deli: Inicio">
                 </a>
             </div>
             <!-- searchbar -->
@@ -39,7 +39,7 @@
     </nav>
 
     <div class="container-principal">
-        <div class="container">
+        <div class="container w-50">
             <div class="row">
                 <div class="col-12 d-flex justify-content-center mt-3">
                     <img class="rounded-circle me-2" src="img/ala.jpg" alt="" style="width: 40px; height: 40px;">

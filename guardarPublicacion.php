@@ -4,7 +4,6 @@
 include "ConexionBS.php";
 session_start();
 extract($_POST);
-$nombreusu = $_SESSION['usuario'];
 $id = $_SESSION['idUser'];
 
 date_default_timezone_set('America/Argentina/Buenos_Aires');
@@ -17,14 +16,14 @@ if(isset($tituloPubli) && isset($provinciaorigen) && isset($Localidadorigen) && 
 $fech = DateTime::createFromFormat("Y-m-d", $fechaLimite);
 $fechaFormateada = $fech ? $fech-> format('d/m/Y'): '';
 
-    $guardaPubli = "INSERT INTO publicaciones (IdUsuario, NombreUsuario, Titulo, Descripcion, FechaPublicacion, FechaLimite, ProvinciaOrigen, 
+    $guardaPubli = "INSERT INTO publicaciones (IdUsuario, Titulo, Descripcion, FechaPublicacion, FechaLimite, ProvinciaOrigen, 
     LocalidadOrigen, BarrioOrigen, DireccionOrigen, ProvinciaDestino, LocalidadDestino, BarrioDestino, DireccionDestino, Fragil, 
-    Peso, Alto, Ancho, Largo ) VALUES ('".$id."', '".$nombreusu."', '".$tituloPubli."', '".$descripcion."', '".$fecha."', '".$fechaFormateada."',
+    Peso, Alto, Ancho, Largo ) VALUES ('".$id."', '".$tituloPubli."', '".$descripcion."', '".$fecha."', '".$fechaFormateada."',
      '".$provinciaorigen."', '".$Localidadorigen."', '".$barrioorigen."', '".$direccionorigen."', '".$provinciadestino."',
      '".$Localidaddestino."', '".$barriodestino."', '".$direcciondestino."', '".$fragil."', '".$peso."', '".$alto."', '".$ancho."',
      '".$largo."' )";
      mysqli_query($conexion, $guardaPubli);
-     header("location: Principal.php?".session_id());
+     header("location: PaginaPrincipal.php?".session_id());
                                                               
 }
 include "DesconexionBS.php";

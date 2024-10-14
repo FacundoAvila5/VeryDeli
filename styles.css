@@ -31,8 +31,9 @@ body{
     text-align: right !important;
 }
 .userImg{
-    width: 16%;
-    height: 16%;
+    width: 3rem;
+    height: 3rem;
+    max-width: 50px;
 }
 
 /* PUBLICACIONES */
@@ -48,7 +49,9 @@ body{
 }
 .postUserImg{
     width: 2.5rem; 
-    height: 2.5rem
+    height: 2.5rem;
+    max-width: 42px;
+    max-height: 42px;
 }
 .postBottom{ 
     width: 50%;

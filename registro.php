@@ -1,52 +1,76 @@
 <?php
-    if (isset($_POST['btn-reg'])) {
-        extract($_POST);
-        $nameError = $apeError = $emailError = $pass1Error = $pass2Error = "";
-        $showModal= false;
+if (isset($_POST['btn-reg'])) {
+    extract($_POST);
+    $nameError = $apeError = $emailError = $pass1Error = $pass2Error = $imageError = "";
+    $showModal = false;
 
-        if (empty($name)) { $nameError = "Ingrese el nombre."; }
-        if (empty($ape)) { $apeError = "Ingrese el apellido."; }
+    if (empty($name)) { $nameError = "Ingrese el nombre."; }
+    if (empty($ape)) { $apeError = "Ingrese el apellido."; }
 
-        if (empty($email)) {
-            $emailError = "Ingrese el email.";
-        } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $emailError = "El formato del email no es válido.";
-        }
-        
-        if (empty($pass1)) { $pass1Error = "La contraseña es obligatoria."; }
-        if (empty($pass2)) { $pass2Error = "Por favor, repita la contraseña."; }
-        if (!empty($pass1) && !empty($pass2) && $pass1 != $pass2) {
-            $pass1Error = "Las contraseñas no coinciden.";
-        }
-
-        //Conexion con la base de datos
-        $conn = mysqli_connect('localhost', 'root');
-        if (!$conn) { die("Conexión fallida: " . mysqli_connect_error()); }
-        mysqli_select_db($conn, 'verydeli');
-        // Verificar si el email ya existe
-        $sql = "SELECT IdUsuario FROM usuarios WHERE EmailUsuario = '$email'";
-        $result = mysqli_query($conn, $sql);
-        if (mysqli_num_rows($result) > 0) {
-            $emailError = "El email ya está registrado.";
-        }
-
-        
-        if (empty($nameError) && empty($apeError) && empty($emailError) && empty($pass1Error) && empty($pass2Error)) {
-            
-            // lógica para almacenar los datos en la base de datos
-            $hashed_password = password_hash($pass1, PASSWORD_DEFAULT);
-            $sql="INSERT INTO usuarios (NombreUsuario, ApellidoUsuario, EmailUsuario, Contrasenia, TipoUsuario, Validado) VALUES ('".$name."','".$ape."','".$email."','".$hashed_password."','Normal','0')";
-            $result = mysqli_query($conn, $sql);
-            if ($result) {
-                $showModal=true;
-            } else {
-                echo "Error: " . mysqli_connect_error();
-            }
-
-            mysqli_close($conn);
-        } 
+    if (empty($email)) {
+        $emailError = "Ingrese el email.";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $emailError = "El formato del email no es válido.";
     }
 
+    if (empty($pass1)) { $pass1Error = "La contraseña es obligatoria."; }
+    if (empty($pass2)) { $pass2Error = "Por favor, repita la contraseña."; }
+    if (!empty($pass1) && !empty($pass2) && $pass1 != $pass2) {
+        $pass1Error = "Las contraseñas no coinciden.";
+    }
+
+    // Validación de imagen
+    if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+        $targetDir = "img/";
+        $targetFile = $targetDir . basename($_FILES['image']['name']);
+        $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+
+        // Verificar el tipo de archivo (opcional)
+        $validImageTypes = ['jpg', 'jpeg', 'png', 'gif'];
+        if (!in_array($imageFileType, $validImageTypes)) {
+            $imageError = "Solo se permiten imágenes en formato JPG, JPEG, PNG y GIF.";
+        }
+
+        // Verificar si el archivo ya existe
+        if (file_exists($targetFile)) {
+            $imageError = "El archivo ya existe.";
+        }
+
+        // Intentar subir la imagen
+        if (empty($imageError) && !move_uploaded_file($_FILES['image']['tmp_name'], $targetFile)) {
+            $imageError = "Hubo un error al subir la imagen.";
+        }
+    } else {
+        $imageError = "Por favor, cargue una imagen.";
+    }
+
+    // Conexión con la base de datos
+    $conn = mysqli_connect('localhost', 'root');
+    if (!$conn) { die("Conexión fallida: " . mysqli_connect_error()); }
+    mysqli_select_db($conn, 'verydeli');
+
+    // Verificar si el email ya existe
+    $sql = "SELECT IdUsuario FROM usuarios WHERE EmailUsuario = '$email'";
+    $result = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($result) > 0) {
+        $emailError = "El email ya está registrado.";
+    }
+
+    if (empty($nameError) && empty($apeError) && empty($emailError) && empty($pass1Error) && empty($pass2Error) && empty($imageError)) {
+        // Lógica para almacenar los datos en la base de datos
+        $hashed_password = password_hash($pass1, PASSWORD_DEFAULT);
+        $sql = "INSERT INTO usuarios (NombreUsuario, ApellidoUsuario, EmailUsuario, Contrasenia, TipoUsuario, Validado, imagenUsuario) 
+                VALUES ('".$name."','".$ape."','".$email."','".$hashed_password."','Normal','0', '$targetFile')";
+        $result = mysqli_query($conn, $sql);
+        if ($result) {
+            $showModal = true;
+        } else {
+            echo "Error: " . mysqli_error($conn);
+        }
+
+        mysqli_close($conn);
+    } 
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,7 +84,6 @@
 <body>
     <div class="container-fluid p-0">
         <div class="gradient-bg-animation d-flex justify-content-center align-items-center vh-100">
-            
             <div class="row w-50">
                 <div class="col-12 col-md-12 bg-light bg-opacity-75 inicio-sesion">
                     <div class="row">
@@ -73,7 +96,7 @@
                         </div>
                         <hr>
                     </div>
-                    <form action="registro.php" method="post">
+                    <form action="registro.php" method="post" enctype="multipart/form-data">
 
                         <div class="row">
                             <div class="col-6">
@@ -98,7 +121,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class ="row pt-3">
+
+                        <div class="row pt-3">
                             <div class="col-6">
                                 <input type="password" class="form-control <?php echo $pass1Error!='' ? 'is-invalid' : ''; ?>" placeholder="Contraseña *"  name="pass1">
                                 <div class="invalid-feedback">
@@ -113,14 +137,15 @@
                             </div>
                         </div>
 
-                        <!-- <div class="row pt-4">
-                            <div class="col-4">
-                                <input type="text" class="form-control " placeholder="Provincia" name="prov">
+                        <!-- Input para cargar la imagen -->
+                        <div class="row pt-3">
+                            <div class="col-12">
+                                <input type="file" class="form-control <?php echo $imageError!='' ? 'is-invalid' : ''; ?>" name="image" accept="image/*">
+                                <div class="invalid-feedback">
+                                    <?php echo isset($imageError) ? $imageError : '' ?>
+                                </div>
                             </div>
-                            <div class="col-4">
-                                <input type="text" class="form-control" placeholder="Ciudad" name="city">
-                            </div>
-                        </div> -->
+                        </div>
 
                         <div class="row pt-3 d-flex justify-content-center">
                             <hr>

@@ -20,6 +20,10 @@ $idusu =  $_SESSION['idUser'];
 ?>
 
 <body>
+<?php
+$id = $_GET['id'];
+?>
+
     <!-- NAV  -->
     <nav class="navbar bg-body-tertiary d-none d-lg-block">
         <div class="container-fluid d-flex justify-content-between">

@@ -106,6 +106,37 @@ body{
     align-items: center;
 }
 
+/* modal postularse */
+
+.custom-modal-content {
+    background-color: rgb(133, 133, 133) !important;
+}
+.custom-input {
+    font-size: 200% !important; 
+    height: 85px !important;  
+    border-radius: 0 5px 5px 0 !important;
+}
+.monto{
+    width: 80% !important; 
+    margin: 0 auto !important; 
+}
+.custom-input-m {
+    width: 20% !important;
+    font-size: 170% !important;
+    display: grid !important;
+    place-items: center !important;
+}
+.custom-textarea {
+    width: 80% !important;
+    height: 110px !important; 
+    margin: 0 auto !important;  
+}
+.modal-body {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important; 
+}
+
 @media (max-width: 768px) {
     .container-principal {
         padding-bottom: 60px; 

@@ -7,89 +7,35 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <title>Inicio</title>
+
+        <title>Inicio</title>
 </head>
 
-<body>
 <?php
-$id = $_GET['id'];
+session_start();
+include "ConexionBS.php";
+$nombre = $_SESSION['usuario']; 
+$idusu =  $_SESSION['idUser'];
 ?>
 
-    <!-- NAV  -->
-    <nav class="navbar bg-body-tertiary d-none d-lg-block">
-        <div class="container-fluid d-flex justify-content-between">
-            <!-- logo -->
-            <div class="col-2 ms-5">
-                <a class="navbar-brand" href="index.html">
-                    <img id="logo" src="img/logo-negro.svg" alt="Very Deli: Inicio">
-                </a>
-            </div>
-            <!-- searchbar -->
-            <div class=" d-flex search-box">
-                <div class="form-container input-group search-bar">
-                    <!-- <form class="d-flex" role="search"> -->
-                    <input class="form-control" type="search" placeholder="Buscar una publicación" aria-label="Search">
-                    <button class="btn btn-search" type="submit">
-                        <i class="lupa fa-solid fa-magnifying-glass"></i>
-                    </button>
-                    <!-- </form> -->
-                </div>
-            </div>
+<body>
+<!-- <?php
+// $id = $_GET['id'];
+?> -->
 
-            <div class="col-2">
-                <!-- div vacio para centrar. aca podría ir la ubicacion/direccion/etc -->
-            </div>
+    <!-- HEADER -->
+    <?php
+    include 'header.php'
+    ?>
 
-        </div>
-    </nav>
     <!-- CONTENIDO -->
     <div class="contenedor container-fluid">
       <div class="row p-2 pt-3">
 
-        <!-- user -->
-        <div class="col-lg-3 d-none d-lg-block">
-            <!-- info -->
-            <div class="user d-flex justify-content-start p-2">
-                <img class="userImg rounded-circle me-2" src="img/1.jpg">
-                Nombre Usuario
-            </div>
-            <!-- botones justify-content-end-->
-            <div class="userBtn d-flex ms-5">
-                <!-- publicar -->
-                <div class="row mb-1">
-                    <div class="col">
-                        <a href="#" class="link"><i class="fa-solid fa-pen-to-square"></i> Publicar</a>
-                        <!-- <button class="btn btn-small btn-publi"><i class="fa-solid fa-pen-to-square"></i> Publicar</button> -->
-                    </div>
-                </div>
-                <!-- vehiculos -->
-                <div class="row mb-1">
-                    <div class="col">
-                        <a href="#" class="link"><i class="fa-solid fa-car"></i> Mis vehículos</a>
-                    </div>
-                </div>
-                <!-- actividad -->
-                <div class="row mb-1">
-                    <div class="col">
-                        <a href="#" class="link"><i class="fa-solid fa-clock-rotate-left"></i> Actividad</a>
-                    </div>
-                </div>
-                <!-- verif -->
-                <div class="row">
-                    <div class="col">
-                        <a href="#" class="link"><i class="fa-solid fa-user-check"></i> Verificar mi cuenta</a>
-                    </div>
-                </div>
-                <hr>
-                <!-- cerrar sesion -->
-                <div class="row">
-                    <div class="col">
-                        <a href="#" class="link"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
+        <!-- columna: Usuario -->
+        <?php
+            include 'sidebarleft.php'
+        ?>
 
         <!-- publicaciones -->
         <div class="publicaciones col-lg-6 col-md-">
@@ -150,7 +96,7 @@ $id = $_GET['id'];
                     </div>
 
                     <div class="d-flex justify-content-end align-items-center me-3">
-                        <button class="btn btn-light">Postularme</button>
+                        <button class="btn btn-light link" data-bs-toggle="modal" data-bs-target="#modalpostularse">Postularme</button>
                     </div>
                 </div>
 
@@ -213,59 +159,137 @@ $id = $_GET['id'];
             </div>
         </div>
 
-        <!-- notif -->
-        <div class="col-lg-3 col-md-3 col-3 d-none d-lg-block">
-            <p class="txt">Notificaciones</p>
-
-            <div class="row">
-                <div class="col rounded" style="padding: 5px;">
-                    <div class="bg-white rounded text-center" style="margin: 10px 2px;">
-                        notif
-                    </div>
-                    <div class="bg-white rounded text-center" style="margin: 10px 2px;">
-                        notif
-                    </div>
-                    <div class="bg-white rounded text-center" style="margin: 10px 2px;">
-                        notif
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!-- columna: Notificaciones -->
+        <?php
+            include 'sidebarright.php'
+        ?>
 
       </div>
 
     </div>
 
-    <!-- BOTTOM NAV -->
-    <div class="bottomNavbar container-fluid bg-body-tertiary d-block d-lg-none">
-      <div class="navIcons d-flex">
-        <!-- home -->
-        <div class="opcionMenu">
-          <i class="fa-solid fa-house"></i>
-        </div>
-        <!-- busqueda -->
-        <div class="opcionMenu">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </div>
-        <!-- postear -->
-        <div class="opcionMenu">
-          <i class="fa-solid fa-square-plus"></i>
-        </div>
-        <!-- idk -->
-        <div class="opcionMenu">
-          <i class="fa-solid fa-face-smile"></i>
-        </div>
-        <!-- perfil -->
-        <div class="opcionMenu">
-            <a href="https://github.com/candazed"><i class="fa-solid fa-user"></i></a>
-        </div>
+    <!-- FOOTER MOBILE -->
+        <?php
+            include 'footermobile.php'
+        ?>    
+
+
+<!-- Modal postularse -->
+
+<div class="modal fade" id="modalpostularse" tabindex="-1" aria-labelledby="publishModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content custom-modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="publishModalLabel">Datos para postulacion</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-    </div>    
+      <div class="modal-body">
+        <form id="publicacion" action="publicarmodal" method="post" class="needs-validation" novalidate>
+       
+         <label for="comentario" class="form-label"><h4>Monto a cobrar.</h4></label>
+          <div class="input-group mb-3 monto">
+            <span class="input-group-text custom-input-m" id="basic-addon1">$</span>
+            <input type="number" class="custom-input form-control" aria-label="Username" aria-describedby="basic-addon1" id="monto" name="monto" placeholder="0.00,0" required>
+            <div class="invalid-feedback">
+                    El monto a cobrar es obligatorio.
+             </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="comentario" class="form-label">Comentario (opcional)</label>
+            <textarea class="form-control custom-textarea" id="comentario" name="comentario"></textarea>
+        </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="background-color: rgb(70, 70, 70);">Cerrar</button>
+        <button type="submit" class="btn text-black" style="background-color: white; "  onclick="abrirSegundoModal()">Siguente</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para confirmar postulacion -->
+<div class="modal fade" id="publicarmodal" tabindex="-1" aria-labelledby="publishModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content custom-modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="publishModalLabel">Datos para postulacion</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="publicacionFinal" action="guardarPublicacion.php" method="post">
+            
+          <div class="input-group mb-3 ">
+            <h3>Danilo Steger</h3>
+          </div>
+
+        <div class="mb-3">
+            <p>Importe a cobrar</p> 
+                <h4><?php  echo ' $ 0.00,0'  ?></h4>
+        </div>
+
+        
+        <div class="mb-3">
+            <h6 >Comentario</h6>
+                <p>Soy un comentario</p>
+        </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="background-color: rgb(70, 70, 70);">Cerrar</button>
+        <button type="submit" form="publicacion" class="btn text-black" style="background-color: white;">Publicar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Script de Bootstrap para mensaje de error en formulario -->
+<script>
+  (function () {
+    'use strict'
+    var forms = document.querySelectorAll('.needs-validation')
+    Array.prototype.slice.call(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
+</script>
+
+<!-- JavaScript para abrir el segundo modal -->
+<script>
+    function abrirSegundoModal() {
+        var formulario = document.getElementById('publicacion');
+        if (formulario.checkValidity()) {
+            // Cerrar el primer modal
+            var primerModal = bootstrap.Modal.getInstance(document.getElementById('modalpostularse'));
+            primerModal.hide();
+
+            // Abrir el segundo modal
+            var segundoModal = new bootstrap.Modal(document.getElementById('publicarmodal'));
+            segundoModal.show();
+        } else {
+            formulario.classList.add('was-validated');
+        }
+    }
+</script>
 
     <script src="https://kit.fontawesome.com/0ce357c188.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>   
+   <?php
+        include "DesconexionBS.php";
+    ?>
 </body>
 
 </html>

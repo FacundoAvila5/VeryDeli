@@ -109,32 +109,32 @@ body{
 /* modal postularse */
 
 .custom-modal-content {
-    background-color: rgb(133, 133, 133);
+    background-color: rgb(133, 133, 133) !important;
 }
 .custom-input {
-    font-size: 200%;
-    height: 85px;  
+    font-size: 200% !important; 
+    height: 85px !important;  
     border-radius: 0 5px 5px 0 !important;
 }
 .monto{
-    width: 80%; 
-    margin: 0 auto; 
+    width: 80% !important; 
+    margin: 0 auto !important; 
 }
-.custom-input-m{
-    width: 20%;
-    font-size: 170%;
-    display: grid;
-    place-items: center;
+.custom-input-m {
+    width: 20% !important;
+    font-size: 170% !important;
+    display: grid !important;
+    place-items: center !important;
 }
 .custom-textarea {
-    width: 80%;
-    height: 110px; 
-    margin: 0 auto;  
+    width: 80% !important;
+    height: 110px !important; 
+    margin: 0 auto !important;  
 }
 .modal-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important; 
 }
 
 @media (max-width: 768px) {

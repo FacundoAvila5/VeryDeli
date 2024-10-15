@@ -23,81 +23,19 @@ $idusu =  $_SESSION['idUser'];
 // $id = $_GET['id'];
 ?> -->
 
-    <!-- NAV  -->
-    <nav class="navbar bg-body-tertiary d-none d-lg-block">
-        <div class="container-fluid d-flex justify-content-between">
-            <!-- logo -->
-            <div class="col-2 ms-5">
-                <a class="navbar-brand" href="index.html">
-                    <img id="logo" src="img/logo-negro.svg" alt="Very Deli: Inicio">
-                </a>
-            </div>
-            <!-- searchbar -->
-            <div class=" d-flex search-box">
-                <div class="form-container input-group search-bar">
-                    <!-- <form class="d-flex" role="search"> -->
-                    <input class="form-control" type="search" placeholder="Buscar una publicación" aria-label="Search">
-                    <button class="btn btn-search" type="submit">
-                        <i class="lupa fa-solid fa-magnifying-glass"></i>
-                    </button>
-                    <!-- </form> -->
-                </div>
-            </div>
+    <!-- HEADER -->
+    <?php
+    include 'header.php'
+    ?>
 
-            <div class="col-2">
-                <!-- div vacio para centrar. aca podría ir la ubicacion/direccion/etc -->
-            </div>
-
-        </div>
-    </nav>
     <!-- CONTENIDO -->
     <div class="contenedor container-fluid">
       <div class="row p-2 pt-3">
 
-        <!-- user -->
-        <div class="col-lg-3 d-none d-lg-block">
-            <!-- info -->
-            <div class="user d-flex justify-content-start p-2">
-                <img class="userImg rounded-circle me-2" src="img/1.jpg">
-                Nombre Usuario
-            </div>
-            <!-- botones justify-content-end-->
-            <div class="userBtn d-flex ms-5">
-                <!-- publicar -->
-                <div class="row mb-1">
-                    <div class="col">
-                        <a href="#" class="link"><i class="fa-solid fa-pen-to-square"></i> Publicar</a>
-                        <!-- <button class="btn btn-small btn-publi"><i class="fa-solid fa-pen-to-square"></i> Publicar</button> -->
-                    </div>
-                </div>
-                <!-- vehiculos -->
-                <div class="row mb-1">
-                    <div class="col">
-                        <a href="#" class="link"><i class="fa-solid fa-car"></i> Mis vehículos</a>
-                    </div>
-                </div>
-                <!-- actividad -->
-                <div class="row mb-1">
-                    <div class="col">
-                        <a href="#" class="link"><i class="fa-solid fa-clock-rotate-left"></i> Actividad</a>
-                    </div>
-                </div>
-                <!-- verif -->
-                <div class="row">
-                    <div class="col">
-                        <a href="#" class="link"><i class="fa-solid fa-user-check"></i> Verificar mi cuenta</a>
-                    </div>
-                </div>
-                <hr>
-                <!-- cerrar sesion -->
-                <div class="row">
-                    <div class="col">
-                        <a href="CerrarSesion.php" class="link"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
+        <!-- columna: Usuario -->
+        <?php
+            include 'sidebarleft.php'
+        ?>
 
         <!-- publicaciones -->
         <div class="publicaciones col-lg-6 col-md-">
@@ -221,54 +159,19 @@ $idusu =  $_SESSION['idUser'];
             </div>
         </div>
 
-        <!-- notif -->
-        <div class="col-lg-3 col-md-3 col-3 d-none d-lg-block">
-            <p class="txt">Notificaciones</p>
-
-            <div class="row">
-                <div class="col rounded" style="padding: 5px;">
-                    <div class="bg-white rounded text-center" style="margin: 10px 2px;">
-                        notif
-                    </div>
-                    <div class="bg-white rounded text-center" style="margin: 10px 2px;">
-                        notif
-                    </div>
-                    <div class="bg-white rounded text-center" style="margin: 10px 2px;">
-                        notif
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!-- columna: Notificaciones -->
+        <?php
+            include 'sidebarright.php'
+        ?>
 
       </div>
 
     </div>
 
-    <!-- BOTTOM NAV -->
-    <div class="bottomNavbar container-fluid bg-body-tertiary d-block d-lg-none">
-      <div class="navIcons d-flex">
-        <!-- home -->
-        <div class="opcionMenu">
-          <i class="fa-solid fa-house"></i>
-        </div>
-        <!-- busqueda -->
-        <div class="opcionMenu">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </div>
-        <!-- postear -->
-        <div class="opcionMenu">
-          <i class="fa-solid fa-square-plus"></i>
-        </div>
-        <!-- idk -->
-        <div class="opcionMenu">
-          <i class="fa-solid fa-face-smile"></i>
-        </div>
-        <!-- perfil -->
-        <div class="opcionMenu">
-            <a href="https://github.com/candazed"><i class="fa-solid fa-user"></i></a>
-        </div>
-      </div>
-    </div>    
+    <!-- FOOTER MOBILE -->
+        <?php
+            include 'footermobile.php'
+        ?>    
 
 
 <!-- Modal postularse -->

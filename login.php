@@ -67,6 +67,12 @@ if(isset($correo) && isset($pass)){
                           <label class="form-check-label" for="exampleCheck1">Check me out</label>
                         </div> -->
 
+                        <?php if ($mensajeError){ ?>
+                        <div class="alert alert-danger text-center" role="alert">
+                            <?php echo $mensajeError; ?>
+                        </div>
+                        <?php } ?>
+
                         <div class="d-grid gap-2 col-4 mx-auto justify-content-center m-0">
                             <!-- <button type="submit" class="btn btn-primary" id="btn-ingresar"><strong>Ingresar</strong></button> -->
                             <button id="btn-ingresar">Ingresar</button>

@@ -92,7 +92,7 @@ $idusu =  $_SESSION['idUser'];
                 <!-- cerrar sesion -->
                 <div class="row">
                     <div class="col">
-                        <a href="#" class="link"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a>
+                        <a href="CerrarSesion.php" class="link"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a>
                     </div>
                 </div>
             </div>

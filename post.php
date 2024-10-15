@@ -309,9 +309,6 @@ $idusu =  $_SESSION['idUser'];
 
 <!-- Modal para confirmar postulacion -->
 <div class="modal fade" id="publicarmodal" tabindex="-1" aria-labelledby="publishModalLabel" aria-hidden="true">
-    <?php
-     include "ConexionBS.php";
-    ?>
   <div class="modal-dialog modal-sm">
     <div class="modal-content custom-modal-content">
       <div class="modal-header">

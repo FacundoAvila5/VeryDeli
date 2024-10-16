@@ -15,6 +15,8 @@
 <?php
     session_start();
     include "ConexionBS.php";
+    include "PaginaPrincipal.php";
+    include "sidebarleft.php";
     $nombre = $_SESSION['usuario']; 
     $idusu =  $_SESSION['idUser'];
 ?>
@@ -201,7 +203,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form id="publicacion" action="publicarmodal" method="post" class="needs-validation" novalidate>
+        <form id="publicacion" action="publicarmodalpostularse" method="post" class="needs-validation" novalidate>
        
          <label for="comentario" class="form-label"><h4>Monto a cobrar.</h4></label>
           <div class="input-group mb-3 monto">
@@ -229,7 +231,7 @@
 
 
 <!-- Modal para confirmar postulacion -->
-<div class="modal fade" id="publicarmodal" tabindex="-1" aria-labelledby="publishModalLabel" aria-hidden="true">
+<div class="modal fade" id="publicarmodalpostularse" tabindex="-1" aria-labelledby="publishModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content custom-modal-content">
       <div class="modal-header">
@@ -306,7 +308,7 @@
             primerModal.hide();
 
             // Abrir el segundo modal
-            var segundoModal = new bootstrap.Modal(document.getElementById('publicarmodal'));
+            var segundoModal = new bootstrap.Modal(document.getElementById('publicarmodalpostularse'));
             segundoModal.show();
         } else {
             formulario.classList.add('was-validated');

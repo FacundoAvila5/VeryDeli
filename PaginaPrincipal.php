@@ -79,14 +79,14 @@ if ($result->num_rows > 0) {
                             <div class="card-text">
                                 <i class="i fa-solid fa-location-dot"></i>
                                 Origen: <?php
-                                        $prov = $row['ProvinciaOrigen']; $localidad = $row['LocalidadOrigen']; $barrio = $row['BarrioOrigen'];
-                                        echo $prov .",". $localidad  .",". $barrio;
+                                        $prov = $row['ProvinciaOrigen'] ; $localidad = $row['LocalidadOrigen']; $barrio = $row['BarrioOrigen'];
+                                        echo $prov .", ". $localidad  .", ". $barrio;
                                         // printf("%s, %s, %s", $row['ProvinciaOrigen'], $row['LocalidadOrigen'], $row['BarrioOrigen']); 
                                     ?> <br>
                                 <i class="i fa-solid fa-route"></i>
                                 Destino: <?php 
                                         $prov = $row['ProvinciaDestino']; $localidad = $row['LocalidadDestino']; $barrio = $row['BarrioDestino'];
-                                        echo $prov .",". $localidad  .",". $barrio;
+                                        echo $prov .", ". $localidad  .", ". $barrio;
                                     ?> <br>
                                 <i class="fa-solid fa-calendar-days"></i>
                                 Fecha límite para completar entrega: <?php $date = $row['FechaLimite']; echo $date; ?> <br>
@@ -314,7 +314,25 @@ if ($result->num_rows > 0) {
             <div class="invalid-feedback">
                 Por favor, ingrese una descripción.
             </div>
-        </div> 
+        </div><hr>
+        <div class="mb-3">
+        <label for="descripcion" class="form-label"><h5>Datos del remitente</h5></label>
+        </div>
+        <div class="mb-3">
+            <label for="nombreremitente" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombreremitente" name="nombreremitente" placeholder="Nombre del remitente" required>
+            <div class="invalid-feedback">
+                Por favor, ingrese un nombre.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="celular" class="form-label">Número de celular</label>
+            <input type="text" class="form-control" id="celular" name="celular" placeholder="Número de celular" required>
+            <div class="invalid-feedback">
+                Por favor, ingrese un número de celular.
+            </div>
+        </div>
 
             </form>
         </div>

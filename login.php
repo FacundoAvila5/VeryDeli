@@ -26,6 +26,7 @@ if(isset($correo) && isset($pass)){
         $clave = $row['Contrasenia'];
         $_SESSION["usuario"] = $row['NombreUsuario'] ." ". $row['ApellidoUsuario'];
         $_SESSION["idUser"] = $row['IdUsuario'];
+        $_SESSION["fotoPerfil"] = $row['ImagenUsuario'];
         if(password_verify($pass, $clave)){
             $auth = true;
         }

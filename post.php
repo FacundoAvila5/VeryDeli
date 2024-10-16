@@ -15,8 +15,8 @@
 <?php
     session_start();
     include "ConexionBS.php";
-    include "PaginaPrincipal.php";
-    include "sidebarleft.php";
+    // include "PaginaPrincipal.php";
+    // include "sidebarleft.php";
     $nombre = $_SESSION['usuario']; 
     $idusu =  $_SESSION['idUser'];
 ?>

@@ -28,7 +28,7 @@
                 <!-- actividad -->
                 <div class="row mb-1">
                     <div class="col">
-                        <a href="#" class="link"><i class="fa-solid fa-clock-rotate-left"></i> Actividad</a>
+                        <a href="historial.php" class="link"><i class="fa-solid fa-clock-rotate-left"></i> Actividad</a>
                     </div>
                 </div>
                 <!-- verif -->

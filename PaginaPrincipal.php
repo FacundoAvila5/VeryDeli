@@ -18,20 +18,19 @@ session_start();
 include "ConexionBS.php";
 
 // Obtener el ID del usuario desde la sesión
-$usuario_id = $_SESSION['idUser'];
+// $usuario_id = $_SESSION['idUser'];
 
 // Realizar la consulta para obtener la imagen del usuario
-$sql = "SELECT ImagenUsuario FROM usuarios WHERE IdUsuario = '$usuario_id'";
-$result = $conexion->query($sql);
+// $sql = "SELECT ImagenUsuario FROM usuarios WHERE IdUsuario = '$usuario_id'";
+// $result = mysqli_query($conexion, $sql);
 
-// Verificar si se encontró el usuario
-if ($result->num_rows > 0) {
-    // Obtener la fila resultante como un arreglo asociativo
-    $row = $result->fetch_assoc();
-    $imagen = $row['ImagenUsuario'];
-} else {
-    $imagen = 'ruta/imagen/default.jpg'; // Imagen por defecto si no se encuentra el usuario
-}
+// if ($result->num_rows > 0) {
+//     $row = mysqli_fetch_assoc($result);
+//     $imagen = $row['ImagenUsuario'];
+// } else {
+//     $imagen = 'ruta/imagen/default.jpg'; // Imagen por defecto si no se encuentra el usuario
+// }
+
 ?>
 
 
@@ -75,35 +74,30 @@ if ($result->num_rows > 0) {
                         </div>
 
                         <div class="postDetails ms-5">
-                            <h6 class="card-title"><?php $titulo = $row['Titulo']; echo $titulo; ?></h6>
+                            <h6 class="card-title"><?php echo $row['Titulo']; ?></h6>
                             <div class="card-text">
                                 <i class="i fa-solid fa-location-dot"></i>
                                 Origen: <?php
-                                        $prov = $row['ProvinciaOrigen'] ; $localidad = $row['LocalidadOrigen']; $barrio = $row['BarrioOrigen'];
-                                        echo $prov .", ". $localidad  .", ". $barrio;
-                                        // printf("%s, %s, %s", $row['ProvinciaOrigen'], $row['LocalidadOrigen'], $row['BarrioOrigen']); 
+                                        echo $row['ProvinciaOrigen'].", ".$row['LocalidadOrigen'].", ".$row['BarrioOrigen'];
                                     ?> <br>
                                 <i class="i fa-solid fa-route"></i>
                                 Destino: <?php 
-                                        $prov = $row['ProvinciaDestino']; $localidad = $row['LocalidadDestino']; $barrio = $row['BarrioDestino'];
-                                        echo $prov .", ". $localidad  .", ". $barrio;
+                                        echo $row['ProvinciaDestino'].", ".$row['LocalidadDestino'].", ".$row['BarrioDestino'];
                                     ?> <br>
                                 <i class="fa-solid fa-calendar-days"></i>
-                                Fecha límite para completar entrega: <?php $date = $row['FechaLimite']; echo $date; ?> <br>
+                                Fecha límite para completar entrega: <?php echo $row['FechaLimite'];?> <br>
                                 <i class="i fa-solid fa-ruler"></i>
                                 Volumen: <?php 
-                                    $largo = $row['Largo']; $ancho = $row['Ancho']; $alto = $row['Alto'];
-                                    echo $largo .' x '. $ancho .' x '. $alto;
-                                    // printf("%f x %f x %f", $row['Largo'], $row['Ancho'], $row['Alto']); 
+                                    echo $row['Largo'].' x '.$row['Ancho'].' x '.$row['Alto'];
                                     ?> <br>
                                 <i class="i fa-solid fa-weight-scale"></i>
-                                Peso: <?php $peso=$row['Peso']; echo $peso. 'g <br>';
+                                Peso: <?php echo $row['Peso']. 'g <br>';
                                 if ($row['Fragil'] == 'sí') { ?>
                                     <span class="txt redLink">FRAGIL</span><br>
                                     <?php
                                 }
 
-                                $desc = $row['Descripcion']; echo $desc;
+                                echo $row['Descripcion'];
                                 ?>
                             </div>
                         </div>

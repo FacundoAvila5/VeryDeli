@@ -7,22 +7,19 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="shortcut icon" href="img\icons\loguito-fondoAzulV2.ico" type="image/x-icon">
 
-        <title>Inicio</title>
+        <title>Publicación</title>
 </head>
 
 <?php
-session_start();
-include "ConexionBS.php";
-$nombre = $_SESSION['usuario']; 
-$idusu =  $_SESSION['idUser'];
+    session_start();
+    include "ConexionBS.php";
+    $nombre = $_SESSION['usuario']; 
+    $idusu =  $_SESSION['idUser'];
 ?>
 
 <body>
-<!-- <?php
-$id = $_GET['id'];
-?> -->
-
     <!-- HEADER -->
     <?php
     include 'header.php'
@@ -39,7 +36,17 @@ $id = $_GET['id'];
 
         <!-- publicaciones -->
         <div class="publicaciones col-lg-6 col-md-">
-            <!-- post -->
+            <?php
+                $id = $_GET['id'];
+                $sql = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario
+                FROM publicaciones p
+                INNER JOIN usuarios u ON p.IdUsuario = u.IdUsuario
+                WHERE p.IdPublicacion = $id";
+
+                $consulta = mysqli_query($conexion, $sql);
+                $post = mysqli_fetch_assoc($consulta);
+            ?>
+
             <div class="post card">
                 <div class="card-header bg-transparent" style="padding: 3px;">
                     <div class="row" style="margin: auto;">
@@ -56,9 +63,11 @@ $id = $_GET['id'];
                 <div class="card-content">
                     <div class="row" style="margin: auto;">
                         <!-- USER INFO -->
-                        <div class="col-10 p-0">
-                            <img class="postUserImg rounded-circle me-2" src="img/1.jpg">
-                            <span class="txt">Nombre Usuario</span>
+                        <div class="user col-10 p-0">
+                            <img class="postUserImg rounded-circle me-2" src="<?php echo $post['ImagenUsuario']; ?>">
+                            <?php
+                                echo '<span class="txt">'.$post['NombreUsuario']. " " . $post['ApellidoUsuario'].'</span>';
+                            ?>
                         </div>
                         <!-- POST LINKS -->
                         <div class="col p-0 d-flex justify-content-end">
@@ -81,17 +90,25 @@ $id = $_GET['id'];
 
                     <div class="row">
                         <div class="postDetails ms-5 col">
-                            <h6 class="card-title" >Titulo de publicación</h6> <!-- style="margin-top: 8px;"-->
-                                <i class="fa-solid fa-location-dot"></i> Origen: Provincia, Localidad <br>
-                                <i class="fa-solid fa-route"></i> Destino: Provincia, Localidad <br>
+                            <h6 class="card-title"><?php echo $post['Titulo']; ?></h6>
+                                <i class="fa-solid fa-location-dot"></i> 
+                                Origen: <?php
+                                        echo $post['ProvinciaOrigen'].", ".$post['LocalidadOrigen'].", ".$post['BarrioOrigen'];
+                                    ?> <br>
+                                <i class="fa-solid fa-route"></i> 
+                                Destino: <?php 
+                                        echo $post['ProvinciaDestino'].", ".$post['LocalidadDestino'].", ".$post['BarrioDestino'];
+                                    ?> <br>
+                                <i class="fa-solid fa-calendar-days"></i>
+                                Fecha límite para completar entrega: <?php echo $post['FechaLimite'];?> <br>
                                 <i class="fa-solid fa-ruler"></i> Volumen <br>
-                                Longitud: 00 <br>
-                                Ancho: 00 <br>
-                                Alto: 00 <br>
-                                <i class="fa-solid fa-weight-scale"></i> Peso: 00.00kg <br>
-
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua.
+                                Longitud: <?php echo $post['Largo']. ' cm'?> <br>
+                                Ancho: <?php echo $post['Ancho']. ' cm'?> <br>
+                                Alto: <?php echo $post['Alto']. ' cm'?> <br>
+                                <i class="fa-solid fa-weight-scale"></i> Peso: <?php echo $post['Peso']. ' g <br><br>';
+                            
+                                echo $post['Descripcion'];
+                                ?>
                         </div>
                     </div>
 
@@ -204,7 +221,7 @@ $id = $_GET['id'];
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="background-color: rgb(70, 70, 70);">Cerrar</button>
-        <button type="button" class="btn text-black" style="background-color: white; "  onclick="abrirSegundoModal()">Siguente</button>
+        <button type="button" class="btn text-black" style="background-color: white; "  onclick="abrirSegundoModal()">Siguiente</button>
       </div>
     </div>
   </div>

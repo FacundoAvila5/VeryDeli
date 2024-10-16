@@ -3,7 +3,7 @@
             <!-- info -->
             <a href="perfildeusuario.php" class="link">
                 <div class="user d-flex justify-content-start p-2">
-                    <img class="userImg rounded-circle me-2" src="<?php echo $imagen; ?>" alt="">
+                    <img class="userImg rounded-circle me-2" src="<?php $foto = $_SESSION['fotoPerfil']; echo $foto; ?>">
                     <?php
                         $nombre = $_SESSION['usuario'];
                         echo $nombre;

@@ -20,7 +20,7 @@ $idusu =  $_SESSION['idUser'];
 
 <body>
 <!-- <?php
-// $id = $_GET['id'];
+$id = $_GET['id'];
 ?> -->
 
     <!-- HEADER -->

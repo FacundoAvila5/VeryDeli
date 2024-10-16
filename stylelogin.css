@@ -29,7 +29,8 @@
 }
 .icons {
     font-size: 2em;
-    padding: 30px;
+    padding-right: 30px;
+    padding-left: 30px;
 }
 .slogan {
     color: rgb(13, 40, 75);

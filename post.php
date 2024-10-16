@@ -227,14 +227,8 @@
   </div>
 </div>
 
+
 <!-- Modal para confirmar postulacion -->
-
-<?php
-
-extract($_POST);
-
-?>
-
 <div class="modal fade" id="publicarmodal" tabindex="-1" aria-labelledby="publishModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content custom-modal-content">
@@ -243,7 +237,7 @@ extract($_POST);
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form id="publicacionFinal" action="guardarPostulacion.php" method="post">
+        <form id="publicacionFinal" action="GuardarPostulacion.php" method="post">
             
           <div class="input-group mb-3 ">
             <h3> <?php echo $nombre ?> </h3>
@@ -251,19 +245,21 @@ extract($_POST);
 
         <div class="mb-3">
             <p>Importe a cobrar</p> 
-                <h4 id="montoConfirmado"></h4>
+            <h4 id="montoConfirmado"></h4>
+            <input type="hidden" id="montoInput" name="monto">
         </div>
 
         <div class="mb-3">
             <h6 >Comentario</h6>
-                <p id="comentarioConfirmado"></p>
+            <p id="comentarioConfirmado"></p>
+            <input type="hidden" id="comentarioInput" name="comentario">
         </div>
 
-        </form>
-      </div>
-      <div class="modal-footer">
+        <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="background-color: rgb(70, 70, 70);">Cerrar</button>
-        <button type="submit" form="publicacion" class="btn text-black" style="background-color: white;">Publicar</button>
+        <button type="submit" class="btn text-black" style="background-color: white;">Publicar</button>
+      </div>
+        </form>
       </div>
     </div>
   </div>
@@ -293,11 +289,17 @@ extract($_POST);
         var formulario = document.getElementById('publicacion');
         if (formulario.checkValidity()) {
 
+        // Variables para obtener los datos del primer modal
         var monto = document.getElementById('monto').value;
         var comentario = document.getElementById('comentario').value;
-
+        
+        // Muestra de lo ingresado en el segundo modal
         document.getElementById('montoConfirmado').innerText = '$ ' + monto;
         document.getElementById('comentarioConfirmado').innerText = comentario ? comentario : "No se ha dejado un comentario."
+
+        // Asignacion de valor a los input ocultos del segundo modal, para pasar los valores al archivo correspondiente
+        document.getElementById('montoInput').value = monto;
+        document.getElementById('comentarioInput').value = comentario;   
 
             // Cerrar el primer modal
             var primerModal = bootstrap.Modal.getInstance(document.getElementById('modalpostularse'));

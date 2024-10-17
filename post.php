@@ -255,6 +255,7 @@
             <h6 >Comentario</h6>
             <p id="comentarioConfirmado"></p>
             <input type="hidden" id="comentarioInput" name="comentario">
+            <input type="hidden" id="idpublicacionconfirmada" name="idPubli">
         </div>
 
         <div class="modal-footer">
@@ -288,20 +289,25 @@
 <!-- JavaScript para abrir el segundo modal -->
 <script>
     function abrirSegundoModal() {
+
+       // Obtencion de ID de la publicacion desde el boton 'postularme'
+       var idPublicacion = "<?php echo $post['IdPublicacion']; ?>";   
+       document.getElementById('idpublicacionconfirmada').value = idPublicacion; 
+    
         var formulario = document.getElementById('publicacion');
         if (formulario.checkValidity()) {
 
         // Variables para obtener los datos del primer modal
         var monto = document.getElementById('monto').value;
         var comentario = document.getElementById('comentario').value;
-        
+    
         // Muestra de lo ingresado en el segundo modal
         document.getElementById('montoConfirmado').innerText = '$ ' + monto;
-        document.getElementById('comentarioConfirmado').innerText = comentario ? comentario : "No se ha dejado un comentario."
+        document.getElementById('comentarioConfirmado').innerText = comentario ? comentario : "No se ha dejado un comentario.";
 
         // Asignacion de valor a los input ocultos del segundo modal, para pasar los valores al archivo correspondiente
         document.getElementById('montoInput').value = monto;
-        document.getElementById('comentarioInput').value = comentario;   
+        document.getElementById('comentarioInput').value = comentario;  
 
             // Cerrar el primer modal
             var primerModal = bootstrap.Modal.getInstance(document.getElementById('modalpostularse'));

@@ -103,14 +103,19 @@ include "ConexionBS.php";
                         </div>
 
                         <div class="d-flex justify-content-end align-items-center me-3">
-                            <a href="post.php?id=<?php echo urlencode($row['IdPublicacion']); ?>" class="link stretched-link">
+                            <a href="post.php?id=<?php $idpost=$row['IdPublicacion']; echo urlencode($idpost); ?>" class="link stretched-link">
                                 Ver más <i class="fa-solid fa-chevron-right"></i></a>
                         </div>
                     </div>
 
                     <div class="card-footer d-flex">
                         <div class="postBottom text-center txt">
-                            <i class="fa-solid fa-comments"></i> 0 comentarios
+                            <i class="fa-solid fa-comments"></i>
+                            <?php 
+                            $sql = "SELECT IdMensaje FROM mensajes WHERE IdPublicacionMensaje = $idpost";
+                            $contC = mysqli_query($conexion, $sql);
+                            echo mysqli_num_rows($contC). ' comentarios';
+                            ?>
                         </div>
                         <div class="postBottom text-center txt">
                             <i class="fa-solid fa-address-card"></i> 0 postulaciones

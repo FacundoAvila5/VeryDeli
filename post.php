@@ -15,8 +15,6 @@
 <?php
     session_start();
     include "ConexionBS.php";
-    // include "PaginaPrincipal.php";
-    // include "sidebarleft.php";
     $nombre = $_SESSION['usuario']; 
     $idusu =  $_SESSION['idUser'];
 ?>
@@ -24,7 +22,7 @@
 <body>
     <!-- HEADER -->
     <?php
-    include 'header.php'
+        include 'header.php'
     ?>
 
     <!-- CONTENIDO -->
@@ -39,11 +37,12 @@
         <!-- publicaciones -->
         <div class="publicaciones col-lg-6 col-md-">
             <?php
-                $id = $_GET['id'];
+                //obtener id publicacion
+                $idpost = $_GET['id'];
                 $sql = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario
                 FROM publicaciones p
                 INNER JOIN usuarios u ON p.IdUsuario = u.IdUsuario
-                WHERE p.IdPublicacion = $id";
+                WHERE p.IdPublicacion = $idpost";
 
                 $consulta = mysqli_query($conexion, $sql);
                 $post = mysqli_fetch_assoc($consulta);
@@ -130,52 +129,13 @@
 
             </div>
 
-            <!-- comentarios -->
-            <div class="comentarios">
-                <!-- *** PREGUNTA = no es dueño de la publi -->
-                <div class="comment bg-white">
-                    <div class="row p-2 mb-3">
-                        <div class="col-1 d-flex justify-content-start">
-                            <img class="postUserImg rounded-circle" src="img/2.jpg">
-                        </div>
-                        <div class="col-11 d-flex align-items-center">
-                            <input type="text" class="cInput form-control" placeholder="Escribe aquí tu pregunta"></input>
-                            <button class="btn"><i class="fa-regular fa-paper-plane"></i></button>
-                        </div>
-                    </div>
-                </div>
-                <!-- *** PREGUNTA YA PUBLICADA -->
-                <div class="comment bg-white">
-                    <div class="row p-2 mb-3">
-                        <div class="col-1 d-flex justify-content-start">
-                            <img class="postUserImg rounded-circle" src="img/2.jpg">
-                        </div>
-                        <div class="col-11 d-flex align-items-center">
-                            ¿Soy una pregunta?
-                        </div>
-                    </div>
-                </div>
-                <!-- *** RESPUESTA = si es dueño de la publi -->
-                <div class="respuesta row mb-3">
-                    <div class="col-1"></div>
-                    <div class="col">
-                        <div class="comment bg-white">
-                            <div class="row p-2">
-                                <!-- <div class="col-1"></div> -->
-                                <div class="col-1 d-flex justify-content-start">
-                                    <img class="postUserImg rounded-circle" src="img/1.jpg">
-                                </div>
-                                <div class="col-11 d-flex align-items-center">
-                                    <input type="text" class="cInput form-control" placeholder="Escribe aquí tu respuesta"></input>
-                                    <button class="btn"><i class="fa-solid fa-paper-plane"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                
+            <!-- comentarios y postulaciones -->
+            <div id="postBottom mb-4">
+            <?php
+                include 'comentarios.php'
+            ?>
             </div>
+            
         </div>
 
         <!-- columna: Notificaciones -->

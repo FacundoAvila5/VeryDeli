@@ -15,6 +15,10 @@ body{
     text-decoration: none;
     color: rgb(29, 29, 29);
 }
+.fecha{
+    font-size: small;
+    color: gray;
+}
 
 /* BUSQUEDA */
 .search-bar{ flex-direction: row; }
@@ -77,6 +81,10 @@ body{
 }
 .cInput{
     border-color: transparent !important;
+}
+.cForm{
+    display: flex !important;
+    flex-direction: row;
 }
 
 /* NOTIFICACIONES */

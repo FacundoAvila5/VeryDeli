@@ -119,10 +119,15 @@
                 </div>
 
                 <div class="card-footer d-flex">
-                    <div class="text-center" style="width: 50%;">
-                        <i class="fa-solid fa-comments"></i> 0 comentarios
+                    <div class="text-center" id="btnComments" style="width: 50%;">
+                        <i class="fa-solid fa-comments"></i> 
+                        <?php 
+                            $sql = "SELECT IdMensaje FROM mensajes WHERE IdPublicacionMensaje = $idpost";
+                            $contC = mysqli_query($conexion, $sql);
+                            echo mysqli_num_rows($contC). ' comentarios';
+                            ?>
                     </div>
-                    <div class="text-center" style="width: 50%;">
+                    <div class="text-center" id="btnPostu" style="width: 50%;">
                         <i class="fa-solid fa-address-card"></i> 0 postulaciones
                     </div>
                 </div>
@@ -134,6 +139,9 @@
             <?php
                 include 'comentarios.php'
             ?>
+            <?php
+            include 'postulaciones.php'
+            ?>
             </div>
             
         </div>
@@ -142,7 +150,6 @@
         <?php
             include 'sidebarright.php'
         ?>
-
       </div>
 
     </div>
@@ -227,6 +234,8 @@
     </div>
   </div>
 </div>
+
+<script src="script.js"></script>
 
 <!-- Script de Bootstrap para mensaje de error en formulario -->
 <script>

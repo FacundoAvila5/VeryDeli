@@ -86,6 +86,12 @@ body{
     display: flex !important;
     flex-direction: row;
 }
+.boton{
+    padding: 0 !important;
+    background-color: transparent !important;
+    border-color: transparent !important;
+    margin-right: 8px;
+}
 
 /* NOTIFICACIONES */
 .notif{

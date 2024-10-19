@@ -1,27 +1,34 @@
-<div class="comentarios">
+<?php 
+    $foto = $_SESSION['fotoPerfil'];
+
+    date_default_timezone_set('America/Argentina/Buenos_Aires');
+    $fecha = date('d/m/Y');
+?>
+
+<div id="comentarios">
     <!-- *** PREGUNTAR = no es dueño de la publi = usuario en sesion -->
+     <?php if(($post['IdUsuario'] != $idusu)){ ?>
     <div class="comment bg-white">
         <div class="row p-2 mb-3">
             <div class="col-1 d-flex justify-content-start">
-                <img class="postUserImg rounded-circle" src="<?php $foto = $_SESSION['fotoPerfil']; echo $foto; ?>">
+                <img class="postUserImg rounded-circle" src="<?php echo $foto; ?>">
             </div>
             <div class="col-11">
                 <form method="post" class="cForm">
-                    <input type="text" class="cInput form-control" name="cInput" placeholder="Escribe aquí tu mensaje"></input>
+                    <input type="text" class="cInput form-control" name="mInput" placeholder="Escribe aquí tu mensaje"></input>
                     <button class="btn" name="btn-mje" type="submit"><i class="fa-regular fa-paper-plane"></i></button>
                 </form>
             </div>
         </div>
     </div>
+    <?php } ?>
 
     <!-- guardar comentario -->
     <?php
-        date_default_timezone_set('America/Argentina/Buenos_Aires');
-        $fecha = date('d/m/Y');
 
         if(isset($_POST['btn-mje'])){ //ARREGLAR
             $guardar = "INSERT INTO mensajes (IdPublicacionMensaje, IdUsuarioMensaje, ContenidoMensaje, FechaMensaje) 
-                        VALUES ('".$idpost."','".$idusu."','".$_POST['cInput']."','".$fecha."')";
+                        VALUES ('".$idpost."','".$idusu."','".$_POST['mInput']."','".$fecha."')";
             mysqli_query($conexion, $guardar);
         }
     ?>
@@ -37,6 +44,7 @@
             if($mje['IdPublicacionMensaje'] == $idpost){
     ?>
 
+    <!-- comentario -->
     <div class="comment bg-white">
         <div class="row p-2 mb-3">
             <div class="col-1 d-flex justify-content-start">
@@ -51,36 +59,60 @@
                     <div class="col-12">
                         <?php echo $mje['ContenidoMensaje']; ?>
                     </div>
+                    <div class="col-12">
+                        <?php
+                        // *** RESPONDER = usuario activo = sí es dueño de la publi = no es el autor del mensaje
+                            if(($post['IdUsuario'] == $idusu) && ($mje['IdUsuarioMensaje'] != $idusu)){
+                        ?>
+                            <button class="btn bt-sm boton" value="<?php echo $mje['IdMensaje']; ?>" onclick="Responder(this)">Responder</button>  
+                        <?php 
+                            } 
+                            if($mje['IdUsuarioMensaje'] == $idusu){
+                        ?>
+                            <button class="btn bt-sm boton redLink">Eliminar</button>
+                        <?php } 
+                        ?>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <?php
-        } //if
 
-        if(($post['IdUsuario'] == $idusu) && ($mje['IdUsuarioMensaje']!=$idusu)){
-    ?>
+    <!-- mostrar respuesta -->
 
-    <!-- *** RESPUESTA = si es dueño de la publi -->
-    <div class="respuesta row mb-3">
+    <!-- respuesta -->
+
+    <!-- RESPONDER -->
+    <div class="respuesta row mb-3 d-none" id="<?php echo $mje['IdMensaje']; ?>">
         <div class="col-1"></div>
         <div class="col">
             <div class="comment bg-white">
                 <div class="row p-2">
                     <div class="col-1 d-flex justify-content-start">
-                        <img class="postUserImg rounded-circle" src="img/1.jpg">
+                        <img class="postUserImg rounded-circle" src="<?php echo $foto; ?>">
                     </div>
-                    <div class="col-11 d-flex align-items-center">
-                        <input type="text" class="cInput form-control" placeholder="Escribe aquí tu respuesta"></input>
-                        <button class="btn"><i class="fa-solid fa-paper-plane"></i></button>
+                    <div class="col-11">
+                        <form method="post" class="cForm">
+                            <input type="text" class="cInput form-control" name="rInput" placeholder="Escribe aquí tu respuesta"></input>
+                            <button class="btn" name="btn-rta" type="submit"><i class="fa-regular fa-paper-plane"></i></button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <?php
+        } //if mostrar comentarios
+        
+        // GUARDAR respuesta
+        if(isset($_POST['btn-rta'])){ //ARREGLAR
+            $guardar = "INSERT INTO respuestas (IdMensaje, IdUsuarioRespuesta, ContenidoRespuesta, FechaRespuesta) 
+                        VALUES ('".$faltaidmensaje."','".$idusu."','".$_POST['rInput']."','".$fecha."')";
+            mysqli_query($conexion, $guardar);
+        }
+    ?>
 
     <?php
-        } //if
     } //while
     ?>
     

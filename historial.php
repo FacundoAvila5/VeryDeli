@@ -9,47 +9,91 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="shortcut icon" href="img\icons\loguito-fondoAzulV2.ico" type="image/x-icon">
-    
-    <style> 
-        /* RESPONSIVE */
-        @media (max-width:768px) {
-            #fecha {
-                font-size: small;
-            }
+    <style>
+        a {
+            text-decoration:none;
+            color: black;
         }
     </style>
 
-    <title>Document</title>
+    <title>VeryDeli</title>
 </head>
 <body>
     <?php 
+
+    session_start();
+    include "ConexionBS.php";
+
     include 'header.php';
-    // include 'sidebarleft.php'; 
-    ?>
     
-    <div class="container-fluid p-0 col-11 col-md-5" >
-        <div class="text-center justify-content-center mx-auto pt-4 pb-3">
-            <h2>Historial de actividad</h2>
-        </div>    
-        <div id="seccion-historial">
+    $user= $_SESSION["usuario"];
+    //$user= 4; //PRUEBA
 
-            <div id="historia" class="row bg-light pt-2 pb-0 ps-3 mb-2" style="border-radius: 15px;">
-                <div class="col-1"> <i class="fa-solid fa-bookmark" style="color:rgb(7, 64, 113);"></i> </div>    
-                <div class="col-8 col-md-9"> <p> Soy una historiaa </p> </div>
-                <div class="col-3 col-md-2"> <p class="text-black-50 text-end" id="fecha"> 00/00/00 </p> </div> <!-- Aqui iria la fecha q lo hizo  -->
-            </div>
+    $con_pub = "SELECT 'publicacion' AS tipo, IdPublicacion AS Id, IdUsuario, FechaPublicacion AS Fecha, Titulo, IdPublicacion FROM publicaciones WHERE IdUsuario = '".$user."' ";
+    $con_post = "SELECT 'postulacion' AS tipo, p.IdPostulacion AS Id, p.IdUsuarioPostulacion AS IdUsuario, p.FechaPostulacion AS Fecha, pp.Titulo, pp.IdPublicacion 
+                FROM postulaciones p 
+                JOIN publicaciones pp ON p.IdPublicacion = pp.IdPublicacion
+                WHERE p.IdUsuarioPostulacion = '".$user."' ";
 
-            <div id="historia" class="row bg-light pt-2 pb-0 ps-3 mb-2" style="border-radius: 15px;">
-                <div class="col-1"> <i class="fa-solid fa-bookmark" style="color:rgb(7, 64, 113);"></i> </div>    
-                <div class="col-8 col-md-9"> <p> Yo iguall </p> </div>
-                <div class="col-3 col-md-2"> <p class="text-black-50 text-end" id="fecha"> 00/00/00 </p> </div> <!-- Aqui iria la fecha q lo hizo  -->
+
+    // tipo / Id / IdUsuario / Fecha / Titulo(publicacion)
+    $con_historial = "($con_pub) UNION ($con_post) ORDER BY Fecha DESC";
+
+    $resultado = mysqli_query($conexion, $con_historial);
+
+    ?>
+    <div class="row">
+        <?php
+            include 'sidebarleft.php';
+        ?>
+
+        <div class="mx-auto p-0 col-11 col-md-5" >
+            <div class="text-center justify-content-center mx-auto pt-4 pb-3">
+                <h2>Historial de actividad</h2>
+            </div>    
+            <div id="seccion-historial">
+
+                <?php
+
+                    if ($resultado->num_rows > 0) { //Si hay postulaciones o publicaciones
+                        while($row = $resultado->fetch_assoc()) {
+                            echo "<a href='post.php?id=" . urlencode($row['IdPublicacion']) . "'> <div id='historia' class='row bg-light pt-2 pb-0 ps-3 mb-2' style='border-radius: 15px;'>
+                                    <div class='col-1'> <i class='fa-solid fa-bookmark' style='color:rgb(7, 64, 113);'></i> </div>    
+                                        <div class='col-8 col-md-9'> ";
+                            if ($row['tipo'] == 'publicacion') {
+                                echo "<p> Realizaste la publicación: ". $row['Titulo'] ." </p> </div>";
+                            } else {
+                                echo "<p> Te postulaste en la publicación: ". $row['Titulo'] ." </p> </div>";
+                            }
+                            echo "<div class='col-3 col-md-2'> <p class='text-black-50 text-end' id='fecha' style='font-size: small'> ". $row['Fecha'] ." </p> </div> 
+                            </div> </a>";
+                        }
+                    } else { //Si no hay nada
+                        echo "<p class='text-center'> <strong>No hay registros!</strong> </p>";
+                    }
+
+                ?>
+
+                <!-- Formato historia:
+                 <div id="historia" class="row bg-light pt-2 pb-0 ps-3 mb-2" style="border-radius: 15px;">
+                    <div class="col-1"> <i class="fa-solid fa-bookmark" style="color:rgb(7, 64, 113);"></i> </div>    
+                    <div class="col-8 col-md-9"> <p> Yo iguall </p> </div>
+                    <div class="col-3 col-md-2"> <p class="text-black-50 text-end" id="fecha"> 00/00/00 </p> </div> 
+                </div> -->
             </div>
         </div>
 
+        <div class="col-lg-3 d-none d-lg-block">
+            <!-- Div para centrar xd -->
+        </div>
+
     </div>
+    
 
     <?php
     include 'footermobile.php';
+
+    include "DesconexionBS.php";
     ?>
 
     <script src="https://kit.fontawesome.com/0ce357c188.js" crossorigin="anonymous"></script>

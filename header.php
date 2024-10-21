@@ -10,12 +10,12 @@
             <!-- searchbar -->
             <div class=" d-flex search-box">
                 <div class="form-container input-group search-bar">
-                    <!-- <form class="d-flex" role="search"> -->
-                    <input class="form-control" type="search" placeholder="Busca una publicación" aria-label="Search">
+                    <form class="d-flex" role="search" action="ResultadoBusqueda.php" method="post">
+                    <input class="form-control" type="search" placeholder="Busca una publicación" aria-label="Search" name="busqueda">
                     <button class="btn btn-search" type="submit">
                         <i class="lupa fa-solid fa-magnifying-glass"></i>
                     </button>
-                    <!-- </form> -->
+                    </form>
                 </div>
             </div>
 

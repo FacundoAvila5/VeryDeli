@@ -17,8 +17,13 @@ document.getElementById("btnPostu").onclick = function() {
 
 function Responder(boton){
     const idMensaje = boton.value
-    console.log("id: " + idMensaje)
-
     rta = document.getElementById(idMensaje);
     rta.classList.toggle("d-none");
+}
+
+function updateContC(){
+    console.log('control check');
+    let btn = document.getElementById('btnComments');
+    btn.innerHTML = '';
+    btn.innerHTML += '<?php echo $contadorC. \' comentarios\'; ?>';
 }

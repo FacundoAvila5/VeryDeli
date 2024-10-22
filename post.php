@@ -78,12 +78,21 @@
                                 </button>
                                 <ul class="dropdown-menu">
                                 <!-- *** EL BOTON QUE SE MUESTRA DEPENDE DEL USUARIO ACTIVO -->
+                                <?php
+                                    if ($idusu == $post['IdUsuario']){
+                                ?>
                                     <li>
                                         <a href="" class="dropdown-item redLink"><i class="fa-solid fa-trash-can"></i> Eliminar</a>
                                     </li>
+                                <?php
+                                    }else{
+                                ?>
                                     <li>
                                         <a href="" class="dropdown-item redLink"><i class="fa-regular fa-flag"></i> Denunciar</a>
                                     </li>
+                                <?php
+                                    }
+                                ?>
                                 </ul>
                             </div>  
                         </div>  
@@ -119,13 +128,14 @@
                 </div>
 
                 <div class="card-footer d-flex">
+                    <?php 
+                        $sql = "SELECT IdMensaje FROM mensajes WHERE IdPublicacionMensaje = $idpost";
+                        $contC = mysqli_query($conexion, $sql);
+                        $contadorC = mysqli_num_rows($contC);
+                    ?>
                     <div class="text-center" id="btnComments" style="width: 50%;">
                         <i class="fa-solid fa-comments"></i> 
-                        <?php 
-                            $sql = "SELECT IdMensaje FROM mensajes WHERE IdPublicacionMensaje = $idpost";
-                            $contC = mysqli_query($conexion, $sql);
-                            echo mysqli_num_rows($contC). ' comentarios';
-                            ?>
+                        <?php echo $contadorC. ' comentarios'; ?>
                     </div>
                     <div class="text-center" id="btnPostu" style="width: 50%;">
                         <i class="fa-solid fa-address-card"></i> 0 postulaciones
@@ -140,7 +150,7 @@
                 include 'comentarios.php'
             ?>
             <?php
-            include 'postulaciones.php'
+                include 'postulaciones.php'
             ?>
             </div>
             

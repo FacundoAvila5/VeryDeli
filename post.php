@@ -15,6 +15,7 @@
 <?php
     session_start();
     include "ConexionBS.php";
+    include "CrearPublicacion.php";
     $nombre = $_SESSION['usuario']; 
     $idusu =  $_SESSION['idUser'];
 ?>
@@ -46,7 +47,12 @@
 
                 $consulta = mysqli_query($conexion, $sql);
                 $post = mysqli_fetch_assoc($consulta);
+                // id del dueño de la publicacion
+                $idUserPost = $post['IdUsuario'];
             ?>
+
+            <input type="hidden" id="idUser" value="<?php echo $idusu; ?>">
+            <input type="hidden" id="idUserPost" value="<?php echo $idUserPost; ?>">
 
             <div class="post card">
                 <div class="card-header bg-transparent" style="padding: 3px;">
@@ -73,17 +79,30 @@
                         <!-- POST LINKS -->
                         <div class="col p-0 d-flex justify-content-end">
                             <div class="btn-group dropstart">
-                                <button class="btn btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="btn btn-sm postLinks" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fa-solid fa-ellipsis-vertical"></i>
                                 </button>
                                 <ul class="dropdown-menu">
                                 <!-- *** EL BOTON QUE SE MUESTRA DEPENDE DEL USUARIO ACTIVO -->
+                                <?php
+                                    if ($idusu == $idUserPost){
+                                ?>
                                     <li>
-                                        <a href="" class="dropdown-item redLink"><i class="fa-solid fa-trash-can"></i> Eliminar</a>
+                                        <a href="eliminarPublicacion.php?id=<?php echo $idpost; ?>" class="dropdown-item redLink" id="deleteP">
+                                            <i class="fa-solid fa-trash-can"></i> Eliminar
+                                        </a>
                                     </li>
+                                <?php
+                                    }else{
+                                ?>
                                     <li>
-                                        <a href="" class="dropdown-item redLink"><i class="fa-regular fa-flag"></i> Denunciar</a>
+                                        <a href="" class="dropdown-item redLink">
+                                            <i class="fa-regular fa-flag"></i> Denunciar
+                                        </a>
                                     </li>
+                                <?php
+                                    }
+                                ?>
                                 </ul>
                             </div>  
                         </div>  
@@ -119,16 +138,23 @@
                 </div>
 
                 <div class="card-footer d-flex">
-                    <div class="text-center" id="btnComments" style="width: 50%;">
+                    <!-- comentarios -->
+                    <?php 
+                        $sqlC = "SELECT IdMensaje FROM mensajes WHERE IdPublicacionMensaje = $idpost";
+                        $contC = mysqli_query($conexion, $sqlC);
+                    ?>
+                    <div class="text-center cursor" id="btnComments" style="width: 50%;">
                         <i class="fa-solid fa-comments"></i> 
-                        <?php 
-                            $sql = "SELECT IdMensaje FROM mensajes WHERE IdPublicacionMensaje = $idpost";
-                            $contC = mysqli_query($conexion, $sql);
-                            echo mysqli_num_rows($contC). ' comentarios';
-                            ?>
+                        <?php echo mysqli_num_rows($contC). ' comentarios'; ?>
                     </div>
-                    <div class="text-center" id="btnPostu" style="width: 50%;">
-                        <i class="fa-solid fa-address-card"></i> 0 postulaciones
+                    <!-- postulaciones -->
+                    <?php 
+                        $sqlP = "SELECT IdPostulacion FROM postulaciones WHERE IdPublicacion = $idpost";
+                        $contP = mysqli_query($conexion, $sqlP);
+                    ?>
+                    <div class="text-center cursor" id="btnPostu" style="width: 50%;">
+                        <i class="fa-solid fa-address-card"></i> 
+                        <?php echo mysqli_num_rows($contP). ' postulaciones'; ?> 
                     </div>
                 </div>
 
@@ -140,7 +166,7 @@
                 include 'comentarios.php'
             ?>
             <?php
-            include 'postulaciones.php'
+                include 'postulaciones.php'
             ?>
             </div>
             

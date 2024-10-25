@@ -38,7 +38,7 @@ include "CrearPublicacion.php";
 <body>
     <!-- HEADER -->
     <?php
-    include 'header.php'
+        include 'header.php'
     ?>
 
     <!-- CONTENIDO -->
@@ -113,13 +113,18 @@ include "CrearPublicacion.php";
                         <div class="postBottom text-center txt">
                             <i class="fa-solid fa-comments"></i>
                             <?php 
-                            $sql = "SELECT IdMensaje FROM mensajes WHERE IdPublicacionMensaje = $idpost";
-                            $contC = mysqli_query($conexion, $sql);
+                            $sqlC = "SELECT IdMensaje FROM mensajes WHERE IdPublicacionMensaje = $idpost";
+                            $contC = mysqli_query($conexion, $sqlC);
                             echo mysqli_num_rows($contC). ' comentarios';
                             ?>
                         </div>
                         <div class="postBottom text-center txt">
-                            <i class="fa-solid fa-address-card"></i> 0 postulaciones
+                            <i class="fa-solid fa-address-card"></i> 
+                            <?php 
+                            $sqlP = "SELECT IdPostulacion FROM postulaciones WHERE IdPublicacion = $idpost";
+                            $contP = mysqli_query($conexion, $sqlP);
+                            echo mysqli_num_rows($contP). ' postulaciones';
+                        ?>
                         </div>
                     </div>
                 </div>

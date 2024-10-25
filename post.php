@@ -15,6 +15,7 @@
 <?php
     session_start();
     include "ConexionBS.php";
+    include "CrearPublicacion.php";
     $nombre = $_SESSION['usuario']; 
     $idusu =  $_SESSION['idUser'];
 ?>

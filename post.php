@@ -147,9 +147,11 @@
         </div>
 
         <!-- columna: Notificaciones -->
-        <?php
-            include 'sidebarright.php'
-        ?>
+        <div class="col-lg-3 col-md-3 col-3 d-none d-lg-block">
+            <?php
+                include 'sidebarright.php'
+            ?>
+        </div>
       </div>
 
     </div>

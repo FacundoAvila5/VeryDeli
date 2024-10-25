@@ -37,18 +37,18 @@
 
 
     // tipo / Id / IdUsuario / Fecha / Titulo(publicacion)
-    $con_historial = "($con_pub) UNION ($con_post) ORDER BY Fecha DESC";
+    $con_historial = "($con_pub) UNION ($con_post) ORDER BY Fecha DESC"; 
 
-    $resultado = mysqli_query($conexion, $con_historial);
+    $resultado = mysqli_query($conexion, $con_historial); 
 
     ?>
     <div class="row">
         <?php
-            include 'sidebarleft.php';
+            include 'sidebarleft.php'; 
         ?>
 
-        <div class="mx-auto p-0 col-11 col-md-5" >
-            <div class="text-center justify-content-center mx-auto pt-4 pb-3">
+        <div class="mx-auto p-0 col-11 col-md-5" > 
+            <div class="text-center justify-content-center mx-auto pt-4 pb-3"> 
                 <h2>Historial de actividad</h2>
             </div>    
             <div id="seccion-historial">
@@ -84,7 +84,7 @@
         </div>
 
         <div class="col-lg-3 d-none d-lg-block">
-            <!-- Div para centrar xd -->
+            <!-- Div para centrar o notificaciones -->
         </div>
 
     </div>

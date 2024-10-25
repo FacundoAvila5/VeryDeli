@@ -2,7 +2,7 @@
       <div class="bNavIcons d-flex">
         <!-- home -->
         <div class="opcionbNav">
-            <a href="" class="link"><i class="fa-solid fa-house"></i></a>
+            <a href="PaginaPrincipal.php" class="link"><i class="fa-solid fa-house"></i></a>
         </div>
         <!-- busqueda -->
         <div class="opcionbNav">
@@ -14,11 +14,11 @@
         </div>
         <!-- notifs -->
         <div class="opcionbNav">
-            <a href="" class="link"><i class="fa-regular fa-bell"></i></a>
+            <a href="notifmobile.php" class="link"><i class="fa-regular fa-bell"></i></a>
         </div>
         <!-- perfil -->
         <div class="opcionbNav">
-            <a href="" class="link"><i class="fa-regular fa-user"></i></a>
+            <a href="perfildeusuario.php" class="link"><i class="fa-regular fa-user"></i></a>
         </div>
       </div>
     </div>

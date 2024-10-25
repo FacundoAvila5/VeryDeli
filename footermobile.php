@@ -14,7 +14,7 @@
         </div>
         <!-- notifs -->
         <div class="opcionbNav">
-            <a href="" class="link"><i class="fa-regular fa-bell"></i></a>
+            <a href="notifmobile.php" class="link"><i class="fa-regular fa-bell"></i></a>
         </div>
         <!-- perfil -->
         <div class="opcionbNav">

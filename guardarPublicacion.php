@@ -22,7 +22,7 @@ $fechaFormateada = $fech ? $fech-> format('d/m/Y'): '';
     Peso, Alto, Ancho, Largo, NombreRemitente, TelefonoRemitente ) VALUES ('".$id."', '".$tituloPubli."', '".$descripcion."', '".$fecha."', '".$fechaFormateada."',
      '".$provinciaorigen."', '".$Localidadorigen."', '".$barrioorigen."', '".$direccionorigen."', '".$provinciadestino."',
      '".$Localidaddestino."', '".$barriodestino."', '".$direcciondestino."', '".$fragil."', '".$peso."', '".$alto."', '".$ancho."',
-     '".$largo."' '".$celular."', '".$nombreremitente."',)";
+     '".$largo."' '".$celular."', '".$nombreremitente."')";
      mysqli_query($conexion, $guardaPubli);
      header("location: PaginaPrincipal.php?".session_id());
                                                               

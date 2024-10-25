@@ -2,7 +2,7 @@
       <div class="bNavIcons d-flex">
         <!-- home -->
         <div class="opcionbNav">
-            <a href="" class="link"><i class="fa-solid fa-house"></i></a>
+            <a href="PaginaPrincipal.php" class="link"><i class="fa-solid fa-house"></i></a>
         </div>
         <!-- busqueda -->
         <div class="opcionbNav">
@@ -10,7 +10,7 @@
         </div>
         <!-- postear -->
         <div class="opcionbNav">
-            <a href="" class="link"><i class="fa-regular fa-square-plus"></i></a>
+            <a href="" class="link" data-bs-toggle="modal" data-bs-target="#publicarmodal"><i class="fa-regular fa-square-plus"></i></a>
         </div>
         <!-- notifs -->
         <div class="opcionbNav">
@@ -18,7 +18,7 @@
         </div>
         <!-- perfil -->
         <div class="opcionbNav">
-            <a href="" class="link"><i class="fa-regular fa-user"></i></a>
+            <a href="perfildeusuario.php" class="link"><i class="fa-regular fa-user"></i></a>
         </div>
       </div>
     </div>

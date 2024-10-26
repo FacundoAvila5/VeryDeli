@@ -15,6 +15,14 @@ body{
     text-decoration: none;
     color: rgb(29, 29, 29);
 }
+.redLink{
+    text-decoration: none;
+    color: rgb(194, 22, 22) !important;
+}
+.fecha{
+    font-size: small;
+    color: gray;
+}
 
 /* BUSQUEDA */
 .search-bar{ flex-direction: row; }
@@ -66,10 +74,8 @@ body{
     width: 40px;
     height: 40px;
 }
-.redLink{
-    text-decoration: none;
-    color: rgb(194, 22, 22) !important;
-}
+.cursor{ cursor: pointer;}
+.postLinks{ border-color: transparent !important; }
 
 /* COMENTARIOS */
 .comment{
@@ -77,6 +83,16 @@ body{
 }
 .cInput{
     border-color: transparent !important;
+}
+.cForm{
+    display: flex !important;
+    flex-direction: row;
+}
+.boton{
+    padding: 0 !important;
+    background-color: transparent !important;
+    border-color: transparent !important;
+    margin-right: 8px;
 }
 
 /* NOTIFICACIONES */
@@ -104,6 +120,36 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/* modal postularse */
+.custom-modal-content {
+    background-color: rgb(133, 133, 133) !important;
+}
+.custom-input {
+    font-size: 200% !important; 
+    height: 85px !important;  
+    border-radius: 0 5px 5px 0 !important;
+}
+.monto{
+    width: 80% !important; 
+    margin: 0 auto !important; 
+}
+.custom-input-m {
+    width: 20% !important;
+    font-size: 170% !important;
+    display: grid !important;
+    place-items: center !important;
+}
+.custom-textarea {
+    width: 80% !important;
+    height: 110px !important; 
+    margin: 0 auto !important;  
+}
+.modal-body {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important; 
 }
 
 @media (max-width: 768px) {

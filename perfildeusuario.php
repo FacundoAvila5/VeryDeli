@@ -10,36 +10,13 @@
     <title>Perfil de usuario</title>
 </head>
 <body>
-    <!-- Nav-->
-    <nav class="navbar bg-body-tertiary d-none d-lg-block">
-        <div class="container-fluid d-flex justify-content-between">
-            <!-- logo -->
-            <div class="col-2 ms-5">
-                <a class="navbar-brand" href="PaginaPrincipal.php">
-                    <img id="logo" src="logos/logo-negro.svg" alt="Very Deli: Inicio">
-                </a>
-            </div>
-            <!-- searchbar -->
-            <div class=" d-flex search-box">
-                <div class="form-container input-group search-bar">
-                    <!-- <form class="d-flex" role="search"> -->
-                    <input class="form-control " type="search" placeholder="Buscar una publicación" aria-label="Search">
-                    <button class="btn btn-search" type="submit">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </button>
-                    <!-- </form> -->
-                </div>
-            </div>
-
-            <div class="col-2">
-                <!-- div vacio para centrar. aca podría ir la ubicacion/direccion/etc -->
-            </div>
-
-        </div>
-    </nav>
+    <!-- HEADER -->
+    <?php
+    include 'header.php'
+    ?>
 
     <div class="container-principal">
-        <div class="container">
+        <div class="container w-50">
             <div class="row">
                 <div class="col-12 d-flex justify-content-center mt-3">
                     <img class="rounded-circle me-2" src="img/ala.jpg" alt="" style="width: 40px; height: 40px;">
@@ -154,30 +131,11 @@
     
 
 
-    <div class="bottomNavbar container-fluid bg-body-tertiary d-block d-lg-none">
-        <div class="navIcons d-flex">
-          <!-- home -->
-          <div class="opcionMenu">
-            <i class="fa-solid fa-house"></i>
-          </div>
-          <!-- busqueda -->
-          <div class="opcionMenu">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </div>
-          <!-- postear -->
-          <div class="opcionMenu">
-            <i class="fa-solid fa-square-plus"></i>
-          </div>
-          <!-- idk -->
-          <div class="opcionMenu">
-            <i class="fa-solid fa-face-smile"></i>
-          </div>
-          <!-- perfil -->
-          <div class="opcionMenu">
-            <i class="fa-solid fa-user"></i>
-          </div>
-        </div>
-      </div>    
+    <!-- FOOTER MOBILE -->
+    <?php
+        include 'footermobile.php'
+    ?>
+
       <script>
         document.addEventListener("DOMContentLoaded", function() {
             if (window.location.hash) {

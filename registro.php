@@ -1,52 +1,80 @@
 <?php
-    if (isset($_POST['btn-reg'])) {
-        extract($_POST);
-        $nameError = $apeError = $emailError = $pass1Error = $pass2Error = "";
-        $showModal= false;
+if (isset($_POST['btn-reg'])) {
+    extract($_POST);
+    $nameError = $apeError = $emailError = $telError = $pass1Error = $pass2Error = $imageError = "";
+    $showModal = false;
 
-        if (empty($name)) { $nameError = "Ingrese el nombre."; }
-        if (empty($ape)) { $apeError = "Ingrese el apellido."; }
+    if (empty($name)) { $nameError = "Ingrese el nombre."; }
+    if (empty($ape)) { $apeError = "Ingrese el apellido."; }
 
-        if (empty($email)) {
-            $emailError = "Ingrese el email.";
-        } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $emailError = "El formato del email no es válido.";
-        }
-        
-        if (empty($pass1)) { $pass1Error = "La contraseña es obligatoria."; }
-        if (empty($pass2)) { $pass2Error = "Por favor, repita la contraseña."; }
-        if (!empty($pass1) && !empty($pass2) && $pass1 != $pass2) {
-            $pass1Error = "Las contraseñas no coinciden.";
-        }
-
-        //Conexion con la base de datos
-        $conn = mysqli_connect('localhost', 'root');
-        if (!$conn) { die("Conexión fallida: " . mysqli_connect_error()); }
-        mysqli_select_db($conn, 'verydeli');
-        // Verificar si el email ya existe
-        $sql = "SELECT IdUsuario FROM usuarios WHERE EmailUsuario = '$email'";
-        $result = mysqli_query($conn, $sql);
-        if (mysqli_num_rows($result) > 0) {
-            $emailError = "El email ya está registrado.";
-        }
-
-        
-        if (empty($nameError) && empty($apeError) && empty($emailError) && empty($pass1Error) && empty($pass2Error)) {
-            
-            // lógica para almacenar los datos en la base de datos
-            $hashed_password = password_hash($pass1, PASSWORD_DEFAULT);
-            $sql="INSERT INTO usuarios (NombreUsuario, ApellidoUsuario, EmailUsuario, Contrasenia, TipoUsuario, Validado) VALUES ('".$name."','".$ape."','".$email."','".$hashed_password."','Normal','0')";
-            $result = mysqli_query($conn, $sql);
-            if ($result) {
-                $showModal=true;
-            } else {
-                echo "Error: " . mysqli_connect_error();
-            }
-
-            mysqli_close($conn);
-        } 
+    if (empty($email)) {
+        $emailError = "Ingrese el email.";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $emailError = "El formato del email no es válido.";
     }
 
+    if (empty($tel)) {
+        $telError = "Ingrese el telefono.";
+    }
+
+    if (empty($pass1)) { $pass1Error = "La contraseña es obligatoria."; }
+    if (empty($pass2)) { $pass2Error = "Por favor, repita la contraseña."; }
+    if (!empty($pass1) && !empty($pass2) && $pass1 != $pass2) {
+        $pass1Error = "Las contraseñas no coinciden.";
+    }
+
+    // Validación de imagen
+    if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+        $targetDir = "img/";
+        $targetFile = $targetDir . basename($_FILES['image']['name']);
+        $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+
+        // Verificar el tipo de archivo (opcional)
+        $validImageTypes = ['jpg', 'jpeg', 'png', 'gif'];
+        if (!in_array($imageFileType, $validImageTypes)) {
+            $imageError = "Solo se permiten imágenes en formato JPG, JPEG, PNG y GIF.";
+        }
+
+        // Verificar si el archivo ya existe
+        if (file_exists($targetFile)) {
+            $imageError = "El archivo ya existe.";
+        }
+
+        // Intentar subir la imagen
+        if (empty($imageError) && !move_uploaded_file($_FILES['image']['tmp_name'], $targetFile)) {
+            $imageError = "Hubo un error al subir la imagen.";
+        }
+    } else {
+        $imageError = "Por favor, cargue una imagen.";
+    }
+
+    // Conexión con la base de datos
+    $conn = mysqli_connect('localhost', 'root');
+    if (!$conn) { die("Conexión fallida: " . mysqli_connect_error()); }
+    mysqli_select_db($conn, 'verydeli');
+
+    // Verificar si el email ya existe
+    $sql = "SELECT IdUsuario FROM usuarios WHERE EmailUsuario = '$email'";
+    $result = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($result) > 0) {
+        $emailError = "El email ya está registrado.";
+    }
+
+    if (empty($nameError) && empty($apeError) && empty($emailError) && empty($telError) && empty($pass1Error) && empty($pass2Error) && empty($imageError)) {
+        // Lógica para almacenar los datos en la base de datos
+        $hashed_password = password_hash($pass1, PASSWORD_DEFAULT);
+        $sql = "INSERT INTO usuarios (NombreUsuario, ApellidoUsuario, EmailUsuario, TelefonoUsuario, Contrasenia, TipoUsuario, Validado, imagenUsuario) 
+                VALUES ('".$name."','".$ape."','".$email."','".$tel."','".$hashed_password."','Normal','0', '$targetFile')";
+        $result = mysqli_query($conn, $sql);
+        if ($result) {
+            $showModal = true;
+        } else {
+            echo "Error: " . mysqli_error($conn);
+        }
+
+        mysqli_close($conn);
+    } 
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,33 +84,44 @@
     <title>Registrarse - Very Deli</title>
     <link rel="stylesheet" href="stylelogin.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        @media (max-width:768px) {
+            #cont {
+                width:90%!important;
+            }
+            .inp {
+                padding-top: 10px; 
+            }
+        }
+
+    </style>
+
 </head>
 <body>
     <div class="container-fluid p-0">
         <div class="gradient-bg-animation d-flex justify-content-center align-items-center vh-100">
-            
-            <div class="row w-50">
+            <div class="row w-50" id="cont">
                 <div class="col-12 col-md-12 bg-light bg-opacity-75 inicio-sesion">
                     <div class="row">
-                        <div class="col-11">
+                        <div class="col-md-11 col-10">
                             <h5><strong>Formulario de registro</strong></h5>
                             <div id="emailHelp" class="form-text">* campos obligatorios</div>
                         </div>
-                        <div class="col-1">
+                        <div class="col-md-1 col-2">
                             <a href="login.php"><button type="button" class="btn-close" aria-label="Close"></button> </a>
                         </div>
                         <hr>
                     </div>
-                    <form action="registro.php" method="post">
+                    <form action="registro.php" method="post" enctype="multipart/form-data">
 
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-12 col-md-6">
                                 <input type="text" class="form-control <?php echo $nameError!='' ? 'is-invalid' : ''; ?>" placeholder="Nombre *" name="name">
                                 <div class="invalid-feedback">
                                     <?php echo isset($nameError) ? $nameError : '' ?>
                                 </div>
                             </div>
-                            <div class="col-6">
+                            <div class="col-12 col-md-6 inp">
                                 <input type="text" class="form-control <?php echo $apeError!='' ? 'is-invalid' : ''; ?>" placeholder="Apellido *" name="ape">
                                 <div class="invalid-feedback">
                                     <?php echo isset($apeError) ? $apeError : '' ?>
@@ -91,21 +130,28 @@
                         </div>
 
                         <div class="row pt-3">
-                            <div class="col-6">
+                            <div class="col-12 col-md-6">
                                 <input type="email" class="form-control <?php echo $emailError!='' ? 'is-invalid' : ''; ?>" placeholder="Email *" name="email">
                                 <div class="invalid-feedback">
                                     <?php echo isset($emailError) ? $emailError : '' ?>
                                 </div>
                             </div>
+                            <div class="col-12 col-md-6 inp">
+                                <input type="number" class="form-control <?php echo $telError!='' ? 'is-invalid' : ''; ?>" placeholder="Telefono *" name="tel">
+                                <div class="invalid-feedback">
+                                    <?php echo isset($telError) ? $telError : '' ?>
+                                </div>
+                            </div>
                         </div>
-                        <div class ="row pt-3">
-                            <div class="col-6">
+
+                        <div class="row pt-3">
+                            <div class="col-12 col-md-6">
                                 <input type="password" class="form-control <?php echo $pass1Error!='' ? 'is-invalid' : ''; ?>" placeholder="Contraseña *"  name="pass1">
                                 <div class="invalid-feedback">
                                     <?php echo isset($pass1Error) ? $pass1Error : 'Minimo 8 caracteres.' ?>
                                 </div>
                             </div>
-                            <div class="col-6">
+                            <div class="col-12 col-md-6 inp">
                                 <input type="password" class="form-control <?php echo $pass2Error!='' ? 'is-invalid' : ''; ?>" placeholder="Repita la contraseña *" name="pass2">
                                 <div class="invalid-feedback">
                                     <?php echo isset($pass2Error) ? $pass2Error : '' ?>
@@ -113,14 +159,16 @@
                             </div>
                         </div>
 
-                        <!-- <div class="row pt-4">
-                            <div class="col-4">
-                                <input type="text" class="form-control " placeholder="Provincia" name="prov">
+                        <!-- Input para cargar la imagen -->
+                        <div class="row pt-3">
+                            <div class="col-12">
+                                <p>Foto de perfil</p>
+                                <input type="file" class="form-control <?php echo $imageError!='' ? 'is-invalid' : ''; ?>" name="image" accept="image/*">
+                                <div class="invalid-feedback">
+                                    <?php echo isset($imageError) ? $imageError : '' ?>
+                                </div>
                             </div>
-                            <div class="col-4">
-                                <input type="text" class="form-control" placeholder="Ciudad" name="city">
-                            </div>
-                        </div> -->
+                        </div>
 
                         <div class="row pt-3 d-flex justify-content-center">
                             <hr>

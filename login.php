@@ -13,6 +13,7 @@
 session_start();
 include "ConexionBS.php";
 $auth = false;
+$mensajeError = null;
 extract($_POST);
 
 if(isset($correo) && isset($pass)){
@@ -25,6 +26,7 @@ if(isset($correo) && isset($pass)){
         $clave = $row['Contrasenia'];
         $_SESSION["usuario"] = $row['NombreUsuario'] ." ". $row['ApellidoUsuario'];
         $_SESSION["idUser"] = $row['IdUsuario'];
+        $_SESSION["fotoPerfil"] = $row['ImagenUsuario'];
         if(password_verify($pass, $clave)){
             $auth = true;
         }
@@ -36,56 +38,9 @@ if(isset($correo) && isset($pass)){
         exit();
     }else{
         $mensajeError = "El correo o contraseña son incorrectos, verifique.";
-        ?>
-        <div class="container-fluid p-0">
-        <div class="gradient-bg-animation d-flex justify-content-center align-items-center vh-100">
-            <div class="d-flex justify-content-between w-75">
-                <div class="col-5">
-                    <img src="logos\logo3.svg" alt="" width="90%">
-                    <h4 class="text-center slogan pt-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod</h4>
-                </div>
-                <div class="col-5 bg-opacity-75 inicio-sesion bg-light">
-                    <h5 class="text-center pb-3"><strong>Inicia Sesión</strong></h5>
-
-                    <form class="p-2" method="post" id="loginform">
-                        <div class="mb-3">
-                          <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Correo" name="correo">
-                        </div>
-                        <div class="mb-3">
-                          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña" name="pass">
-                          <p> <a href="recuperacion.html" class="link-offset-2 link-underline link-underline-opacity-0 small">Olvidé mi contraseña</a> </p>
-                        </div>
-                                           
-                    <!-- Mensaje de error -->
-                     
-                        <div class="alert alert-danger text-center" role="alert">
-                            <?php echo $mensajeError; ?>  
-                        </div>
-                        <div class="d-grid gap-2 col-4 mx-auto justify-content-center m-0">
-                            <button id="btn-ingresar">Ingresar</button>
-                        </div>
-                    </form>
-                    <div class="m-0 pt-2 text-center">
-                        <hr>
-                        <p>¿No tienes una cuenta? <a href="registro.php" class="link-offset-2 link-underline link-underline-opacity-0">Registrarse</a> </p>
-                    </div>
-                    <div class="icons-div text-center">
-                        <a href="www.facebook.com" class="icons p-4"><i class="fa-brands fa-square-facebook"></i></a>
-                        <a href="www.instagram.com" class="icons p-4"><i class="fa-brands fa-square-instagram"></i></a>
-                        <a href="www.x.com" class="icons p-4"><i class="fa-brands fa-square-x-twitter"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="https://kit.fontawesome.com/51d2388034.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-        <?php
     }
 
-
-}else{
+}
 ?>
     <div class="container-fluid p-0">
         <div class="gradient-bg-animation d-flex justify-content-center align-items-center vh-100">
@@ -113,6 +68,12 @@ if(isset($correo) && isset($pass)){
                           <label class="form-check-label" for="exampleCheck1">Check me out</label>
                         </div> -->
 
+                        <?php if ($mensajeError){ ?>
+                        <div class="alert alert-danger text-center" role="alert">
+                            <?php echo $mensajeError; ?>
+                        </div>
+                        <?php } ?>
+
                         <div class="d-grid gap-2 col-4 mx-auto justify-content-center m-0">
                             <!-- <button type="submit" class="btn btn-primary" id="btn-ingresar"><strong>Ingresar</strong></button> -->
                             <button id="btn-ingresar">Ingresar</button>
@@ -135,9 +96,6 @@ if(isset($correo) && isset($pass)){
     
     <script src="https://kit.fontawesome.com/51d2388034.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
- <?php
-}
-include "DesconexionBS.php";
-?>
+ <?php include "DesconexionBS.php"; ?>
 </body>
 </html>

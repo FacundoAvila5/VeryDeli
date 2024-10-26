@@ -27,6 +27,8 @@
     include 'sidebarright.php';
 
     include 'footermobile.php';
+
+    include "CrearPublicacion.php";
     ?>
 </div>
     

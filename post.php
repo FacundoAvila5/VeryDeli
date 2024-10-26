@@ -16,6 +16,9 @@
     session_start();
     include "ConexionBS.php";
     include "CrearPublicacion.php";
+
+    include "FormPostularse.php";
+
     $nombre = $_SESSION['usuario']; 
     $idusu =  $_SESSION['idUser'];
 ?>
@@ -190,7 +193,7 @@
 
 <!-- Modal postularse -->
 
-<div class="modal fade" id="modalpostularse" tabindex="-1" aria-labelledby="publishModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="modalpostularse" tabindex="-1" aria-labelledby="publishModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content custom-modal-content">
       <div class="modal-header">
@@ -222,11 +225,11 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 
 <!-- Modal para confirmar postulacion -->
-<div class="modal fade" id="publicarmodalpostularse" tabindex="-1" aria-labelledby="publishModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="publicarmodalpostularse" tabindex="-1" aria-labelledby="publishModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content custom-modal-content">
       <div class="modal-header">
@@ -237,7 +240,7 @@
         <form id="publicacionFinal" action="GuardarPostulacion.php" method="post">
             
           <div class="input-group mb-3 ">
-            <h3> <?php echo $nombre ?> </h3>
+            <h3> <?php //echo $nombre ?> </h3>
           </div>
 
         <div class="mb-3">
@@ -261,12 +264,12 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 <script src="script.js"></script>
 
 <!-- Script de Bootstrap para mensaje de error en formulario -->
-<script>
+<!-- <script>
   (function () {
     'use strict'
     var forms = document.querySelectorAll('.needs-validation')
@@ -281,14 +284,14 @@
         }, false)
       })
   })()
-</script>
+</script> -->
 
 <!-- JavaScript para abrir el segundo modal -->
-<script>
+<!-- <script>
     function abrirSegundoModal() {
 
        // Obtencion de ID de la publicacion desde el boton 'postularme'
-       var idPublicacion = "<?php echo $post['IdPublicacion']; ?>";   
+       var idPublicacion = "<?php // echo $post['IdPublicacion']; ?>";   
        document.getElementById('idpublicacionconfirmada').value = idPublicacion; 
     
         var formulario = document.getElementById('publicacion');
@@ -317,7 +320,7 @@
             formulario.classList.add('was-validated');
         }
     }
-</script>
+</script> -->
 
     <script src="https://kit.fontawesome.com/0ce357c188.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

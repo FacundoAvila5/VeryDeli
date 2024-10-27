@@ -31,7 +31,7 @@ function saveVehicleToDatabase($vehiculo) {
         // Actualizar vehículo existente
         $sql = "UPDATE vehiculos 
                 SET Marca='$marca', Modelo='$modelo', Alto='$alto', Ancho='$ancho', Largo='$largo', Capacidad_Peso='$capacidadPeso'
-                WHERE Id_Vehiculo='$idVehiculo' AND Id_Usuario='$idUser'";
+                WHERE IdVehiculo='$idVehiculo' AND Id_Usuario='$idUser'";
     } else {
         // Insertar nuevo vehículo
         $sql = "INSERT INTO vehiculos (Id_Usuario, Marca, Modelo, Alto, Ancho, Largo, Capacidad_Peso)

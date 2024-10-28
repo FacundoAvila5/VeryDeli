@@ -152,6 +152,20 @@ body{
     align-items: center !important; 
 }
 
+/* No lee los estilos. Los puse en header.php*/
+#Mostrartodo {
+    background-color: rgb(178, 176, 176) !important;
+    color: black !important; 
+    padding: 7px 16px !important; 
+    font-size: 14px !important; 
+    cursor: pointer !important; 
+}
+#opcionesBusqueda{
+    border: none !important;
+    border-radius: 50px !important; 
+}
+
+
 @media (max-width: 768px) {
     .container-principal {
         padding-bottom: 60px; 

@@ -47,7 +47,7 @@
         <form id="publicacionFinal" action="GuardarPostulacion.php" method="post">
             
           <div class="input-group mb-3 ">
-            <h3> <?php echo $nombre ?> </h3>
+            <h3> <?php echo $_SESSION["usuario"] ?> </h3>
           </div>
 
         <div class="mb-3">
@@ -76,7 +76,7 @@
 <script src="script.js"></script>
 
 <!-- Script de Bootstrap para mensaje de error en formulario -->
-<script>
+<!-- <script>
   (function () {
     'use strict'
     var forms = document.querySelectorAll('.needs-validation')
@@ -91,40 +91,5 @@
         }, false)
       })
   })()
-</script>
+</script> -->
 
-<!-- JavaScript para abrir el segundo modal -->
-<script>
-    function abrirSegundoModal() {
-
-       // Obtencion de ID de la publicacion desde el boton 'postularme'
-       var idPublicacion = "<?php echo $post['IdPublicacion']; ?>";   
-       document.getElementById('idpublicacionconfirmada').value = idPublicacion; 
-    
-        var formulario = document.getElementById('publicacion');
-        if (formulario.checkValidity()) {
-
-        // Variables para obtener los datos del primer modal
-        var monto = document.getElementById('monto').value;
-        var comentario = document.getElementById('comentario').value;
-    
-        // Muestra de lo ingresado en el segundo modal
-        document.getElementById('montoConfirmado').innerText = '$ ' + monto;
-        document.getElementById('comentarioConfirmado').innerText = comentario ? comentario : "No se ha dejado un comentario.";
-
-        // Asignacion de valor a los input ocultos del segundo modal, para pasar los valores al archivo correspondiente
-        document.getElementById('montoInput').value = monto;
-        document.getElementById('comentarioInput').value = comentario;  
-
-            // Cerrar el primer modal
-            var primerModal = bootstrap.Modal.getInstance(document.getElementById('modalpostularse'));
-            primerModal.hide();
-
-            // Abrir el segundo modal
-            var segundoModal = new bootstrap.Modal(document.getElementById('publicarmodalpostularse'));
-            segundoModal.show();
-        } else {
-            formulario.classList.add('was-validated');
-        }
-    }
-</script>

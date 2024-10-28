@@ -10,7 +10,7 @@
         </div>
         <!-- postear -->
         <div class="opcionbNav">
-            <a href="" class="link"><i class="fa-regular fa-square-plus"></i></a>
+            <a href="" class="link" data-bs-toggle="modal" data-bs-target="#publicarmodal"><i class="fa-regular fa-square-plus"></i></a>
         </div>
         <!-- notifs -->
         <div class="opcionbNav">

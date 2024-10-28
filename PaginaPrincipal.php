@@ -18,6 +18,7 @@ session_start();
 include "ConexionBS.php";
 include "CrearPublicacion.php";
 
+
 // Obtener el ID del usuario desde la sesión
 // $usuario_id = $_SESSION['idUser'];
 
@@ -38,7 +39,7 @@ include "CrearPublicacion.php";
 <body>
     <!-- HEADER -->
     <?php
-        include 'header.php'
+        include 'header.php';
     ?>
 
     <!-- CONTENIDO -->
@@ -47,21 +48,42 @@ include "CrearPublicacion.php";
 
         <!-- columna: Usuario -->
         <?php
-            include 'sidebarleft.php'
+            include 'sidebarleft.php';
+            
         ?>
         
+
+        
         <!-- columna: publicaciones -->
-        <div class="publicaciones col-lg-6 col-md-">
+        <div class="publicaciones col-lg-6 col-md-" id="conteni">
             
         <?php
+            
             $sql = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario
             FROM publicaciones p
             INNER JOIN usuarios u ON p.IdUsuario = u.IdUsuario 
             ORDER BY p.IdPublicacion DESC";
             $publicaciones = mysqli_query($conexion, $sql);
-            $content = false;
+            $content = true;
 
-            while ($row = mysqli_fetch_assoc($publicaciones)) {
+            if(isset($_SESSION['resultadoBusqueda'])){
+                if(!empty($_SESSION['resultadoBusqueda'])){  
+                $publicaciones = '';               
+                $publicaciones = $_SESSION['resultadoBusqueda'];
+                $content = true;
+                }
+                else if((empty($_SESSION['resultadoBusqueda']))){
+                    $content = false;
+                }
+                else{
+                    while ($row = mysqli_fetch_assoc($publicaciones)) {
+                        $publicaciones[] = $row;
+                        $content = true;
+                    }
+                }
+             }   
+            if ($content) {
+                foreach ($publicaciones as $row){
                 $content = true;
                 ?>
 
@@ -130,7 +152,8 @@ include "CrearPublicacion.php";
                 </div>
 
                 <?php
-            } //aca se termina el while
+                }
+            } 
                 
             if (!$content) { ?>
 
@@ -162,6 +185,14 @@ include "CrearPublicacion.php";
         <?php
             include 'footermobile.php'
         ?>
+
+    <script>
+        function limpiaDivParaBusqueda(){
+        window.onload = function() {
+            document.getElementById('conteni').innerHTML = ''; 
+        };
+    }
+    </script>
 
     <script src="https://kit.fontawesome.com/0ce357c188.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

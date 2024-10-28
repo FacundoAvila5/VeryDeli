@@ -57,7 +57,8 @@
 <body>
     <!-- HEADER -->
     <?php
-        include 'header.php';
+    include 'header.php';
+    include "CrearPublicacion.php";
     ?>
 
     <div class="container-principal">

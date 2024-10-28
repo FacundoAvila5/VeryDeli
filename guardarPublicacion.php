@@ -19,10 +19,10 @@ $fechaFormateada = $fech ? $fech-> format('d/m/Y'): '';
 
     $guardaPubli = "INSERT INTO publicaciones (IdUsuario, Titulo, Descripcion, FechaPublicacion, FechaLimite, ProvinciaOrigen, 
     LocalidadOrigen, BarrioOrigen, DireccionOrigen, ProvinciaDestino, LocalidadDestino, BarrioDestino, DireccionDestino, Fragil, 
-    Peso, Alto, Ancho, Largo, NombreRemitente, TelefonoRemitente ) VALUES ('".$id."', '".$tituloPubli."', '".$descripcion."', '".$fecha."', '".$fechaFormateada."',
-     '".$provinciaorigen."', '".$Localidadorigen."', '".$barrioorigen."', '".$direccionorigen."', '".$provinciadestino."',
+    Peso, Alto, Ancho, Largo, NombreRemitente, TelefonoRemitente ) VALUES ('".$id."', '".$tituloPubli."', '".$descripcion."', '".$fecha."',
+     '".$fechaFormateada."', '".$provinciaorigen."', '".$Localidadorigen."', '".$barrioorigen."', '".$direccionorigen."', '".$provinciadestino."',
      '".$Localidaddestino."', '".$barriodestino."', '".$direcciondestino."', '".$fragil."', '".$peso."', '".$alto."', '".$ancho."',
-     '".$largo."' '".$celular."', '".$nombreremitente."',)";
+     '".$largo."', '".$nombreremitente."', '".$celular."')";
      mysqli_query($conexion, $guardaPubli);
      header("location: PaginaPrincipal.php?".session_id());
                                                               

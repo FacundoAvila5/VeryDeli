@@ -11,7 +11,7 @@ $fecha = date('d/m/Y');
 
 if(isset($monto) && isset($comentario)){
 
-    $postulacion = "INSERT INTO postulaciones (IdPublicacionPostulacion, IdUsuarioPostulacion, FechaPostulacion, Monto, ComentarioPostulacion)
+    $postulacion = "INSERT INTO postulaciones (IdPublicacion, IdUsuarioPostulacion, FechaPostulacion, Monto, ComentarioPostulacion)
     VALUES ('".$idPubli."', '".$idUser."', '".$fecha."', '".$monto."', '".$comentario."') ";
     mysqli_query($conexion, $postulacion);
     header("Location: PaginaPrincipal.php?". session_id());

@@ -1,6 +1,10 @@
 <style>
-#Mostrartodo {
+
+#opcionesBusqueda{
     background-color: rgb(178, 176, 176);
+}    
+#Mostrartodo {
+    background-color: white;
     color: black; 
     padding: 7px 16px; 
     font-size: 14px; 
@@ -8,7 +12,7 @@
 }
 #opcionesBusqueda{
     border: none;
-    border-radius: 50px;
+    border-radius: 80px;
 }
 </style>
 <!-- NAV -->
@@ -31,6 +35,9 @@
                     <div id="opcionesBusqueda" style="display: none; position: absolute; top: 100%; background-color: white; border: 1px solid #ccc; z-index: 1;">
                         <button class="btn btn-search" type="submit" name="mostrar_todo" value="true" style="width: 100%;" id="Mostrartodo">
                             Mostrar Todo
+                        </button>
+                        <button class="btn btn-search" type="submit" name="mostrar_todo" value="true" style="width: 100%;" id="Mostrartodo">
+                            fragil
                         </button>
                     </div>
                     </form>

@@ -8,32 +8,31 @@
         </div>
         <div class="modal-body">
             <form id="verificar" action="GuardarPedidoValidacion.php" method="post" class="needs-validation" enctype="multipart/form-data" novalidate>
-                
-            <div class="mb-3">
-                <label for="dni" class="form-label">DNI</label>
-                <input type="text" class="form-control" id="dni" name="dni" placeholder="Ingrese su DNI" required>
-                <div class="invalid-feedback">
-                    El DNI es obligatorio. 
-                </div>
-            </div>
+                    
+                <div class="col-md-12">
+                    <label for="dni" class="form-label">DNI</label>
+                    <input type="text" class="form-control" id="dni" name="dni" placeholder="Ingrese su DNI" required>
+                    <div class="invalid-feedback">
+                        El DNI es obligatorio. 
+                    </div>
+                </div>  
 
-            <div class="mb-3">
-                <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <label for="cuil" class="form-label">CUIL</label>
                         <input type="text" class="form-control" id="cuil" name="cuil" placeholder="Ingrese su CUIL" required>
                         <div class="invalid-feedback">
                             El CUIL es obligatorio.
                         </div>
                     </div>
-                    <div class="col-md-6">
+
+                    <div class="col-md-12">
                         <br><label for="boleta" class="form-label">Boleta de servicio a su nombre</label>
                         <input type="file" class="form-control" id="boleta" name="boleta" required>  
                         <div class="invalid-feedback">
                             Por favor, seleccione una boleta de pago de servicios a su nombre.
                         </div>
                     </div>
-                </div>
+
 
             </form>
         </div>

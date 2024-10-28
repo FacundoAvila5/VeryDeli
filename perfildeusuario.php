@@ -86,7 +86,7 @@
                             <i class="bi bi-info-square-fill ms-3 align-self-center"></i>
                         </div>
                         <div class="col-2 d-flex justify-content-end">
-                            <i class="bi bi-pencil-fill" data-bs-toggle="modal" data-bs-target="#editPersonalInfoModal"></i>
+                            <i class="bi bi-pencil-fill" data-bs-toggle="modal" data-bs-target="#editPersonalInfoModal" style="cursor: pointer;"></i>
                         </div>
                     </div>
                 </div>
@@ -197,8 +197,6 @@
             </div>
         </div>
     </div>
-    
-
 
     <!-- FOOTER MOBILE -->
     <?php

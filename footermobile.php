@@ -1,3 +1,8 @@
+<style>
+.opcionbNav .bi-person-check {
+        font-size: 1.3rem; /* Ajusta el tamaño del icono */
+    }
+</style>
 <div class="bNav container-fluid bg-body-tertiary d-block d-lg-none">
       <div class="bNavIcons d-flex">
         <!-- home -->
@@ -15,6 +20,10 @@
         <!-- notifs -->
         <div class="opcionbNav">
             <a href="notifmobile.php" class="link"><i class="fa-regular fa-bell"></i></a>
+        </div>
+        <!-- Validaciones -->
+        <div class="opcionbNav">
+            <a href="notifmobile.php" class="link"><i class="bi bi-person-check"></i></a>
         </div>
         <!-- perfil -->
         <div class="opcionbNav">

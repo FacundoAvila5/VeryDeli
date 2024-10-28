@@ -99,7 +99,7 @@
                                     }else{
                                 ?>
                                     <li>
-                                        <a href="" class="dropdown-item redLink">
+                                        <a href="#" class="dropdown-item redLink" onclick="abrirModalDenuncia(); return false;">
                                             <i class="fa-regular fa-flag"></i> Denunciar
                                         </a>
                                     </li>
@@ -191,6 +191,18 @@
         ?>    
 
 
+
+<!-- Modal Denuncia -->
+<?php 
+    include 'modaldenuncia.php';
+?>
+<!-- Script para abrir modal denuncia -->
+ <script>
+    function abrirModalDenuncia() {
+        var ModalD = new bootstrap.Modal(document.getElementById('ModalDenuncia'), {});
+        ModalD.show();
+    }
+ </script>
 
 <script src="script.js"></script>
 

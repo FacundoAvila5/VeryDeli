@@ -40,6 +40,7 @@
             <?php
                 //obtener id publicacion
                 $idpost = $_GET['id'];
+
                 $sql = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario
                 FROM publicaciones p
                 INNER JOIN usuarios u ON p.IdUsuario = u.IdUsuario
@@ -49,6 +50,12 @@
                 $post = mysqli_fetch_assoc($consulta);
                 // id del dueño de la publicacion
                 $idUserPost = $post['IdUsuario'];
+
+                if ($idusu == $idUserPost)
+                    $dueñoPost = true;
+                else
+                    $dueñoPost = false;
+                                    
             ?>
 
             <input type="hidden" id="idUser" value="<?php echo $idusu; ?>">
@@ -85,13 +92,15 @@
                                 <ul class="dropdown-menu">
                                 <!-- *** EL BOTON QUE SE MUESTRA DEPENDE DEL USUARIO ACTIVO -->
                                 <?php
-                                    if ($idusu == $idUserPost){
+                                    if($dueñoPost){
                                 ?>
                                     <li>
-                                        <a href="eliminarPublicacion.php?id=<?php echo $idpost; ?>" class="dropdown-item redLink" id="deleteP">
+                                        <!-- <a href="eliminarPublicacion.php?id=<?php //echo $idpost; ?>" id="deleteP" class="dropdown-item redLink" -->
+                                        <a href="" id="deleteP" class="dropdown-item redLink" data-bs-toggle="modal" data-bs-target="#modalDeletePost">
                                             <i class="fa-solid fa-trash-can"></i> Eliminar
                                         </a>
                                     </li>
+                                    
                                 <?php
                                     }else{
                                 ?>
@@ -114,27 +123,42 @@
                                 <i class="fa-solid fa-location-dot"></i> 
                                 Origen: <?php
                                         echo $post['ProvinciaOrigen'].", ".$post['LocalidadOrigen'].", ".$post['BarrioOrigen'];
-                                    ?> <br>
+                                        ?><span class="mostrarDetalle">, 
+                                            <span class="txt"><?php echo $post['DireccionOrigen']; ?></span>
+                                        </span> <br>
                                 <i class="fa-solid fa-route"></i> 
-                                Destino: <?php 
+                                Destino: <?php
                                         echo $post['ProvinciaDestino'].", ".$post['LocalidadDestino'].", ".$post['BarrioDestino'];
-                                    ?> <br>
+                                        ?><span class="mostrarDetalle">, 
+                                            <span class="txt"><?php echo $post['DireccionDestino']; ?></span>
+                                        </span> <br>
                                 <i class="fa-solid fa-calendar-days"></i>
                                 Fecha límite para completar entrega: <?php echo $post['FechaLimite'];?> <br>
                                 <i class="fa-solid fa-ruler"></i> Volumen <br>
                                 Longitud: <?php echo $post['Largo']. ' cm'?> <br>
                                 Ancho: <?php echo $post['Ancho']. ' cm'?> <br>
                                 Alto: <?php echo $post['Alto']. ' cm'?> <br>
-                                <i class="fa-solid fa-weight-scale"></i> Peso: <?php echo $post['Peso']. ' g <br><br>';
-                            
+                                <i class="fa-solid fa-weight-scale"></i> Peso: <?php echo $post['Peso']. ' g <br>';
                                 echo $post['Descripcion'];
                                 ?>
+                                    
+                                <h6 class="card-subtitle mb-1 mt-2 text-body-secondary">Información del remitente</h6>
+                                <span class="txt mostrarDetalle"><i class="fa-solid fa-user"></i> <?php echo $post['NombreRemitente']; ?></span> <br>
+                                <span class="txt mostrarDetalle"><i class="fa-solid fa-phone"></i> <?php echo $post['TelefonoRemitente']; ?></span> <br>
+
+                                
                         </div>
                     </div>
-
+                    
+                    <?php
+                        if(!$dueñoPost){
+                    ?>
                     <div class="d-flex justify-content-end align-items-center me-3">
                         <button class="btn btn-light link" data-bs-toggle="modal" data-bs-target="#modalpostularse">Postularme</button>
                     </div>
+                    <?php
+                        }
+                    ?>
                 </div>
 
                 <div class="card-footer d-flex">
@@ -143,18 +167,37 @@
                         $sqlC = "SELECT IdMensaje FROM mensajes WHERE IdPublicacionMensaje = $idpost";
                         $contC = mysqli_query($conexion, $sqlC);
                     ?>
-                    <div class="text-center cursor" id="btnComments" style="width: 50%;">
-                        <i class="fa-solid fa-comments"></i> 
-                        <?php echo mysqli_num_rows($contC). ' comentarios'; ?>
+                    <div class="text-center " id="btnComments" style="width: 50%;">
+                        <a class="btn boton" role="button" aria-disabled="true">
+                            <i class="fa-solid fa-comments"></i> 
+                            <?php echo mysqli_num_rows($contC). ' comentarios'; ?>
+                        </a>
+                        
                     </div>
                     <!-- postulaciones -->
                     <?php 
                         $sqlP = "SELECT IdPostulacion FROM postulaciones WHERE IdPublicacion = $idpost";
-                        $contP = mysqli_query($conexion, $sqlP);
+                        $consultaP = mysqli_query($conexion, $sqlP);
+                        $cantP = mysqli_num_rows($consultaP);
                     ?>
-                    <div class="text-center cursor" id="btnPostu" style="width: 50%;">
-                        <i class="fa-solid fa-address-card"></i> 
-                        <?php echo mysqli_num_rows($contP). ' postulaciones'; ?> 
+                    <div class="text-center" id="btnPostu" style="width: 50%;">
+                        <?php
+                            if($dueñoPost && $cantP > 0){ // || ['IdPostulante'] != null
+                        ?>
+                        <a class="btn boton" id="linkBtnPostu" role="button" aria-disabled="true">
+                            <i class="fa-solid fa-address-card"></i> 
+                            <?php echo $cantP. ' postulaciones'; ?>
+                        </a>  
+                        <?php
+                            }else{
+                        ?>
+                        <a class="btn boton disabled" id="linkBtnPostu" role="button" aria-disabled="true">
+                            <i class="fa-solid fa-address-card"></i> 
+                            <?php echo $cantP. ' postulaciones'; ?>
+                        </a> 
+                        <?php
+                            }
+                        ?>
                     </div>
                 </div>
 
@@ -186,6 +229,25 @@
         <?php
             include 'footermobile.php'
         ?>    
+
+<!-- Modal eliminar post -->
+<div class="modal fade" id="modalDeletePost" tabindex="-1" aria-labelledby="modalDeletePost" aria-hidden="true">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">¿Eliminar publicación?</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body modalDeletePost-body text-body-secondary">
+                Esta acción es irreversible.
+            </div>
+            <div class="modal-footer modalDeletePost-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <a href="eliminarPublicacion.php?id=<?php echo $idpost; ?>" id="deleteP" class="btn btn-danger">Eliminar</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <!-- Modal postularse -->

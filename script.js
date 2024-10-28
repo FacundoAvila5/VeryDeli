@@ -1,5 +1,6 @@
 var c = document.getElementById("comentarios");
 var p = document.getElementById("postulaciones");
+var d = document.getElementById("linkBtnPostu");
 var iduser = document.getElementById("idUser").value;
 var iduserpost = document.getElementById("idUserPost").value;
 
@@ -11,7 +12,7 @@ if(iduser == iduserpost){
         }
     };
     document.getElementById("btnPostu").onclick = function() {
-        if(p.classList.contains("d-none") && !c.classList.contains("d-none")){
+        if(p.classList.contains("d-none") && !(d.classList.contains("disabled")) && !c.classList.contains("d-none")){
             c.classList.add('d-none');
             p.classList.remove("d-none");
         }
@@ -20,31 +21,30 @@ if(iduser == iduserpost){
 
 
 postDelete = document.getElementById("deleteP");
-if(postDelete != null){
-    postDelete.onclick = function() {
-        if (confirm("¿Eliminar publicacion?")){
-            return true;
-        }else{
-            e.preventDefault();
-        }
-    }
-}
+// if(postDelete != null){
+//     postDelete.onclick = function() {
+//         if (confirm("¿Eliminar publicacion?")){
+//             return true;
+//         }else{
+//             e.preventDefault();
+//         }
+//     }
+// }
 
 
 linkDelete = document.querySelectorAll(".deleteC");
-linkDelete.forEach((element)=>{ element.addEventListener('click', (e)=>{ 
-    console.log('borra?')
-        if (confirm("¿Eliminar comentario?")){
-            return true;
-        }else{
-            e.preventDefault();
-        }
-    })
-});
+// linkDelete.forEach((element)=>{ element.addEventListener('click', (e)=>{
+//         if (confirm("¿Eliminar comentario?")){
+//             return true;
+//         }else{
+//             e.preventDefault();
+//         }
+//     })
+// });
 
 
 function Responder(boton){
     const idMensaje = boton.value
     rta = document.getElementById(idMensaje);
-    rta.classList.remove("d-none");
+    rta.classList.toggle("d-none");
 }

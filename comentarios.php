@@ -62,12 +62,7 @@
                             } 
                             if($mje['IdUsuarioMensaje'] == $idusu){
                         ?>
-                            <form method="post" action="eliminarComentario.php">
-                                <input type="hidden" name="commentType" value="m">
-                                <input type="hidden" name="idPost" value="<?php echo $idpost; ?>">
-                                <input type="hidden" name="idMje" value="<?php echo $idMje; ?>">
-                                <button class="btn btn-sm boton redLink deleteC" type="submit">Eliminar</button>
-                            </form>
+                            <button class="btn btn-sm boton redLink" data-bs-toggle="modal" data-bs-target="#modalDeleteComment">Eliminar</button>
                         <?php } 
                         ?>
                     </div>
@@ -115,12 +110,7 @@
                                         <?php echo $rta['ContenidoRespuesta']; ?>
                                     </div>
                                     <div class="col-12">
-                                        <form method="post" action="eliminarComentario.php">
-                                            <input type="hidden" name="commentType" value="r">
-                                            <input type="hidden" name="idPost" value="<?php echo $idpost; ?>">
-                                            <input type="hidden" name="idRta" value="<?php echo $rta['IdRespuesta']; ?>">
-                                            <button class="btn btn-sm boton redLink deleteC" type="submit">Eliminar</button>
-                                        </form>
+                                        <button class="btn btn-sm boton redLink" data-bs-toggle="modal" data-bs-target="#modalDeleteComment">Eliminar</button>
                                     </div>
                                 </div>
                             </div>
@@ -160,5 +150,29 @@
             } //if mostrar comentarios
         } //while
     ?>
+
+    <!-- Modal eliminar comentarios -->
+    <div class="modal fade" id="modalDeleteComment" tabindex="-1" aria-labelledby="modalDeleteComment" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <!-- <div class="modal-header">
+                    <h1 class="modal-title fs-5">¿Eliminar comentario?</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div> -->
+                <div class="modal-body modalDeleteComment-body">
+                        ¿Eliminar comentario?
+                </div>
+                <div class="modal-footer modalDeleteComment-footer">
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <form method="post" action="eliminarComentario.php"> 
+                        <input type="hidden" name="commentType" value="m">
+                        <input type="hidden" name="idPost" value="<?php echo $idpost; ?>">
+                        <input type="hidden" name="idMje" value="<?php echo $idMje; ?>">
+                        <button class="btn btn-sm btn-danger deleteC" type="submit">Eliminar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>

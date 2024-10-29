@@ -5,11 +5,20 @@ session_start();
 extract($_POST);
 $flag = false;
 
+
 if (isset($mostrar_todo) && $mostrar_todo === 'true') {
     $consultaBusqueda = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario
                          FROM publicaciones p
                          INNER JOIN usuarios u ON p.IdUsuario = u.IdUsuario
                          ORDER BY p.IdPublicacion DESC";
+                         
+}else if(isset($fragil) && $fragil === 'true'){
+    $consultaBusqueda = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario
+                        FROM publicaciones p
+                        INNER JOIN usuarios u ON p.IdUsuario = u.IdUsuario
+                        WHERE Fragil = 'si'
+                        ORDER BY p.IdPublicacion DESC";                    
+
 }else if(isset($busqueda) && !empty($busqueda)){
 
     $consultaBusqueda = " SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario
@@ -20,7 +29,8 @@ if (isset($mostrar_todo) && $mostrar_todo === 'true') {
                         OR p.BarrioOrigen = '$busqueda' 
                         OR p.LocalidadDestino = '$busqueda' 
                         OR p.BarrioDestino = '$busqueda' 
-                        OR p.DireccionDestino = '$busqueda'  
+                        OR p.DireccionDestino = '$busqueda' 
+                        OR p.Descripcion LIKE '%$busqueda%' 
                         ORDER BY p.IdPublicacion DESC";
 }else{
     $consultaBusqueda = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario

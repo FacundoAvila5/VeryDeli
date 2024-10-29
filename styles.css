@@ -152,8 +152,39 @@ body{
     align-items: center !important; 
 }
 
+
+/* Pie de pagina */
+
+#pieDePagina{
+    background-color: rgb(133, 133, 133);
+    margin-top: 30px;
+    
+}
+#redes{
+    display: grid;
+    place-items: center;
+}
+#list{
+    list-style: none;
+    margin-right: 2% ;
+}
+.redesLista{
+    display: inline-block;
+    padding: 10px;
+}
+#r{
+    color: black;
+}
+#frase{
+    padding-top: 2%;
+    margin-bottom: 2%;
+    text-align: center;
+}
+
+
+
 /* No lee los estilos. Los puse en header.php*/
-#Mostrartodo {
+/* #Mostrartodo {
     background-color: rgb(178, 176, 176) !important;
     color: black !important; 
     padding: 7px 16px !important; 
@@ -163,11 +194,11 @@ body{
 #opcionesBusqueda{
     border: none !important;
     border-radius: 50px !important; 
-}
+} */
 /* No lee los estilos. Los puse en footermobile.php*/
-.opcionbNav .bi-person-check {
-    font-size: 1.3rem; /* Ajusta el tamaño del icono */
-}
+/* .opcionbNav .bi-person-check {
+    font-size: 1.3rem; 
+} */
 
 
 @media (max-width: 768px) {

@@ -1,19 +1,25 @@
 <style>
 
-#opcionesBusqueda{
-    background-color: rgb(178, 176, 176);
-}    
+#opcionesBusqueda {
+    background-color: rgb(245, 244, 244) !important;
+    width: 84%; 
+    border-radius: 5% !important;
+    position: absolute;
+    z-index: 3;
+}
+
 #Mostrartodo {
-    background-color: white;
-    color: black; 
-    padding: 7px 16px; 
-    font-size: 14px; 
-    cursor: pointer; 
+    background-color: transparent !important;
+    color: black;
+    padding: 7px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: left;
+    z-index: 4 !important;
+    position: relative;
 }
-#opcionesBusqueda{
-    border: none;
-    border-radius: 80px;
-}
+
+
 </style>
 <!-- NAV -->
 <nav class="navbar bg-body-tertiary d-none d-lg-block">
@@ -32,12 +38,12 @@
                     <button class="btn btn-search" type="submit">
                         <i class="lupa fa-solid fa-magnifying-glass"></i>
                     </button>
-                    <div id="opcionesBusqueda" style="display: none; position: absolute; top: 100%; background-color: white; border: 1px solid #ccc; z-index: 1;">
+                    <div id="opcionesBusqueda" style="display: none; position: absolute; top: 100%; border: 1px solid #ccc;">
                         <button class="btn btn-search" type="submit" name="mostrar_todo" value="true" style="width: 100%;" id="Mostrartodo">
                             Mostrar Todo
                         </button>
-                        <button class="btn btn-search" type="submit" name="mostrar_todo" value="true" style="width: 100%;" id="Mostrartodo">
-                            fragil
+                        <button class="btn btn-search" type="submit" name="fragil" value="true" style="width: 100%;" id="Mostrartodo">
+                            Frágil
                         </button>
                     </div>
                     </form>

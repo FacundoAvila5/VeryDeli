@@ -23,7 +23,7 @@
         </div>
         <!-- Validaciones -->
         <div class="opcionbNav">
-            <a href="notifmobile.php" class="link"><i class="bi bi-person-check"></i></a>
+            <a href="" class="link"><i class="bi bi-person-check"></i></a>
         </div>
         <!-- perfil -->
         <div class="opcionbNav">

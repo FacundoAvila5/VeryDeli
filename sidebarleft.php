@@ -6,7 +6,7 @@
                     <img class="userImg rounded-circle me-2" src="<?php $foto = $_SESSION['fotoPerfil']; echo $foto; ?>">
                     <?php
                         $nombre = $_SESSION['usuario'];
-                        echo $nombre;
+                        echo '<span style="font-size: large;">' .$nombre. '</span>';
                     ?>
                 </div>
             </a>

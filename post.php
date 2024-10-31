@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="shortcut icon" href="img\icons\loguito-fondoAzulV2.ico" type="image/x-icon">
 
         <title>Publicación</title>
@@ -15,7 +16,7 @@
 <?php
     session_start();
     include "ConexionBS.php";
-    //include "CrearPublicacion.php";
+    include "CrearPublicacion.php";
 
     include "FormPostularse.php";
 
@@ -44,7 +45,7 @@
                 //obtener id publicacion
                 $idpost = $_GET['id'];
 
-                $sql = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario
+                $sql = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario, u.Validado
                 FROM publicaciones p
                 INNER JOIN usuarios u ON p.IdUsuario = u.IdUsuario
                 WHERE p.IdPublicacion = $idpost";
@@ -54,18 +55,17 @@
                 // id del dueño de la publicacion
                 $idUserPost = $post['IdUsuario'];
 
+                $dueñoPost = false;
                 if ($idusu == $idUserPost)
                     $dueñoPost = true;
-                else
-                    $dueñoPost = false;
-                                    
+
             ?>
 
             <input type="hidden" id="idUser" value="<?php echo $idusu; ?>">
             <input type="hidden" id="idUserPost" value="<?php echo $idUserPost; ?>">
 
-            <div class="post card">
-                <div class="card-header bg-transparent" style="padding: 3px;">
+            <div class="card card-border post">
+                <div class="card-header card-border bg-transparent" style="padding: 3px;">
                     <div class="row" style="margin: auto;">
                         <!-- volver -->
                         <div class="col p-0">
@@ -80,10 +80,15 @@
                 <div class="card-content">
                     <div class="row" style="margin: auto;">
                         <!-- USER INFO -->
-                        <div class="user col-10 p-0">
+                        <div class="col-10 p-0">
                             <img class="postUserImg rounded-circle me-2" src="<?php echo $post['ImagenUsuario']; ?>">
+                            <span class="txt"><?php echo $post['NombreUsuario']. " " . $post['ApellidoUsuario']. " "?></span>
                             <?php
-                                echo '<span class="txt">'.$post['NombreUsuario']. " " . $post['ApellidoUsuario'].'</span>';
+                                if ($post['Validado'] == 1) {
+                                    echo ' <i class="bi bi-patch-check-fill align-self-center user-check"></i>';      
+                                }
+                                //else if (usuario responsable){ }
+                                // echo ' <span class="badge text-bg-secondary"><i class="bi bi-star-fill"></i> Usuario responsable</span>';
                             ?>
                         </div>
                         <!-- POST LINKS -->
@@ -98,12 +103,15 @@
                                     if($dueñoPost){
                                 ?>
                                     <li>
-                                        <!-- <a href="eliminarPublicacion.php?id=<?php //echo $idpost; ?>" id="deleteP" class="dropdown-item redLink" -->
+                                        <a href="" id="editP" class="dropdown-item" data-bs-toggle="modal" data-bs-target="">
+                                            <i class="fa-solid fa-pen"></i> Editar
+                                        </a>
+                                    </li> 
+                                    <li>
                                         <a href="" id="deleteP" class="dropdown-item redLink" data-bs-toggle="modal" data-bs-target="#modalDeletePost">
                                             <i class="fa-solid fa-trash-can"></i> Eliminar
                                         </a>
-                                    </li>
-                                    
+                                    </li>                          
                                 <?php
                                     }else{
                                 ?>
@@ -126,17 +134,17 @@
                                 <i class="fa-solid fa-location-dot"></i> 
                                 Origen: <?php
                                         echo $post['ProvinciaOrigen'].", ".$post['LocalidadOrigen'].", ".$post['BarrioOrigen'];
-                                        ?><span class="mostrarDetalle">, 
-                                            <span class="txt"><?php echo $post['DireccionOrigen']; ?></span>
+                                        ?><span class="postExtraInfo">, 
+                                            <span class="txtExtraInfo"><?php echo $post['DireccionOrigen']; ?></span>
                                         </span> <br>
                                 <i class="fa-solid fa-route"></i> 
                                 Destino: <?php
                                         echo $post['ProvinciaDestino'].", ".$post['LocalidadDestino'].", ".$post['BarrioDestino'];
-                                        ?><span class="mostrarDetalle">, 
-                                            <span class="txt"><?php echo $post['DireccionDestino']; ?></span>
+                                        ?><span class="postExtraInfo">, 
+                                            <span class="txtExtraInfo"><?php echo $post['DireccionDestino']; ?></span>
                                         </span> <br>
                                 <i class="fa-solid fa-calendar-days"></i>
-                                Fecha límite para completar entrega: <?php echo $post['FechaLimite'];?> <br>
+                                Fecha límite para completar la entrega: <?php echo $post['FechaLimite'];?> <br>
                                 <i class="fa-solid fa-ruler"></i> Volumen <br>
                                 Longitud: <?php echo $post['Largo']. ' cm'?> <br>
                                 Ancho: <?php echo $post['Ancho']. ' cm'?> <br>
@@ -144,12 +152,12 @@
                                 <i class="fa-solid fa-weight-scale"></i> Peso: <?php echo $post['Peso']. ' g <br>';
                                 echo $post['Descripcion'];
                                 ?>
-                                    
-                                <h6 class="card-subtitle mb-1 mt-2 text-body-secondary">Información del remitente</h6>
-                                <span class="txt mostrarDetalle"><i class="fa-solid fa-user"></i> <?php echo $post['NombreRemitente']; ?></span> <br>
-                                <span class="txt mostrarDetalle"><i class="fa-solid fa-phone"></i> <?php echo $post['TelefonoRemitente']; ?></span> <br>
-
-                                
+                                 
+                                <div class="postExtraInfo">
+                                    <h6 class="card-subtitle mb-1 mt-2 text-body-secondary">Información del remitente</h6>
+                                    <span class="txtExtraInfo"><i class="fa-solid fa-user"></i> Nombre: <span class="">Veronica<?php echo $post['NombreRemitente']; ?></span></span> <br>
+                                    <span class="txtExtraInfo"><i class="fa-solid fa-phone"></i> Teléfono: +54 266 4010101 <?php echo $post['TelefonoRemitente']; ?></span> <br>
+                                </div>
                         </div>
                     </div>
                     
@@ -157,14 +165,14 @@
                         if(!$dueñoPost){
                     ?>
                     <div class="d-flex justify-content-end align-items-center me-3">
-                        <button class="btn btn-light link" data-bs-toggle="modal" data-bs-target="#modalpostularse">Postularme</button>
+                        <button class="btn btn-deli link" data-bs-toggle="modal" data-bs-target="#modalpostularse">Postularme</button>
                     </div>
                     <?php
                         }
                     ?>
                 </div>
 
-                <div class="card-footer d-flex">
+                <div class="card-footer card-border d-flex">
                     <!-- comentarios -->
                     <?php 
                         $sqlC = "SELECT IdMensaje FROM mensajes WHERE IdPublicacionMensaje = $idpost";

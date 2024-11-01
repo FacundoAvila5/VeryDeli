@@ -12,7 +12,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <!-- favicon -->
     <link rel="shortcut icon" href="img\icons\loguito-fondoAzulV2.ico" type="image/x-icon">
-    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 
         <title>Inicio</title>
 </head>
@@ -56,11 +57,12 @@ include "CrearPublicacion.php";
             
         ?>
         
+
+        
         <!-- columna: publicaciones -->
         <div class="publicaciones col-lg-6 col-md-" id="conteni">
-            
         <?php
-            
+            include "BusquedasMobile.php";
             $sql = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario, u.Validado
             FROM publicaciones p
             INNER JOIN usuarios u ON p.IdUsuario = u.IdUsuario 
@@ -187,12 +189,13 @@ include "CrearPublicacion.php";
             ?>
         </div>
       </div>
-
+     <?php include 'PiedePagina.php'; ?>
     </div>
 
     <!-- FOOTER MOBILE -->
         <?php
-            include 'footermobile.php'
+            include 'footermobile.php';
+        
         ?>
 
     <script>
@@ -209,6 +212,7 @@ include "CrearPublicacion.php";
         crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
         <?php
         include "DesconexionBS.php";

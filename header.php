@@ -12,14 +12,13 @@
 }
 </style>
 <!-- NAV -->
-    <!-- <nav class="navbar bg-body-tertiary d-none d-lg-block">  -->
-<nav class="navbar d-none d-lg-block" style="background-color: rgb(18, 146, 154);">
+    <nav class="navbar bg-body-tertiary d-none d-lg-block">
         <div class="container-fluid d-flex justify-content-between">
             <!-- logo -->
             <div class="col-2 ms-5">
                 <a class="navbar-brand" href="PaginaPrincipal.php">
+                    <img id="logo" src="logos/logo-aqua-azul.svg">
                     <!-- <img id="logo" src="logos/logo-aqua.svg"> -->
-                    <img id="logo" src="logos/logo-azul.svg">
                 </a>
             </div>
             <!-- searchbar -->

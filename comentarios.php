@@ -7,7 +7,7 @@
 
 <div id="comentarios">
     <!-- *** PREGUNTA/MENSAJE = no es dueño de la publi = usuario en sesion -->
-    <?php if($idUserPost != $idusu){ ?>
+    <?php if(($idUserPost != $idusu) && !$postulanteElegido){ ?>
     <div class="comment bg-white">
         <div class="row p-2 mb-3">
             <div class="col-1 d-flex justify-content-start">
@@ -182,7 +182,7 @@
                     <form method="post" action="eliminarComentario.php">
                         <input type="hidden" name="idPost" value="<?php echo $idpost; ?>">
                         <input type="hidden" name="idMje" value="<?php echo $idMje; ?>">
-                        <button class="btn btn-sm btn-danger deleteC" type="submit">Eliminar</button>
+                        <button class="btn btn-sm btn-danger" type="submit">Eliminar</button>
                     </form>
                 </div>
             </div>
@@ -196,13 +196,13 @@
                 <div class="modal-body">
                         ¿Eliminar respuesta?
                 </div>
-                <div class="modal-footer modalDeleteComment-footer">
+                <div class="modal-footer modalDeleteComment-footer pt-0">
                     <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                     <form method="post" action="eliminarRespuesta.php"> 
                         <input type="hidden" name="commentType" value="r">
                         <input type="hidden" name="idPost" value="<?php echo $idpost; ?>">
                         <input type="hidden" name="idRta" value="<?php echo $idRta; ?>">
-                        <button class="btn btn-sm btn-danger deleteC" type="submit">Eliminar</button>
+                        <button class="btn btn-sm btn-danger" type="submit">Eliminar</button>
                     </form>
                 </div>
             </div>

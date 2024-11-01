@@ -6,13 +6,13 @@ extract($_POST);
 $flag = false;
 
 if (isset($mostrar_todo) && $mostrar_todo === 'true') {
-    $consultaBusqueda = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario
+    $consultaBusqueda = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario, u.Validado
                          FROM publicaciones p
                          INNER JOIN usuarios u ON p.IdUsuario = u.IdUsuario
                          ORDER BY p.IdPublicacion DESC";
 }else if(isset($busqueda) && !empty($busqueda)){
 
-    $consultaBusqueda = " SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario
+    $consultaBusqueda = " SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario, u.Validado
                         FROM publicaciones p
                         INNER JOIN usuarios u ON p.IdUsuario = u.IdUsuario
                         where p.ProvinciaOrigen = '$busqueda' 
@@ -23,7 +23,7 @@ if (isset($mostrar_todo) && $mostrar_todo === 'true') {
                         OR p.DireccionDestino = '$busqueda'  
                         ORDER BY p.IdPublicacion DESC";
 }else{
-    $consultaBusqueda = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario
+    $consultaBusqueda = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario, u.Validado
                         FROM publicaciones p
                         INNER JOIN usuarios u ON p.IdUsuario = u.IdUsuario
                         ORDER BY p.IdPublicacion DESC";

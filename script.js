@@ -19,32 +19,15 @@ if(iduser == iduserpost){
     }
 }
 
-
-postDelete = document.getElementById("deleteP");
-// if(postDelete != null){
-//     postDelete.onclick = function() {
-//         if (confirm("¿Eliminar publicacion?")){
-//             return true;
-//         }else{
-//             e.preventDefault();
-//         }
-//     }
-// }
-
-
-linkDelete = document.querySelectorAll(".deleteC");
-// linkDelete.forEach((element)=>{ element.addEventListener('click', (e)=>{
-//         if (confirm("¿Eliminar comentario?")){
-//             return true;
-//         }else{
-//             e.preventDefault();
-//         }
-//     })
-// });
-
-
 function Responder(boton){
     const idMensaje = boton.value
     rta = document.getElementById(idMensaje);
     rta.classList.toggle("d-none");
 }
+
+//  AGREGAR ESTE EVENTO onclick A LA NOTIFICACION <<TE HAN ELEGIDO PARA REALIZAR ESTE ENVIO>>:
+//  value="<?php echo $aquiVaElIdPostDePostulacion; ?>" onclick="mostrarInfoExtra(this)"
+
+// function mostrarInfoExtra(post){
+
+// }

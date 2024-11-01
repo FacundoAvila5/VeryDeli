@@ -16,8 +16,7 @@
 <?php
     session_start();
     include "ConexionBS.php";
-    include "CrearPublicacion.php";
-
+    // include "CrearPublicacion.php";
     include "FormPostularse.php";
 
     $nombre = $_SESSION['usuario']; 
@@ -52,8 +51,14 @@
 
                 $consulta = mysqli_query($conexion, $sql);
                 $post = mysqli_fetch_assoc($consulta);
+
                 // id del dueño de la publicacion
                 $idUserPost = $post['IdUsuario'];
+
+                //revisa si hay un postulante ya seleccionado
+                $postulanteElegido = false;
+                if($post['IdPostulante'] != 0)
+                    $postulanteElegido = true;
 
                 $dueñoPost = false;
                 if ($idusu == $idUserPost)
@@ -87,9 +92,13 @@
                                 if ($post['Validado'] == 1) {
                                     echo ' <i class="bi bi-patch-check-fill align-self-center user-check"></i>';      
                                 }
-                                //else if (usuario responsable){ }
-                                // echo ' <span class="badge text-bg-secondary"><i class="bi bi-star-fill"></i> Usuario responsable</span>';
+                                if($postulanteElegido){
                             ?>
+                                    <span class="badge text-bg-secondary">Publicación pausada</span>
+                            <?php
+                                }
+                            ?>
+                            
                         </div>
                         <!-- POST LINKS -->
                         <div class="col p-0 d-flex justify-content-end">
@@ -102,13 +111,13 @@
                                 <?php
                                     if($dueñoPost){
                                 ?>
-                                    <li>
+                                    <!-- <li>
                                         <a href="" id="editP" class="dropdown-item" data-bs-toggle="modal" data-bs-target="">
                                             <i class="fa-solid fa-pen"></i> Editar
                                         </a>
-                                    </li> 
+                                    </li>  -->
                                     <li>
-                                        <a href="" id="deleteP" class="dropdown-item redLink" data-bs-toggle="modal" data-bs-target="#modalDeletePost">
+                                        <a href="" class="dropdown-item redLink" data-bs-toggle="modal" data-bs-target="#modalDeletePost">
                                             <i class="fa-solid fa-trash-can"></i> Eliminar
                                         </a>
                                     </li>                          
@@ -134,15 +143,17 @@
                                 <i class="fa-solid fa-location-dot"></i> 
                                 Origen: <?php
                                         echo $post['ProvinciaOrigen'].", ".$post['LocalidadOrigen'].", ".$post['BarrioOrigen'];
-                                        ?><span class="postExtraInfo">, 
+                                        ?><span class="postExtraInfo d-none">, 
                                             <span class="txtExtraInfo"><?php echo $post['DireccionOrigen']; ?></span>
-                                        </span> <br>
+                                        </span>
+                                <br>
                                 <i class="fa-solid fa-route"></i> 
                                 Destino: <?php
                                         echo $post['ProvinciaDestino'].", ".$post['LocalidadDestino'].", ".$post['BarrioDestino'];
-                                        ?><span class="postExtraInfo">, 
+                                        ?><span class="postExtraInfo d-none">, 
                                             <span class="txtExtraInfo"><?php echo $post['DireccionDestino']; ?></span>
-                                        </span> <br>
+                                        </span>
+                                <br>
                                 <i class="fa-solid fa-calendar-days"></i>
                                 Fecha límite para completar la entrega: <?php echo $post['FechaLimite'];?> <br>
                                 <i class="fa-solid fa-ruler"></i> Volumen <br>
@@ -153,19 +164,22 @@
                                 echo $post['Descripcion'];
                                 ?>
                                  
-                                <div class="postExtraInfo">
+                                <div class="postExtraInfo d-none">
                                     <h6 class="card-subtitle mb-1 mt-2 text-body-secondary">Información del remitente</h6>
-                                    <span class="txtExtraInfo"><i class="fa-solid fa-user"></i> Nombre: <span class="">Veronica<?php echo $post['NombreRemitente']; ?></span></span> <br>
-                                    <span class="txtExtraInfo"><i class="fa-solid fa-phone"></i> Teléfono: +54 266 4010101 <?php echo $post['TelefonoRemitente']; ?></span> <br>
+                                    <span class="txtExtraInfo"><i class="fa-solid fa-user"></i> Nombre: <?php echo $post['NombreRemitente']; ?></span> <br>
+                                    <span class="txtExtraInfo"><i class="fa-solid fa-phone"></i> Teléfono: <?php echo $post['TelefonoRemitente']; ?></span> <br>
                                 </div>
                         </div>
                     </div>
                     
+                    <!-- BOTON POSTULACION -->
                     <?php
-                        if(!$dueñoPost){
+                        if(!$dueñoPost && !$postulanteElegido){
                     ?>
                     <div class="d-flex justify-content-end align-items-center me-3">
-                        <button class="btn btn-deli link" data-bs-toggle="modal" data-bs-target="#modalpostularse">Postularme</button>
+                        <button class="btn btn-deli link" data-bs-toggle="modal" data-bs-target="#modalpostularse">
+                            <span class="txt">Postularme</span>
+                        </button>
                     </div>
                     <?php
                         }
@@ -173,7 +187,7 @@
                 </div>
 
                 <div class="card-footer card-border d-flex">
-                    <!-- comentarios -->
+                    <!-- numero comentarios -->
                     <?php 
                         $sqlC = "SELECT IdMensaje FROM mensajes WHERE IdPublicacionMensaje = $idpost";
                         $contC = mysqli_query($conexion, $sqlC);
@@ -185,7 +199,7 @@
                         </a>
                         
                     </div>
-                    <!-- postulaciones -->
+                    <!-- numero postulaciones -->
                     <?php 
                         $sqlP = "SELECT IdPostulacion FROM postulaciones WHERE IdPublicacion = $idpost";
                         $consultaP = mysqli_query($conexion, $sqlP);
@@ -193,13 +207,21 @@
                     ?>
                     <div class="text-center" id="btnPostu" style="width: 50%;">
                         <?php
-                            if($dueñoPost && $cantP > 0){ // || ['IdPostulante'] != null
+                            if($dueñoPost && $cantP > 0){
+                                if($postulanteElegido){
                         ?>
-                        <a class="btn boton" id="linkBtnPostu" role="button" aria-disabled="true">
-                            <i class="fa-solid fa-address-card"></i> 
-                            <?php echo $cantP. ' postulaciones'; ?>
-                        </a>  
+                                <a class="btn boton" id="linkBtnPostu" role="button" aria-disabled="true" style="color: rgb(7, 64, 113);">
+                                    <i class="fa-solid fa-address-card"></i> Postulante
+                                </a>
                         <?php
+                                }else{
+                        ?>
+                                <a class="btn boton" id="linkBtnPostu" role="button" aria-disabled="true">
+                                    <i class="fa-solid fa-address-card"></i> 
+                                    <?php echo $cantP. ' postulaciones'; ?>
+                                </a>  
+                        <?php
+                                }
                             }else{
                         ?>
                         <a class="btn boton disabled" id="linkBtnPostu" role="button" aria-disabled="true">
@@ -260,8 +282,6 @@
     </div>
 </div>
 
-
-
 <!-- Modal Denuncia -->
 <?php 
     include 'modaldenuncia.php';
@@ -273,8 +293,6 @@
         ModalD.show();
     }
  </script>
-
-<script src="script.js"></script>
 
 <!-- JavaScript para abrir el segundo modal -->
 <script>
@@ -312,6 +330,7 @@
     }
 </script>
 
+    <script src="script.js"></script>
     <script src="https://kit.fontawesome.com/0ce357c188.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

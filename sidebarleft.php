@@ -11,12 +11,15 @@
                 </div>
             </a>
             <!-- botones justify-content-end-->
-            <div class="userBtn d-flex ms-5">
+            <div class="userBtns d-flex ms-5">
                 <!-- publicar -->
                 <div class="row mb-1">
                     <div class="col">
-                        <a href="#" class="link" data-bs-toggle="modal" data-bs-target="#publicarmodal"><i class="fa-solid fa-pen-to-square"></i> Publicar</a>
-                        <!-- <button class="btn btn-small btn-publi"><i class="fa-solid fa-pen-to-square"></i> Publicar</button> -->
+                        <!-- <a href="#" class="link" data-bs-toggle="modal" data-bs-target="#publicarmodal"><i class="fa-solid fa-pen-to-square"></i> Publicar</a> -->
+                        <button class="btn btn-small btn-deli btn-publi"
+                            data-bs-toggle="modal" data-bs-target="#publicarmodal">
+                            <span class="txt"><i class="fa-solid fa-pen-to-square"></i> Publicar</span>
+                        </button>
                     </div>
                 </div>
                 <!-- vehiculos -->

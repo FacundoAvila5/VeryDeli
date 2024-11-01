@@ -37,40 +37,30 @@ body{
         rgba(18, 145, 154, 0.301) 50%
     );
 }
-/* 
-.badge-userStar{
-    background-color: white;
-    color: rgba(18, 145, 154) !important;
-    border-radius: 50% !important;
-    display: flex;
-    align-self: center; 
-}*/
-.user-check{
-    /* color: rgb(18, 145, 154); */
-    color: rgb(13, 40, 75);
-}
 .fecha{
     font-size: small;
     color: gray;
+}
+.user-check{
+    /* color: rgb(18, 145, 154); */
+    color: rgb(13, 40, 75);
 }
 
 /* BUSQUEDA */
 .search-bar{ flex-direction: row; }
 #busqueda{
-    border-color: rgb(13, 40, 75)!important;
-    /* border-color: rgb(18, 146, 154)!important; */
+    border-color: rgb(18, 146, 154)!important;
 }
 .btn-search{ 
-    background-color: rgb(13, 40, 75)!important; 
-    /* background-color: rgb(18, 146, 154)!important;  */
+    background-color: rgb(18, 146, 154)!important; 
 }
 .lupa{ 
     /* color: rgb(18, 146, 154); */
-    color: rgb(238, 238, 238); 
+    color: rgb(243, 243, 243); 
 }
 
 /* USER MENU */
-.userBtn{
+.userBtns{
     padding-left: 6%;
     flex-direction: column;
 }
@@ -114,11 +104,11 @@ body{
 }
 
 /* UNA PUBLICACION */
+.postLinks{ border-color: transparent !important; }
 .btnVolver{
     width: 40px;
     height: 40px;
 }
-.postLinks{ border-color: transparent !important; }
 .btn-deli{ 
     background-color: rgb(18, 146, 154) !important;
     color: white !important; 
@@ -176,9 +166,9 @@ body{
 
 
 /* modal postularse */
-.custom-modal-content {
+/* .custom-modal-content {
     background-color: rgb(133, 133, 133) !important;
-}
+} */
 .custom-input {
     font-size: 200% !important; 
     height: 85px !important;  
@@ -199,7 +189,7 @@ body{
     height: 110px !important; 
     margin: 0 auto !important;  
 }
-.modal-body {
+.body-postu {
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important; 

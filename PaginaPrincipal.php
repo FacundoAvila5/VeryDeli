@@ -88,12 +88,29 @@ include "CrearPublicacion.php";
                 ?>
 
                 <div class="post card">
-                    <div class="card-body">
-                        <div class="user d-flex justify-content-start">
-                            <img class="postUserImg rounded-circle me-2" src="<?php echo $row['ImagenUsuario']; ?>">
+                    <div class="card-body"> 
+                        <div class="row p-0">
+                            <div class="col user d-flex justify-content-start">
+                                <img class="postUserImg rounded-circle me-2" src="<?php echo $row['ImagenUsuario']; ?>">
+                                <?php
+                                echo $row['NombreUsuario']. " " . $row['ApellidoUsuario'];
+                                ?>
+                            </div>
+                            <!-- admin: icono publicacion denunciada -->
                             <?php
-                            echo $row['NombreUsuario']. " " . $row['ApellidoUsuario'];
+                                if ($_SESSION["tipo"]=="Administrador") { //Si el usuario es admin !!! CORREGIR TIPO !!!
+
+                                    $sql2= "SELECT IdPublicacion FROM denuncias d WHERE IdPublicacion = '".$row['IdPublicacion']."' ";
+                                    $result= mysqli_query($conexion,$sql);
+
+                                    if (mysqli_num_rows($result) > 0) { //Si hay denuncias en el post
+                                        echo "<div class='col-1'> 
+                                            <i class='fa-solid fa-triangle-exclamation' style='color:red;' title='Publicacion denunciada'></i> 
+                                        </div>";
+                                    }
+                                }
                             ?>
+                            
                         </div>
 
                         <div class="postDetails ms-5">

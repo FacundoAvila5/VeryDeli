@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="shortcut icon" href="img\icons\loguito-fondoAzulV2.ico" type="image/x-icon">
 
         <title>Publicación</title>
@@ -15,8 +16,7 @@
 <?php
     session_start();
     include "ConexionBS.php";
-    //include "CrearPublicacion.php";
-
+    // include "CrearPublicacion.php";
     include "FormPostularse.php";
 
     $nombre = $_SESSION['usuario']; 
@@ -43,22 +43,34 @@
             <?php
                 //obtener id publicacion
                 $idpost = $_GET['id'];
-                $sql = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario
+
+                $sql = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario, u.Validado
                 FROM publicaciones p
                 INNER JOIN usuarios u ON p.IdUsuario = u.IdUsuario
                 WHERE p.IdPublicacion = $idpost";
 
                 $consulta = mysqli_query($conexion, $sql);
                 $post = mysqli_fetch_assoc($consulta);
+
                 // id del dueño de la publicacion
                 $idUserPost = $post['IdUsuario'];
+
+                //revisa si hay un postulante ya seleccionado
+                $postulanteElegido = false;
+                if($post['IdPostulante'] != 0)
+                    $postulanteElegido = true;
+
+                $dueñoPost = false;
+                if ($idusu == $idUserPost)
+                    $dueñoPost = true;
+
             ?>
 
             <input type="hidden" id="idUser" value="<?php echo $idusu; ?>">
             <input type="hidden" id="idUserPost" value="<?php echo $idUserPost; ?>">
 
-            <div class="post card">
-                <div class="card-header bg-transparent" style="padding: 3px;">
+            <div class="card card-border post">
+                <div class="card-header card-border bg-transparent" style="padding: 3px;">
                     <div class="row" style="margin: auto;">
                         <!-- volver -->
                         <div class="col p-0">
@@ -73,11 +85,20 @@
                 <div class="card-content">
                     <div class="row" style="margin: auto;">
                         <!-- USER INFO -->
-                        <div class="user col-10 p-0">
+                        <div class="col-10 p-0">
                             <img class="postUserImg rounded-circle me-2" src="<?php echo $post['ImagenUsuario']; ?>">
+                            <span class="txt"><?php echo $post['NombreUsuario']. " " . $post['ApellidoUsuario']. " "?></span>
                             <?php
-                                echo '<span class="txt">'.$post['NombreUsuario']. " " . $post['ApellidoUsuario'].'</span>';
+                                if ($post['Validado'] == 1) {
+                                    echo ' <i class="bi bi-patch-check-fill align-self-center user-check"></i>';      
+                                }
+                                if($postulanteElegido){
                             ?>
+                                    <span class="badge text-bg-secondary">Publicación pausada</span>
+                            <?php
+                                }
+                            ?>
+                            
                         </div>
                         <!-- POST LINKS -->
                         <div class="col p-0 d-flex justify-content-end">
@@ -88,18 +109,23 @@
                                 <ul class="dropdown-menu">
                                 <!-- *** EL BOTON QUE SE MUESTRA DEPENDE DEL USUARIO ACTIVO -->
                                 <?php
-                                    if ($idusu == $idUserPost){
+                                    if($dueñoPost){
                                 ?>
+                                    <!-- <li>
+                                        <a href="" id="editP" class="dropdown-item" data-bs-toggle="modal" data-bs-target="">
+                                            <i class="fa-solid fa-pen"></i> Editar
+                                        </a>
+                                    </li>  -->
                                     <li>
-                                        <a href="eliminarPublicacion.php?id=<?php echo $idpost; ?>" class="dropdown-item redLink" id="deleteP">
+                                        <a href="" class="dropdown-item redLink" data-bs-toggle="modal" data-bs-target="#modalDeletePost">
                                             <i class="fa-solid fa-trash-can"></i> Eliminar
                                         </a>
-                                    </li>
+                                    </li>                          
                                 <?php
                                     }else{
                                 ?>
                                     <li>
-                                        <a href="" class="dropdown-item redLink">
+                                        <a href="#" class="dropdown-item redLink" onclick="abrirModalDenuncia(); return false;">
                                             <i class="fa-regular fa-flag"></i> Denunciar
                                         </a>
                                     </li>
@@ -117,47 +143,94 @@
                                 <i class="fa-solid fa-location-dot"></i> 
                                 Origen: <?php
                                         echo $post['ProvinciaOrigen'].", ".$post['LocalidadOrigen'].", ".$post['BarrioOrigen'];
-                                    ?> <br>
+                                        ?><span class="postExtraInfo d-none">, 
+                                            <span class="txtExtraInfo"><?php echo $post['DireccionOrigen']; ?></span>
+                                        </span>
+                                <br>
                                 <i class="fa-solid fa-route"></i> 
-                                Destino: <?php 
+                                Destino: <?php
                                         echo $post['ProvinciaDestino'].", ".$post['LocalidadDestino'].", ".$post['BarrioDestino'];
-                                    ?> <br>
+                                        ?><span class="postExtraInfo d-none">, 
+                                            <span class="txtExtraInfo"><?php echo $post['DireccionDestino']; ?></span>
+                                        </span>
+                                <br>
                                 <i class="fa-solid fa-calendar-days"></i>
-                                Fecha límite para completar entrega: <?php echo $post['FechaLimite'];?> <br>
+                                Fecha límite para completar la entrega: <?php echo $post['FechaLimite'];?> <br>
                                 <i class="fa-solid fa-ruler"></i> Volumen <br>
                                 Longitud: <?php echo $post['Largo']. ' cm'?> <br>
                                 Ancho: <?php echo $post['Ancho']. ' cm'?> <br>
                                 Alto: <?php echo $post['Alto']. ' cm'?> <br>
-                                <i class="fa-solid fa-weight-scale"></i> Peso: <?php echo $post['Peso']. ' g <br><br>';
-                            
+                                <i class="fa-solid fa-weight-scale"></i> Peso: <?php echo $post['Peso']. ' g <br>';
                                 echo $post['Descripcion'];
                                 ?>
+                                 
+                                <div class="postExtraInfo d-none">
+                                    <h6 class="card-subtitle mb-1 mt-2 text-body-secondary">Información del remitente</h6>
+                                    <span class="txtExtraInfo"><i class="fa-solid fa-user"></i> Nombre: <?php echo $post['NombreRemitente']; ?></span> <br>
+                                    <span class="txtExtraInfo"><i class="fa-solid fa-phone"></i> Teléfono: <?php echo $post['TelefonoRemitente']; ?></span> <br>
+                                </div>
                         </div>
                     </div>
-
+                    
+                    <!-- BOTON POSTULACION -->
+                    <?php
+                        if(!$dueñoPost && !$postulanteElegido){
+                    ?>
                     <div class="d-flex justify-content-end align-items-center me-3">
-                        <button class="btn btn-light link" data-bs-toggle="modal" data-bs-target="#modalpostularse">Postularme</button>
+                        <button class="btn btn-deli link" data-bs-toggle="modal" data-bs-target="#modalpostularse">
+                            <span class="txt">Postularme</span>
+                        </button>
                     </div>
+                    <?php
+                        }
+                    ?>
                 </div>
 
-                <div class="card-footer d-flex">
-                    <!-- comentarios -->
+                <div class="card-footer card-border d-flex">
+                    <!-- numero comentarios -->
                     <?php 
                         $sqlC = "SELECT IdMensaje FROM mensajes WHERE IdPublicacionMensaje = $idpost";
                         $contC = mysqli_query($conexion, $sqlC);
                     ?>
-                    <div class="text-center cursor" id="btnComments" style="width: 50%;">
-                        <i class="fa-solid fa-comments"></i> 
-                        <?php echo mysqli_num_rows($contC). ' comentarios'; ?>
+                    <div class="text-center " id="btnComments" style="width: 50%;">
+                        <a class="btn boton" role="button" aria-disabled="true">
+                            <i class="fa-solid fa-comments"></i> 
+                            <?php echo mysqli_num_rows($contC). ' comentarios'; ?>
+                        </a>
+                        
                     </div>
-                    <!-- postulaciones -->
+                    <!-- numero postulaciones -->
                     <?php 
                         $sqlP = "SELECT IdPostulacion FROM postulaciones WHERE IdPublicacion = $idpost";
-                        $contP = mysqli_query($conexion, $sqlP);
+                        $consultaP = mysqli_query($conexion, $sqlP);
+                        $cantP = mysqli_num_rows($consultaP);
                     ?>
-                    <div class="text-center cursor" id="btnPostu" style="width: 50%;">
-                        <i class="fa-solid fa-address-card"></i> 
-                        <?php echo mysqli_num_rows($contP). ' postulaciones'; ?> 
+                    <div class="text-center" id="btnPostu" style="width: 50%;">
+                        <?php
+                            if($dueñoPost && $cantP > 0){
+                                if($postulanteElegido){
+                        ?>
+                                <a class="btn boton" id="linkBtnPostu" role="button" aria-disabled="true" style="color: rgb(7, 64, 113);">
+                                    <i class="fa-solid fa-address-card"></i> Postulante
+                                </a>
+                        <?php
+                                }else{
+                        ?>
+                                <a class="btn boton" id="linkBtnPostu" role="button" aria-disabled="true">
+                                    <i class="fa-solid fa-address-card"></i> 
+                                    <?php echo $cantP. ' postulaciones'; ?>
+                                </a>  
+                        <?php
+                                }
+                            }else{
+                        ?>
+                        <a class="btn boton disabled" id="linkBtnPostu" role="button" aria-disabled="true">
+                            <i class="fa-solid fa-address-card"></i> 
+                            <?php echo $cantP. ' postulaciones'; ?>
+                        </a> 
+                        <?php
+                            }
+                        ?>
                     </div>
                 </div>
 
@@ -190,9 +263,36 @@
             include 'footermobile.php'
         ?>    
 
+<!-- Modal eliminar post -->
+<div class="modal fade" id="modalDeletePost" tabindex="-1" aria-labelledby="modalDeletePost" aria-hidden="true">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">¿Eliminar publicación?</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body modalDeletePost-body text-body-secondary">
+                Esta acción es irreversible.
+            </div>
+            <div class="modal-footer modalDeletePost-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <a href="eliminarPublicacion.php?id=<?php echo $idpost; ?>" id="deleteP" class="btn btn-danger">Eliminar</a>
+            </div>
+        </div>
+    </div>
+</div>
 
-
-<script src="script.js"></script>
+<!-- Modal Denuncia -->
+<?php 
+    include 'modaldenuncia.php';
+?>
+<!-- Script para abrir modal denuncia -->
+ <script>
+    function abrirModalDenuncia() {
+        var ModalD = new bootstrap.Modal(document.getElementById('ModalDenuncia'), {});
+        ModalD.show();
+    }
+ </script>
 
 <!-- JavaScript para abrir el segundo modal -->
 <script>
@@ -230,6 +330,7 @@
     }
 </script>
 
+    <script src="script.js"></script>
     <script src="https://kit.fontawesome.com/0ce357c188.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

@@ -7,26 +7,26 @@ $flag = false;
 
 
 if (isset($mostrar_todo) || $filtro == 'mostrar_todo' ) {
-    $consultaBusqueda = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario
+    $consultaBusqueda = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario, u.Validado
                          FROM publicaciones p
                          INNER JOIN usuarios u ON p.IdUsuario = u.IdUsuario
                          ORDER BY p.IdPublicacion DESC";
                          
 }else if($filtro == 'fragil'){
-    $consultaBusqueda = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario
+    $consultaBusqueda = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario, , u.Validado
                         FROM publicaciones p
                         INNER JOIN usuarios u ON p.IdUsuario = u.IdUsuario
                         WHERE Fragil = 'si'
                         ORDER BY p.IdPublicacion DESC";                    
 }else if($filtro == 'fragilno'){
-    $consultaBusqueda = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario
+    $consultaBusqueda = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario, , u.Validado
                         FROM publicaciones p
                         INNER JOIN usuarios u ON p.IdUsuario = u.IdUsuario
                         WHERE Fragil = 'no'
                         ORDER BY p.IdPublicacion DESC";                    
 }else if(isset($busqueda) || isset($busque)){
 
-    $consultaBusqueda = " SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario
+    $consultaBusqueda = " SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario, u.Validado
                         FROM publicaciones p
                         INNER JOIN usuarios u ON p.IdUsuario = u.IdUsuario
                         where p.ProvinciaOrigen = '$busqueda' 
@@ -38,7 +38,7 @@ if (isset($mostrar_todo) || $filtro == 'mostrar_todo' ) {
                         OR p.Descripcion LIKE '%$busqueda%' 
                         ORDER BY p.IdPublicacion DESC";
 }else{
-    $consultaBusqueda = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario
+    $consultaBusqueda = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario, u.Validado
                         FROM publicaciones p
                         INNER JOIN usuarios u ON p.IdUsuario = u.IdUsuario
                         ORDER BY p.IdPublicacion DESC";

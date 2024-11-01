@@ -1,5 +1,5 @@
 body{
-    background-color: rgb(238, 238, 238) !important;
+    background-color: rgb(243, 243, 243) !important;
 }
 #logo{
     height: 50px;
@@ -8,35 +8,66 @@ body{
 }
 
 /* TEXTO */
-.link, .user, .txt, .denunciar{ 
+.link, .user, .txt, .txtExtraInfo{ 
     font-weight: 500;
 }
 .link{
     text-decoration: none;
-    color: rgb(29, 29, 29);
+    color: rgb(13, 40, 75);
 }
 .redLink{
     text-decoration: none;
     color: rgb(194, 22, 22) !important;
 }
+
+.txtExtraInfo{ 
+    /* azul chillon */
+    /* color: rgb(7, 64, 113); */
+
+    /* cyan */
+    /* color: rgb(18, 146, 154); */
+
+    /* azul oscuro */
+    /* color: rgb(13, 40, 75); */
+
+    /* highlight */
+    background: linear-gradient(
+        to bottom,
+        transparent 50%,
+        rgba(18, 145, 154, 0.301) 50%
+    );
+}
 .fecha{
     font-size: small;
     color: gray;
 }
+.user-check{
+    /* color: rgb(18, 145, 154); */
+    color: rgb(13, 40, 75);
+}
 
 /* BUSQUEDA */
 .search-bar{ flex-direction: row; }
+#busqueda{
+    border-color: rgb(18, 146, 154)!important;
+}
+.btn-search{ 
+    background-color: rgb(18, 146, 154)!important; 
+}
+.lupa{ 
+    /* color: rgb(18, 146, 154); */
+    color: rgb(243, 243, 243); 
+}
 
 /* USER MENU */
-.userBtn{
+.userBtns{
     padding-left: 6%;
     flex-direction: column;
 }
 .user{
     display: flex;
+    justify-content: start;
     align-items: center;
-    font-size: large;
-    text-align: right !important;
 }
 .userImg{
     width: 3rem;
@@ -45,6 +76,9 @@ body{
 }
 
 /* PUBLICACIONES */
+.card-border{ 
+    border-color: rgb(18, 146, 154) !important; 
+}
 .card-content{
     margin: 1rem;
 }
@@ -70,12 +104,15 @@ body{
 }
 
 /* UNA PUBLICACION */
+.postLinks{ border-color: transparent !important; }
 .btnVolver{
     width: 40px;
     height: 40px;
 }
-.cursor{ cursor: pointer;}
-.postLinks{ border-color: transparent !important; }
+.btn-deli{ 
+    background-color: rgb(18, 146, 154) !important;
+    color: white !important; 
+}
 
 /* COMENTARIOS */
 .comment{
@@ -122,10 +159,16 @@ body{
     align-items: center;
 }
 
-/* modal postularse */
-.custom-modal-content {
-    background-color: rgb(133, 133, 133) !important;
+/**** MODALES ****/
+.modalDeleteComment-footer, .modalDeletePost-footer{ 
+    border-top: unset !important; 
 }
+
+
+/* modal postularse */
+/* .custom-modal-content {
+    background-color: rgb(133, 133, 133) !important;
+} */
 .custom-input {
     font-size: 200% !important; 
     height: 85px !important;  
@@ -146,7 +189,7 @@ body{
     height: 110px !important; 
     margin: 0 auto !important;  
 }
-.modal-body {
+.body-postu {
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important; 

@@ -48,7 +48,7 @@ body{
 
 /* BUSQUEDA */
 .search-bar{ flex-direction: row; }
-#busqueda{
+#busqueda, #busque{
     border-color: rgb(18, 146, 154)!important;
 }
 .btn-search{ 
@@ -254,6 +254,7 @@ body{
     z-index: 4 !important;
     position: relative !important;
 }
+
 
 /* No lee los estilos. Los puse en footermobile.php*/
  /* .opcionbNav .bi-person-check {

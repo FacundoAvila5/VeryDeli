@@ -9,7 +9,7 @@
 <body>
 <div id="buscadormobile" class="d-block d-lg-none" style="margin-bottom: 3%;">
     <div class="row">
-        <div class="input-group col-mb-3 mx-auto w-75">
+        <div class="input-group search-box col-mb-3 mx-auto w-75">
             <form class="search d-flex align-items-center w-100" role="search" action="ResultadoBusqueda.php" method="post"  id="formBusque">
                     <div class="input-group">
                         <input class="form-control form-control-sm h-100" type="search" placeholder="Busca una publicación" aria-label="Search" name="busqueda" id="busque">

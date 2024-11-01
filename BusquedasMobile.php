@@ -11,10 +11,12 @@
     <div class="row">
         <div class="input-group col-mb-3 mx-auto w-75">
             <form class="search d-flex align-items-center w-100" role="search" action="ResultadoBusqueda.php" method="post"  id="formBusque">
-                <input class="form-control form-control-sm h-100" type="search" placeholder="Busca una publicación" aria-label="Search" name="busqueda" id="busque">
-                    <button class="btn btn-search btn-sm h-100" type="submit">
-                        <i class="lupa fa-solid fa-magnifying-glass"></i>
-                    </button>
+                    <div class="input-group">
+                        <input class="form-control form-control-sm h-100" type="search" placeholder="Busca una publicación" aria-label="Search" name="busqueda" id="busque">
+                        <button class="btn btn-deli btn-sm h-100" type="submit">
+                            <i class="lupa fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </div>
                     <div class="btn-group ms-2">
                         <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-filter-left"></i>

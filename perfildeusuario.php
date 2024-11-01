@@ -61,7 +61,8 @@
     include "CrearPublicacion.php";
     ?>
 
-    <div class="container-principal">
+    <!-- <div class="container-principal"> -->
+    <div class="contenedor container-fluid">
         <div class="container w-50">
             <div class="row">
                 <div class="col-12 d-flex justify-content-center mt-3">
@@ -196,11 +197,12 @@
                 </div>
             </div>
         </div>
+        <?php include 'PiedePagina.php'; ?>
     </div>
 
     <!-- FOOTER MOBILE -->
-    <?php
-        include 'footermobile.php'
+    <?php 
+        include 'footermobile.php';
     ?>
 
       <script>

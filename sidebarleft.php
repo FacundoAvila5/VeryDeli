@@ -37,6 +37,17 @@
                         <a href="perfildeusuario.php#verificarCuenta" class="link"><i class="fa-solid fa-user-check"></i> Verificar mi cuenta</a>
                     </div>
                 </div>
+                 <!-- Verificar usuarios -->
+                  
+                  <?php
+                  $tipouser = $_SESSION['tipoUser'];
+                   if($tipouser == "Administrador"){ ?>
+                <br><div class="row">
+                    <div class="col">
+                        <a href="VerificarUsuario.php" class="link"><i class="bi bi-patch-check-fill"></i> Verificar Usuarios</a>
+                    </div>
+                </div>
+                <?php }?>
                 <hr>
                 <!-- cerrar sesion -->
                 <div class="row">
@@ -44,6 +55,8 @@
                         <a href="CerrarSesion.php" class="link"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a>
                     </div>
                 </div>
+
+
             </div>
 
         </div>

@@ -52,15 +52,12 @@ include "CrearPublicacion.php";
             include 'sidebarleft.php';
             
         ?>
-        
 
-        
         <!-- columna: publicaciones -->
         <div class="publicaciones col-lg-6 col-md-" id="conteni">
-            
         <?php
-            
-            $sql = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario
+            include "BusquedasMobile.php";
+            $sql = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario, u.Validado
             FROM publicaciones p
             INNER JOIN usuarios u ON p.IdUsuario = u.IdUsuario 
             ORDER BY p.IdPublicacion DESC";
@@ -93,8 +90,8 @@ include "CrearPublicacion.php";
                         <div class="user d-flex justify-content-start">
                             <img class="postUserImg rounded-circle me-2" src="<?php echo $row['ImagenUsuario']; ?>">
                             <?php
-                            echo $row['NombreUsuario']. " " . $row['ApellidoUsuario'];
-                            ?>
+                            echo $row['NombreUsuario']. " " . $row['ApellidoUsuario'];                   
+                        ?>          
                         </div>
 
                         <div class="postDetails ms-5">
@@ -202,7 +199,8 @@ include "CrearPublicacion.php";
         crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
         <?php
         include "DesconexionBS.php";
         ?>

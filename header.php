@@ -13,7 +13,7 @@
                     <form class="d-flex" role="search" action="ResultadoBusqueda.php" method="post" id="formBusqueda">
                     <div class="input-group">
                         <input class="form-control" type="search" placeholder="Busca una publicación" aria-label="Search" name="busqueda" id="busqueda" onfocus="mostrarOpciones()"><br>
-                        <button class="btn btn-search" type="submit">
+                        <button class="btn btn-deli" type="submit">
                             <i class="lupa fa-solid fa-magnifying-glass"></i>
                         </button>
                     </div>
@@ -26,7 +26,7 @@
                                     <li><a class="dropdown-item" href="#" onclick="aplicarFilt('fragil')">Paquete Frágil</a></li>
                                     <li><a class="dropdown-item" href="#" onclick="aplicarFilt('fragilno')">Paquete NO Frágil</a></li>
                                 </ul>                   
-                           </div>
+                    </div>
                             <input type="hidden" name="filtro" id="filtroOculto">
                     </form>
                 </div>                 

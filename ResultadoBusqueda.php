@@ -13,13 +13,13 @@ if (isset($mostrar_todo) || $filtro == 'mostrar_todo' ) {
                          ORDER BY p.IdPublicacion DESC";
                          
 }else if($filtro == 'fragil'){
-    $consultaBusqueda = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario, , u.Validado
+    $consultaBusqueda = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario, u.Validado
                         FROM publicaciones p
                         INNER JOIN usuarios u ON p.IdUsuario = u.IdUsuario
                         WHERE Fragil = 'si'
                         ORDER BY p.IdPublicacion DESC";                    
 }else if($filtro == 'fragilno'){
-    $consultaBusqueda = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario, , u.Validado
+    $consultaBusqueda = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario, u.Validado
                         FROM publicaciones p
                         INNER JOIN usuarios u ON p.IdUsuario = u.IdUsuario
                         WHERE Fragil = 'no'

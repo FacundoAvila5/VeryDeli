@@ -12,27 +12,31 @@
 }
 </style>
 <!-- NAV -->
-<nav class="navbar bg-body-tertiary d-none d-lg-block">
+    <nav class="navbar bg-body-tertiary d-none d-lg-block">
         <div class="container-fluid d-flex justify-content-between">
             <!-- logo -->
             <div class="col-2 ms-5">
                 <a class="navbar-brand" href="PaginaPrincipal.php">
-                    <img id="logo" src="logos/logo-negro.svg">
+                    <img id="logo" src="logos/logo-aqua-azul.svg">
+                    <!-- <img id="logo" src="logos/logo-aqua.svg"> -->
                 </a>
             </div>
             <!-- searchbar -->
-            <div class=" d-flex search-box">
-                <div class="form-container input-group search-bar">
+            <div class="d-flex search-box">
+                <div class="form-container input-group search-bar buscador">
                     <form class="d-flex" role="search" action="ResultadoBusqueda.php" method="post">
-                    <input class="form-control" type="search" placeholder="Busca una publicación" aria-label="Search" name="busqueda" id="busqueda" onfocus="mostrarOpciones()"><br>
-                    <button class="btn btn-search" type="submit">
-                        <i class="lupa fa-solid fa-magnifying-glass"></i>
-                    </button>
-                    <div id="opcionesBusqueda" style="display: none; position: absolute; top: 100%; background-color: white; border: 1px solid #ccc; z-index: 1;">
-                        <button class="btn btn-search" type="submit" name="mostrar_todo" value="true" style="width: 100%;" id="Mostrartodo">
-                            Mostrar Todo
+                        <div class="input-group">
+                        <input class="form-control" type="search" placeholder="Busca una publicación" aria-label="Search" name="busqueda" id="busqueda" onfocus="mostrarOpciones()">
+                        <!-- <br> -->
+                        <button class="btn btn-search" type="submit">
+                            <i class="lupa fa-solid fa-magnifying-glass"></i>
                         </button>
-                    </div>
+                        </div>
+                        <div class="col-10" id="opcionesBusqueda" style="display: none; position: absolute; top: 100%; background-color: white; border: 1px solid #ccc; z-index: 1;">
+                            <button class="btn" type="submit" name="mostrar_todo" value="true" style="width: 100%;" id="Mostrartodo">
+                                Mostrar Todo
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>

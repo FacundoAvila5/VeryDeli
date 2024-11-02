@@ -81,28 +81,28 @@
                             form['vehiculos[' + i + '][Modelo]'].classList.remove('is-invalid');
                         }
 
-                        if (alto && !/^\d+([.,]\d+)?$/.test(alto)) {
+                        if (!alto || !/^\d+([.,]\d+)?$/.test(alto)) {
                             valid = false;
                             form['vehiculos[' + i + '][Alto]'].classList.add('is-invalid');
                         } else {
                             form['vehiculos[' + i + '][Alto]'].classList.remove('is-invalid');
                         }
 
-                        if (ancho && !/^\d+([.,]\d+)?$/.test(ancho)) {
+                        if (!ancho || !/^\d+([.,]\d+)?$/.test(ancho)) {
                             valid = false;
                             form['vehiculos[' + i + '][Ancho]'].classList.add('is-invalid');
                         } else {
                             form['vehiculos[' + i + '][Ancho]'].classList.remove('is-invalid');
                         }
 
-                        if (largo && !/^\d+([.,]\d+)?$/.test(largo)) {
+                        if (!largo || !/^\d+([.,]\d+)?$/.test(largo)) {
                             valid = false;
                             form['vehiculos[' + i + '][Largo]'].classList.add('is-invalid');
                         } else {
                             form['vehiculos[' + i + '][Largo]'].classList.remove('is-invalid');
                         }
 
-                        if (capacidad && !/^\d+([.,]\d+)?$/.test(capacidad)) {
+                        if (!capacidad || !/^\d+([.,]\d+)?$/.test(capacidad)) {
                             valid = false;
                             form['vehiculos[' + i + '][Capacidad_Peso]'].classList.add('is-invalid');
                         } else {

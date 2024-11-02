@@ -5,13 +5,10 @@ include "ConexionBS.php";
 header('Content-Type: application/json');
 header('Cache-Control: no-cache');
 
-// Verificamos si hay un usuario logueado
 $idusu = $_SESSION['idUser'];
 
-// Obtener las notificaciones más recientes del usuario logueado
 $query = "SELECT * FROM notificaciones 
-          WHERE IdUsuario = '$idusu' AND Estado = 0 
-          ORDER BY STR_TO_DATE(FechaDeNotificacion, '%d/%m/%Y %H:%i') DESC";
+          WHERE IdUsuario = '$idusu' AND Estado = 0";
 
 $resultado = mysqli_query($conexion, $query);
 
@@ -20,6 +17,11 @@ while ($fila = mysqli_fetch_assoc($resultado)) {
     $notificaciones[] = $fila;
 }
 
-// Devolver notificaciones como JSON
+usort($notificaciones, function($a, $b) {
+    $dateA = DateTime::createFromFormat('d/m/Y H:i', $a['FechaDeNotificacion']);
+    $dateB = DateTime::createFromFormat('d/m/Y H:i', $b['FechaDeNotificacion']);
+    return $dateB <=> $dateA; 
+});
+
 echo json_encode($notificaciones);
 ?>

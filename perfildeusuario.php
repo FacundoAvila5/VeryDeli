@@ -196,6 +196,34 @@
                     </div>
                 </div>
             </div>
+
+             <!-- Card de ver historial -->           
+            <div class="card mb-3 d-lg-none" style="background-color: #ffffff; border-color: rgb(18, 146, 154)" id="verificarCuenta">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 d-flex justify-content-center">
+                            <h2>Ver Actividad</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 d-flex justify-content-center">
+                            <a class="btn text-white link"style="background-color: rgb(18, 146, 154); border-color: rgb(18, 146, 154);" href="historial.php">Ir a actividad</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card de cerrar sesion-->
+            <div class="card mb-3 d-lg-none" style="background-color: #ffffff; border-color: rgb(18, 146, 154); width: 50%; margin:auto;" id="verificarCuenta">
+                <div class="card-body p-2">
+                    <div class="row">
+                        <div class="col-12 d-flex justify-content-center">
+                        <a href="CerrarSesion.php" class="link"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a><br>      
+                        </div>
+                    </div>
+                </div>
+            </div>           
+
         </div>
         <?php include 'PiedePagina.php'; ?>
     </div>

@@ -11,6 +11,18 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 
     <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* El contenedor principal debe expandirse */
+        .contenedor {
+            flex: 1;
+        }
         @media (max-width:768px) {
             .txt {
                 text-align: center;
@@ -31,15 +43,15 @@
     session_start();
 
     include 'sidebarright.php';
-
-    include 'PiedePagina.php';
-
-    include 'footermobile.php';
-
     include "CrearPublicacion.php";
     ?>
 </div>
-    
+    <footer>
+        <?php    
+            include 'PiedePagina.php';
+            include 'footermobile.php';
+        ?>
+    </footer>
 
     <script src="https://kit.fontawesome.com/0ce357c188.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

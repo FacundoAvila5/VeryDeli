@@ -5,12 +5,26 @@ session_start();
 extract($_POST);
 $flag = false;
 
-if (isset($mostrar_todo) && $mostrar_todo === 'true') {
+
+if (isset($mostrar_todo) || $filtro == 'mostrar_todo' ) {
     $consultaBusqueda = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario, u.Validado
                          FROM publicaciones p
                          INNER JOIN usuarios u ON p.IdUsuario = u.IdUsuario
                          ORDER BY p.IdPublicacion DESC";
-}else if(isset($busqueda) && !empty($busqueda)){
+                         
+}else if($filtro == 'fragil'){
+    $consultaBusqueda = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario, u.Validado
+                        FROM publicaciones p
+                        INNER JOIN usuarios u ON p.IdUsuario = u.IdUsuario
+                        WHERE Fragil = 'si'
+                        ORDER BY p.IdPublicacion DESC";                    
+}else if($filtro == 'fragilno'){
+    $consultaBusqueda = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario, u.Validado
+                        FROM publicaciones p
+                        INNER JOIN usuarios u ON p.IdUsuario = u.IdUsuario
+                        WHERE Fragil = 'no'
+                        ORDER BY p.IdPublicacion DESC";                    
+}else if(isset($busqueda) || isset($busque)){
 
     $consultaBusqueda = " SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario, u.Validado
                         FROM publicaciones p
@@ -18,9 +32,10 @@ if (isset($mostrar_todo) && $mostrar_todo === 'true') {
                         where p.ProvinciaOrigen = '$busqueda' 
                         OR p.LocalidadOrigen = '$busqueda' 
                         OR p.BarrioOrigen = '$busqueda' 
+                        OR p.ProvinciaDestino = '$busqueda'
                         OR p.LocalidadDestino = '$busqueda' 
-                        OR p.BarrioDestino = '$busqueda' 
-                        OR p.DireccionDestino = '$busqueda'  
+                        OR p.BarrioDestino = '$busqueda'                         
+                        OR p.Descripcion LIKE '%$busqueda%' 
                         ORDER BY p.IdPublicacion DESC";
 }else{
     $consultaBusqueda = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario, u.Validado

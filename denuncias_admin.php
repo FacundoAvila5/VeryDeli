@@ -53,7 +53,7 @@
                     if ($resultado->num_rows > 0) {
                         while($row = $resultado->fetch_assoc()) {
                             echo "<a href='post.php?id=" . urlencode($row['IdPublicacion']) . "'> <div id='historia' class='row bg-light pt-2 pb-0 ps-3 mb-2' style='border-radius: 15px;'>
-                                    <div class='col-1'> <i class='fa-solid fa-bookmark' style='color:rgb(7, 64, 113);'></i> </div>    
+                                    <div class='col-1'> <i class='fa-solid fa-triangle-exclamation' style='color:red;'></i> </div>    
                                         <div class='col-8 col-md-9'> 
                                             <p> Publicacion denunciada: ". $row['Titulo'] ." </p> 
                                         </div>

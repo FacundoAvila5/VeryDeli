@@ -98,10 +98,10 @@ include "CrearPublicacion.php";
                             </div>
                             <!-- admin: icono publicacion denunciada -->
                             <?php
-                                if ($_SESSION["tipo"]=="Administrador") { //Si el usuario es admin !!! CORREGIR TIPO !!!
-
-                                    $sql2= "SELECT IdPublicacion FROM denuncias d WHERE IdPublicacion = '".$row['IdPublicacion']."' ";
-                                    $result= mysqli_query($conexion,$sql);
+                                if ($_SESSION['idUser']=='1') { //Si el usuario es admin !!! CORREGIR TIPO !!!
+                                    
+                                    $sql2= "SELECT IdPublicacion FROM denuncias WHERE IdPublicacion = '".$row['IdPublicacion']."' ";
+                                    $result= mysqli_query($conexion,$sql2);
 
                                     if (mysqli_num_rows($result) > 0) { //Si hay denuncias en el post
                                         echo "<div class='col-1'> 

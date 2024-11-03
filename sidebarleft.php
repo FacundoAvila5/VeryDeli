@@ -37,6 +37,14 @@
                         <a href="perfildeusuario.php#verificarCuenta" class="link"><i class="fa-solid fa-user-check"></i> Verificar mi cuenta</a>
                     </div>
                 </div>
+                <!-- ADMIN: denuncias -->
+                 <?php if($_SESSION['idUser']=='1') { ?>
+                <div class="row">
+                    <div class="col">
+                        <a href="denuncias_admin.php" class="link"><i class='fa-solid fa-triangle-exclamation'></i> Denuncias</a>
+                    </div>
+                </div>
+                <?php } ?>
                 <hr>
                 <!-- cerrar sesion -->
                 <div class="row">

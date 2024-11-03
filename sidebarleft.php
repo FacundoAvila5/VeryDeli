@@ -6,17 +6,20 @@
                     <img class="userImg rounded-circle me-2" src="<?php $foto = $_SESSION['fotoPerfil']; echo $foto; ?>">
                     <?php
                         $nombre = $_SESSION['usuario'];
-                        echo $nombre;
+                        echo '<span style="font-size: large;">' .$nombre. '</span>';
                     ?>
                 </div>
             </a>
             <!-- botones justify-content-end-->
-            <div class="userBtn d-flex ms-5">
+            <div class="userBtns d-flex ms-5">
                 <!-- publicar -->
                 <div class="row mb-1">
                     <div class="col">
-                        <a href="#" class="link" data-bs-toggle="modal" data-bs-target="#publicarmodal"><i class="fa-solid fa-pen-to-square"></i> Publicar</a>
-                        <!-- <button class="btn btn-small btn-publi"><i class="fa-solid fa-pen-to-square"></i> Publicar</button> -->
+                        <!-- <a href="#" class="link" data-bs-toggle="modal" data-bs-target="#publicarmodal"><i class="fa-solid fa-pen-to-square"></i> Publicar</a> -->
+                        <button class="btn btn-small btn-deli btn-publi"
+                            data-bs-toggle="modal" data-bs-target="#publicarmodal">
+                            <span class="txt"><i class="fa-solid fa-pen-to-square"></i> Publicar</span>
+                        </button>
                     </div>
                 </div>
                 <!-- vehiculos -->
@@ -37,14 +40,25 @@
                         <a href="perfildeusuario.php#verificarCuenta" class="link"><i class="fa-solid fa-user-check"></i> Verificar mi cuenta</a>
                     </div>
                 </div>
+                
+                 <!-- Verificar usuarios -->
+                  
+                  <?php
+                  $tipouser = $_SESSION['tipoUser'];
+                   if($tipouser == "Administrador"){ ?>
+                <br><div class="row">
+                    <div class="col">
+                        <a href="VerificarUsuario.php" class="link"><i class="bi bi-patch-check-fill"></i> Verificar Usuarios</a>
+                    </div>
+                </div>
                 <!-- ADMIN: denuncias -->
-                 <?php if($_SESSION['idUser']=='1') { ?>
                 <div class="row">
                     <div class="col">
                         <a href="denuncias_admin.php" class="link"><i class='fa-solid fa-triangle-exclamation'></i> Denuncias</a>
                     </div>
                 </div>
-                <?php } ?>
+
+                <?php }?>
                 <hr>
                 <!-- cerrar sesion -->
                 <div class="row">
@@ -52,6 +66,8 @@
                         <a href="CerrarSesion.php" class="link"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a>
                     </div>
                 </div>
+
+
             </div>
 
         </div>

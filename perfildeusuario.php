@@ -13,7 +13,7 @@
 <?php
     session_start();
     include "ConexionBS.php";
-    
+
     $idUsuario = $_SESSION["idUser"];
     if (isset($_SESSION['mensaje'])) {
         echo "
@@ -61,7 +61,8 @@
     include "CrearPublicacion.php";
     ?>
 
-    <div class="container-principal">
+    <!-- <div class="container-principal"> -->
+    <div class="contenedor container-fluid">
         <div class="container w-50">
             <div class="row">
                 <div class="col-12 d-flex justify-content-center mt-3">
@@ -86,7 +87,7 @@
                             <i class="bi bi-info-square-fill ms-3 align-self-center"></i>
                         </div>
                         <div class="col-2 d-flex justify-content-end">
-                            <i class="bi bi-pencil-fill" data-bs-toggle="modal" data-bs-target="#editPersonalInfoModal"></i>
+                            <i class="bi bi-pencil-fill" data-bs-toggle="modal" data-bs-target="#editPersonalInfoModal" style="cursor: pointer;"></i>
                         </div>
                     </div>
                 </div>
@@ -190,19 +191,46 @@
                     </div>
                     <div class="row">
                         <div class="col-12 d-flex justify-content-center">
-                            <button class="btn text-white"style="background-color: rgb(18, 146, 154); border-color: rgb(18, 146, 154);">Verificar</button>
+                            <button class="btn text-white link"style="background-color: rgb(18, 146, 154); border-color: rgb(18, 146, 154);" data-bs-toggle="modal" data-bs-target="#validarUser">Verificar</button>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    
 
+             <!-- Card de ver historial -->           
+            <div class="card mb-3 d-lg-none" style="background-color: #ffffff; border-color: rgb(18, 146, 154)" id="verificarCuenta">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 d-flex justify-content-center">
+                            <h2>Ver Actividad</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 d-flex justify-content-center">
+                            <a class="btn text-white link"style="background-color: rgb(18, 146, 154); border-color: rgb(18, 146, 154);" href="historial.php">Ir a actividad</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card de cerrar sesion-->
+            <div class="card mb-3 d-lg-none" style="background-color: #ffffff; border-color: rgb(18, 146, 154); width: 50%; margin:auto;" id="verificarCuenta">
+                <div class="card-body p-2">
+                    <div class="row">
+                        <div class="col-12 d-flex justify-content-center">
+                        <a href="CerrarSesion.php" class="link"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a><br>      
+                        </div>
+                    </div>
+                </div>
+            </div>           
+
+        </div>
+        <?php include 'PiedePagina.php'; ?>
+    </div>
 
     <!-- FOOTER MOBILE -->
-    <?php
-        include 'footermobile.php'
+    <?php 
+        include 'footermobile.php';
     ?>
 
       <script>
@@ -234,7 +262,10 @@
         });
     </script>
 
+  <?php include "formularioVerificarCuenta.php"; ?>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/0ce357c188.js" crossorigin="anonymous"></script>
+
 </body>
 </html>

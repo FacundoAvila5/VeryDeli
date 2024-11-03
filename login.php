@@ -21,12 +21,14 @@ if(isset($correo) && isset($pass)){
     $consulta = "SELECT * FROM usuarios WHERE EmailUsuario = '".$correo."' ";
     $resultado = mysqli_query($conexion, $consulta);
 
+
     if(mysqli_num_rows($resultado) > 0){
         $row = mysqli_fetch_assoc($resultado);
         $clave = $row['Contrasenia'];
         $_SESSION["usuario"] = $row['NombreUsuario'] ." ". $row['ApellidoUsuario'];
         $_SESSION["idUser"] = $row['IdUsuario'];
         $_SESSION["fotoPerfil"] = $row['ImagenUsuario'];
+        $_SESSION['tipoUser'] = $row['TipoUsuario']; 
         if(password_verify($pass, $clave)){
             $auth = true;
         }

@@ -7,15 +7,15 @@
         <h5 class="modal-title" id="publishModalLabel">Datos para postulacion</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body body-postu">
         <form id="publicacion" action="publicarmodalpostularse" method="post" class="needs-validation" novalidate>
        
-         <label for="comentario" class="form-label"><h4>Monto a cobrar.</h4></label>
+         <label for="comentario" class="form-label"><h4>Monto a cobrar</h4></label>
           <div class="input-group mb-3 monto">
             <span class="input-group-text custom-input-m" id="basic-addon1">$</span>
             <input type="number" class="custom-input form-control" aria-label="Username" aria-describedby="basic-addon1" id="monto" name="monto" placeholder="0.00,0" required>
             <div class="invalid-feedback">
-                    El monto a cobrar es obligatorio.
+                    El monto a cobrar es obligatorio
              </div>
         </div>
 
@@ -27,8 +27,8 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="background-color: rgb(70, 70, 70);">Cerrar</button>
-        <button type="button" class="btn text-black" style="background-color: white; "  onclick="abrirSegundoModal()">Siguiente</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-deli" onclick="abrirSegundoModal()">Siguiente</button>
       </div>
     </div>
   </div>
@@ -43,7 +43,7 @@
         <h5 class="modal-title" id="publishModalLabel">Datos para postulacion</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body body-postu">
         <form id="publicacionFinal" action="GuardarPostulacion.php" method="post">
             
           <div class="input-group mb-3 ">
@@ -63,9 +63,9 @@
             <input type="hidden" id="idpublicacionconfirmada" name="idPubli">
         </div>
 
-        <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="background-color: rgb(70, 70, 70);">Cerrar</button>
-        <button type="submit" class="btn text-black" style="background-color: white;">Publicar</button>
+        <div class="modal-footer d-flex justify-content-end">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button> <!-- style="background-color: rgb(70, 70, 70);" -->
+        <button type="submit" class="btn btn-deli">Postularme</button> <!-- style="background-color: white;" -->
       </div>
         </form>
       </div>

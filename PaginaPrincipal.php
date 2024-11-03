@@ -4,11 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- estilos -->
     <link rel="stylesheet" href="styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- favicon -->
     <link rel="shortcut icon" href="img\icons\loguito-fondoAzulV2.ico" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 
         <title>Inicio</title>
 </head>
@@ -56,10 +61,9 @@ include "CrearPublicacion.php";
         
         <!-- columna: publicaciones -->
         <div class="publicaciones col-lg-6 col-md-" id="conteni">
-            
         <?php
-            
-            $sql = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario
+            include "BusquedasMobile.php";
+            $sql = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario, u.Validado
             FROM publicaciones p
             INNER JOIN usuarios u ON p.IdUsuario = u.IdUsuario 
             ORDER BY p.IdPublicacion DESC";
@@ -87,13 +91,16 @@ include "CrearPublicacion.php";
                 $content = true;
                 ?>
 
-                <div class="post card">
-                    <div class="card-body"> 
-                        <div class="row p-0">
-                            <div class="col user d-flex justify-content-start">
+                <div class="card card-border post">
+                    <div class="card-body">
+                        <div class="row user ms-0">
+                            <div class="col p-0">
                                 <img class="postUserImg rounded-circle me-2" src="<?php echo $row['ImagenUsuario']; ?>">
+                                <span class="txt"><?php echo $row['NombreUsuario']. " " . $row['ApellidoUsuario']. " "?></span>
                                 <?php
-                                echo $row['NombreUsuario']. " " . $row['ApellidoUsuario'];
+                                if ($row['Validado'] == 1) {
+                                    echo ' <i class="bi bi-patch-check-fill align-self-center user-check"></i>'; //text-success
+                                }
                                 ?>
                             </div>
                             <!-- admin: icono publicacion denunciada -->
@@ -110,8 +117,8 @@ include "CrearPublicacion.php";
                                     }
                                 }
                             ?>
-                            
                         </div>
+
 
                         <div class="postDetails ms-5">
                             <h6 class="card-title"><?php echo $row['Titulo']; ?></h6>
@@ -125,7 +132,7 @@ include "CrearPublicacion.php";
                                         echo $row['ProvinciaDestino'].", ".$row['LocalidadDestino'].", ".$row['BarrioDestino'];
                                     ?> <br>
                                 <i class="fa-solid fa-calendar-days"></i>
-                                Fecha límite para completar entrega: <?php echo $row['FechaLimite'];?> <br>
+                                Fecha límite para completar la entrega: <?php echo $row['FechaLimite'];?> <br>
                                 <i class="i fa-solid fa-ruler"></i>
                                 Volumen: <?php 
                                     echo $row['Largo'].' x '.$row['Ancho'].' x '.$row['Alto'];
@@ -134,7 +141,7 @@ include "CrearPublicacion.php";
                                 Peso: <?php echo $row['Peso']. 'g <br>';
                                 if ($row['Fragil'] == 'sí') { ?>
                                     <span class="txt redLink">FRAGIL</span><br>
-                                    <?php
+                                <?php
                                 }
 
                                 echo $row['Descripcion'];
@@ -143,12 +150,13 @@ include "CrearPublicacion.php";
                         </div>
 
                         <div class="d-flex justify-content-end align-items-center me-3">
-                            <a href="post.php?id=<?php $idpost=$row['IdPublicacion']; echo urlencode($idpost); ?>" class="link stretched-link">
+                            <a href="post.php?id=<?php $idpost=$row['IdPublicacion']; echo urlencode($idpost); ?>" class="link stretched-link"
+                            style="color: rgb(18, 145, 154);">
                                 Ver más <i class="fa-solid fa-chevron-right"></i></a>
                         </div>
                     </div>
 
-                    <div class="card-footer d-flex">
+                    <div class="card-footer card-border d-flex">
                         <div class="postBottom text-center txt">
                             <i class="fa-solid fa-comments"></i>
                             <?php 
@@ -195,12 +203,13 @@ include "CrearPublicacion.php";
             ?>
         </div>
       </div>
-
+     <?php include 'PiedePagina.php'; ?>
     </div>
 
     <!-- FOOTER MOBILE -->
         <?php
-            include 'footermobile.php'
+            include 'footermobile.php';
+        
         ?>
 
     <script>
@@ -217,6 +226,7 @@ include "CrearPublicacion.php";
         crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
         <?php
         include "DesconexionBS.php";

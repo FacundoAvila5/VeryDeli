@@ -94,7 +94,7 @@ include "CrearPublicacion.php";
                 <div class="card card-border post">
                     <div class="card-body">
                         <div class="row user ms-0">
-                            <div class="col-12 p-0">
+                            <div class="col p-0">
                                 <img class="postUserImg rounded-circle me-2" src="<?php echo $row['ImagenUsuario']; ?>">
                                 <span class="txt"><?php echo $row['NombreUsuario']. " " . $row['ApellidoUsuario']. " "?></span>
                                 <?php
@@ -103,6 +103,20 @@ include "CrearPublicacion.php";
                                 }
                                 ?>
                             </div>
+                            <!-- admin: icono publicacion denunciada -->
+                            <?php
+                                if ($_SESSION['idUser']=='1') { //Si el usuario es admin !!! CORREGIR TIPO !!!
+                                    
+                                    $sql2= "SELECT IdPublicacion FROM denuncias WHERE IdPublicacion = '".$row['IdPublicacion']."' ";
+                                    $result= mysqli_query($conexion,$sql2);
+
+                                    if (mysqli_num_rows($result) > 0) { //Si hay denuncias en el post
+                                        echo "<div class='col-1'> 
+                                            <i class='fa-solid fa-triangle-exclamation' style='color:red;' title='Publicacion denunciada'></i> 
+                                        </div>";
+                                    }
+                                }
+                            ?>
                         </div>
 
 

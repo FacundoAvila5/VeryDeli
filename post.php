@@ -15,6 +15,10 @@
 
 <?php
     session_start();
+    if (!isset($_SESSION['usuario'])) {
+        header("Location: login.php");
+        exit;
+    }
     include "ConexionBS.php";
     // include "CrearPublicacion.php";
     include "FormPostularse.php";
@@ -177,10 +181,15 @@
                         if(!$dueñoPost && !$postulanteElegido){
                     ?>
                     <div class="d-flex justify-content-end align-items-center me-3">
-                        <button class="btn btn-deli link" data-bs-toggle="modal" data-bs-target="#modalpostularse">
-                            <span class="txt">Postularme</span>
-                        </button>
+                    <button class="btn btn-deli link" onclick="validarPostulacion()"> 
+                        <span class="txt">Postularme</span> 
+                    </button>
+
                     </div>
+                    <div id="vehiculoAlerta" class="alert alert-warning alert-dismissible fade show mt-2" role="alert" style="display:none;">
+                        Para poder postularse necesita cargar al menos un vehículo, podrá cargarlos <a href="perfildeusuario.php#vehiculos" class="alert-link">aquí</a>.
+                    </div>
+
                     <?php
                         }
                     ?>
@@ -327,6 +336,28 @@
         } else {
             formulario.classList.add('was-validated');
         }
+    }
+</script>
+<script>
+    function validarPostulacion() {
+        const formData = new FormData();
+        formData.append('usuarioId', <?php echo $_SESSION['idUser']; ?>);
+        
+        fetch('verificar_vehiculos.php', {
+            method: 'POST',
+            body: formData 
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.tieneVehiculos) {
+                var modal = new bootstrap.Modal(document.getElementById('modalpostularse'));
+                modal.show();
+            } else {
+                var alerta = document.getElementById('vehiculoAlerta');
+                alerta.style.display = 'block';
+            }
+        })
+        .catch(error => console.error('Error al verificar vehículos:', error));
     }
 </script>
 

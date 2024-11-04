@@ -35,6 +35,7 @@
 
     <!-- CONTENIDO -->
     <div class="contenedor container-fluid">
+
       <div class="row p-2 pt-3">
 
         <!-- columna: Usuario -->
@@ -85,6 +86,12 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Visualizacion de la denuncia para el admin -->
+                    <?php
+                        include 'postdenuncia_admin.php';
+                    ?>
+
                 </div>
                 <div class="card-content">
                     <div class="row" style="margin: auto;">

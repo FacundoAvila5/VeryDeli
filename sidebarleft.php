@@ -40,6 +40,7 @@
                         <a href="perfildeusuario.php#verificarCuenta" class="link"><i class="fa-solid fa-user-check"></i> Verificar mi cuenta</a>
                     </div>
                 </div>
+                
                  <!-- Verificar usuarios -->
                   
                   <?php
@@ -50,6 +51,13 @@
                         <a href="VerificarUsuario.php" class="link"><i class="bi bi-patch-check-fill"></i> Verificar Usuarios</a>
                     </div>
                 </div>
+                <!-- ADMIN: denuncias -->
+                <div class="row">
+                    <div class="col">
+                        <a href="denuncias_admin.php" class="link"><i class='fa-solid fa-triangle-exclamation'></i> Denuncias</a>
+                    </div>
+                </div>
+
                 <?php }?>
                 <hr>
                 <!-- cerrar sesion -->

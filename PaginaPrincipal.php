@@ -20,6 +20,12 @@
 
 <?php
 session_start();
+
+if (!isset($_SESSION['usuario'])) {
+    header("Location: login.php");
+    exit;
+}
+
 include "ConexionBS.php";
 include "CrearPublicacion.php";
 
@@ -89,18 +95,25 @@ include "CrearPublicacion.php";
             if ($content) {
                 foreach ($publicaciones as $row){
                 $content = true;
+                $isInactive = $row['Estado'] == "Inactiva";
+                echo "<script>console.log('Mensaje desde PHP:  $isInactive');</script>";
                 ?>
 
-                <div class="card card-border post">
+                <div class="card card-border post <?php echo $isInactive ? 'inactive' : ''; ?>">
                     <div class="card-body">
                         <div class="row user ms-0">
                             <div class="col p-0">
                                 <img class="postUserImg rounded-circle me-2" src="<?php echo $row['ImagenUsuario']; ?>">
                                 <span class="txt"><?php echo $row['NombreUsuario']. " " . $row['ApellidoUsuario']. " "?></span>
                                 <?php
-                                if ($row['Validado'] == 1) {
-                                    echo ' <i class="bi bi-patch-check-fill align-self-center user-check"></i>'; //text-success
+                                    if ($row['Validado'] == 1) {
+                                        echo ' <i class="bi bi-patch-check-fill align-self-center user-check"></i>';      
                                 }
+                                    if ($row['Estado'] == "Inactiva") {
+                                ?>
+                                    <span class="badge" style="background-color: rgb(18, 146, 154);">Publicación finalizada</span>
+                                <?php
+                                    } 
                                 ?>
                             </div>
                             <!-- admin: icono publicacion denunciada -->

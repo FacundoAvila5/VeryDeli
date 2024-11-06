@@ -7,13 +7,18 @@
             .then(data => {
                 const output = document.getElementById('notificaciones');
                 data.forEach(noti => {
-                    if (!idsNotificacionesMostradas.has(noti.IdNotificacion)) {
+                    if (!idsNotificacionesMostradas.has(noti.IdNotificacion) && noti.TipoNotificacion === "Normal") {
                         output.innerHTML += `<div class="notif bg-white rounded text-center border" id="busqueda" style="border-color: aqua; cursor: pointer;"
                                                  onclick="marcarComoVisto(${noti.IdNotificacion}, '${noti.IdPublicacion}')">
                                                  <p>${noti.Mensaje} - ${noti.FechaDeNotificacion}</p>
                                              </div>`;
-                        idsNotificacionesMostradas.add(noti.IdNotificacion);
                     }
+                    if (!idsNotificacionesMostradas.has(noti.IdNotificacion) && noti.TipoNotificacion === "Envio") {
+                        output.innerHTML += `<div class="notif bg-white rounded text-center border" id="busqueda" style="border-color: aqua; cursor: pointer;">
+                                                 <p>${noti.Mensaje} - ${noti.FechaDeNotificacion}</p>
+                                             </div>`;
+                    }
+                    idsNotificacionesMostradas.add(noti.IdNotificacion);
                 });
             })
             .catch(error => console.error('Error al obtener notificaciones:', error));

@@ -66,7 +66,7 @@
 
             ?>
 
-            <input type="hidden" id="idUser" value="<?php echo $idusu; ?>">
+            <input type="hidden" id="idDeUser" value="<?php echo $idusu; ?>">
             <input type="hidden" id="idUserPost" value="<?php echo $idUserPost; ?>">
 
             <div class="card card-border post">
@@ -211,7 +211,7 @@
                                 if($postulanteElegido){
                         ?>
                                 <a class="btn boton" id="linkBtnPostu" role="button" aria-disabled="true" style="color: rgb(7, 64, 113);">
-                                    <i class="fa-solid fa-address-card"></i> Postulante
+                                    <i class="fa-solid fa-address-card"></i> Ver postulante
                                 </a>
                         <?php
                                 }else{

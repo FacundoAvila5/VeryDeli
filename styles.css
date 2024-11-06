@@ -158,6 +158,9 @@ body{
     justify-content: center;
     align-items: center;
 }
+.opcionbNav .bi-person-check {
+    font-size: 1.3rem; /* Ajusta el tamaño del icono */
+}
 
 /**** MODALES ****/
 .modalDeleteComment-footer, .modalDeletePost-footer{ 

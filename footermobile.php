@@ -1,8 +1,3 @@
-<style>
-.opcionbNav .bi-person-check {
-        font-size: 1.3rem; /* Ajusta el tamaño del icono */
-    }
-</style>
 <div class="bNav container-fluid bg-body-tertiary d-block d-lg-none">
       <div class="bNavIcons d-flex">
         <!-- home -->
@@ -18,8 +13,9 @@
             <a href="" class="link" data-bs-toggle="modal" data-bs-target="#publicarmodal"><i class="fa-regular fa-square-plus"></i></a>
         </div>
         <!-- notifs -->
-        <div class="opcionbNav">
-            <a href="notifmobile.php" class="link"><i class="fa-regular fa-bell"></i></a>
+        <div class="opcionbNav" id="btnNotif">
+            <!-- <a href="sidebarright.php" class="link"><i class="fa-regular fa-bell"></i></a> -->
+             <button class="btn boton" id="btnNotif" ><i class="fa-regular fa-bell"></i></button>
         </div>
         
         <!-- Validaciones -->
@@ -37,4 +33,6 @@
         </div>
       </div>
     </div>
+
+    <script src="scriptMobile.js"></script>
     

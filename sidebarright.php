@@ -1,3 +1,23 @@
+<style>
+    @media (max-width: 991px) {
+    #colNotificaciones {
+        visibility: hidden;
+    }
+}
+</style>
+
+<!-- d-none col-md-3-->
+<div class="col-lg-3 col-3 d-lg-block" id="colNotificaciones">
+    <p class="txt">Notificaciones</p>
+
+    <div class="row m-0">
+        <div class="notificaciones col rounded" style="padding: 5px;">
+            <div id="notificaciones">
+            </div> 
+        </div>
+    </div>
+</div>
+
 <script>
     const idsNotificacionesMostradas = new Set();
 
@@ -39,15 +59,6 @@
     .catch(error => console.error('Error al marcar la notificación como vista:', error));
 }
 
-
     setInterval(fetchNotificaciones, 1000);
+
 </script>
-
-<p class="txt">Notificaciones</p>
-
-<div class="row m-0">
-    <div class="notificaciones col rounded" style="padding: 5px;">
-        <div id="notificaciones">
-        </div> 
-    </div>
-</div>

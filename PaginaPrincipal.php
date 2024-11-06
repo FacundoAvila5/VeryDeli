@@ -22,22 +22,6 @@
 session_start();
 include "ConexionBS.php";
 include "CrearPublicacion.php";
-
-
-// Obtener el ID del usuario desde la sesión
-// $usuario_id = $_SESSION['idUser'];
-
-// Realizar la consulta para obtener la imagen del usuario
-// $sql = "SELECT ImagenUsuario FROM usuarios WHERE IdUsuario = '$usuario_id'";
-// $result = mysqli_query($conexion, $sql);
-
-// if ($result->num_rows > 0) {
-//     $row = mysqli_fetch_assoc($result);
-//     $imagen = $row['ImagenUsuario'];
-// } else {
-//     $imagen = 'ruta/imagen/default.jpg'; // Imagen por defecto si no se encuentra el usuario
-// }
-
 ?>
 
 
@@ -56,11 +40,10 @@ include "CrearPublicacion.php";
             include 'sidebarleft.php';
             
         ?>
-        
 
         
         <!-- columna: publicaciones -->
-        <div class="publicaciones col-lg-6 col-md-" id="conteni">
+        <div class="publicaciones col-lg-6 d-lg-block" id="conteni">
         <?php
             include "BusquedasMobile.php";
             $sql = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario, u.Validado
@@ -183,12 +166,11 @@ include "CrearPublicacion.php";
         </div>
 
         <!-- columna: Notificaciones -->
-        <div class="col-lg-3 col-md-3 col-3 d-none d-lg-block">
             <?php
                 include 'sidebarright.php'
             ?>
-        </div>
-      </div>
+    </div>
+
      <?php include 'PiedePagina.php'; ?>
     </div>
 
@@ -199,13 +181,14 @@ include "CrearPublicacion.php";
         ?>
 
     <script>
-        function limpiaDivParaBusqueda(){
-        window.onload = function() {
-            document.getElementById('conteni').innerHTML = ''; 
-        };
-    }
+        // function limpiaDivParaBusqueda(){
+        // window.onload = function() {
+        //     document.getElementById('conteni').innerHTML = ''; 
+        // };
+    // }
     </script>
 
+    <script src="script.js"></script>
     <script src="https://kit.fontawesome.com/0ce357c188.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

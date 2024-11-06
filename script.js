@@ -1,7 +1,34 @@
+let screenWidth = screen.width;
+let windowWidth = window.innerWidth;
+
+function limpiaDivParaBusqueda(){
+    window.onload = function() {
+        document.getElementById('conteni').innerHTML = ''; 
+    };
+}
+
+// window.addEventListener('load', () => {
+//     if (screenWidth < 992 || windowWidth < 992) {
+//         console.log("yoo")
+//         colNotifs.classList.add("invisible")
+//     }
+// })
+
+// window.addEventListener('resize', () => {
+//     var colNotifs = document.getElementById("colNotificaciones");
+
+//     if (screenWidth < 992 || windowWidth < 992) {
+//         console.log("heyo")
+//         colNotifs.classList.add("invisible")
+//     }else{
+//         colNotifs.classList.remove("invisible")
+//     }
+// })
+
 var c = document.getElementById("comentarios");
 var p = document.getElementById("postulaciones");
 var d = document.getElementById("linkBtnPostu");
-var iduser = document.getElementById("idUser").value;
+var iduser = document.getElementById("idDeUser").value;
 var iduserpost = document.getElementById("idUserPost").value;
 
 if(iduser == iduserpost){
@@ -19,6 +46,7 @@ if(iduser == iduserpost){
     }
 }
 
+//mostrar y ocultar interfaz de respuesta
 function Responder(boton){
     const idMensaje = boton.value
     rta = document.getElementById(idMensaje);

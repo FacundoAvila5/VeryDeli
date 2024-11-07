@@ -9,23 +9,37 @@
       </div>
       <div class="modal-body body-postu">
         <form id="publicacion" action="publicarmodalpostularse" method="post" class="needs-validation" novalidate>
-       
-         <label for="comentario" class="form-label"><h4>Monto a cobrar</h4></label>
+
+          <!-- Campo de selección de vehículo
+          <label for="vehiculo" class="form-label"><h4>Seleccionar vehículo</h4></label>
+          <select class="form-select custom-input" id="vehiculo" name="vehiculo" required>
+            <option value="" selected disabled>Seleccione su vehículo</option>
+            <option value="vehiculo1">Vehículo 1</option>
+            <option value="vehiculo2">Vehículo 2</option>
+          </select>
+          <div class="invalid-feedback">
+            Debe seleccionar un vehículo.
+          </div> -->
+
+          <!-- Campo de monto -->
+          <label for="comentario" class="form-label"><h4>Monto a cobrar</h4></label>
           <div class="input-group mb-3 monto">
             <span class="input-group-text custom-input-m" id="basic-addon1">$</span>
             <input type="number" class="custom-input form-control" aria-label="Username" aria-describedby="basic-addon1" id="monto" name="monto" placeholder="0.00,0" required>
             <div class="invalid-feedback">
-                    El monto a cobrar es obligatorio
-             </div>
-        </div>
+              El monto a cobrar es obligatorio
+            </div>
+          </div>
 
-        <div class="mb-3">
+          <!-- Campo de comentario -->
+          <div class="mb-3">
             <label for="comentario" class="form-label">Comentario (opcional)</label>
             <textarea class="form-control custom-textarea" id="comentario" name="comentario"></textarea>
-        </div>
+          </div>
 
         </form>
       </div>
+
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
         <button type="button" class="btn btn-deli" onclick="abrirSegundoModal()">Siguiente</button>

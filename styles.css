@@ -275,3 +275,12 @@ body{
         padding-bottom: 7%; 
     }
 }
+
+.inactive {
+    background-color: #e2e4e6 !important; 
+    pointer-events: none;
+}
+
+.inactive-style{
+    background-color: #e2e4e6 !important;
+}

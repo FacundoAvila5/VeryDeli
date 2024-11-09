@@ -1,3 +1,7 @@
+<?php
+    include "modal_calificacion.php";
+?>
+
 <script>
     const idsNotificacionesMostradas = new Set();
 
@@ -14,7 +18,8 @@
                                              </div>`;
                     }
                     if (!idsNotificacionesMostradas.has(noti.IdNotificacion) && noti.TipoNotificacion === "Envio") {
-                        output.innerHTML += `<div class="notif bg-white rounded text-center border" id="busqueda" style="border-color: aqua; cursor: pointer;">
+                        output.innerHTML += `<div class="notif bg-white rounded text-center border" id="busqueda" style="border-color: aqua; cursor: pointer;"
+                                                data-bs-toggle="modal" data-bs-target="#calificacion">
                                                  <p>${noti.Mensaje} - ${noti.FechaDeNotificacion}</p>
                                              </div>`;
                     }

@@ -1,6 +1,7 @@
 <?php
-        if (isset($_SESSION['success']) && $_SESSION['success'] === true) {
-            echo '<div id="success-alert" class="alert alert-success alert-dismissible fade show" role="alert">
+        if (isset($_SESSION['success'])) {
+            $alertClass = $_SESSION['success'] === true ? 'alert-success' : 'alert-danger';
+            echo '<div id="success-alert" class="alert '.$alertClass.' alert-dismissible fade show" role="alert">
                    '.$_SESSION['msg'].'
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>';

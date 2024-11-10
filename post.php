@@ -61,7 +61,6 @@
                 $idUserPost = $post['IdUsuario'];
                 $idPostulacion = $post['IdPostulante'];
                 $isInactive = $post['Estado'] == "Inactiva";
-                echo "<script>console.log('Mensaje desde PHP:  $isInactive');</script>";
 
                 $sql = "SELECT IdUsuarioPostulacion
                 FROM postulaciones

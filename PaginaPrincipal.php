@@ -26,8 +26,13 @@ if (!isset($_SESSION['usuario'])) {
     exit;
 }
 
+$alert_message = $_SESSION['alert_message'] ?? '';
+unset($_SESSION['alert_message']); 
+
 include "ConexionBS.php";
 include "CrearPublicacion.php";
+
+
 
 
 // Obtener el ID del usuario desde la sesión
@@ -45,6 +50,14 @@ include "CrearPublicacion.php";
 // }
 
 ?>
+
+<!-- Alerta de Bootstrap en el centro de la pantalla -->
+<?php if ($alert_message): ?>
+    <div id="alert-box" class="alert alert-info alert-dismissible fade show position-fixed bottom-0 end-0 m-3" role="alert">
+        <strong>¡Éxito! </strong> <?php echo $alert_message; ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php endif; ?>
 
 
 <body>
@@ -96,7 +109,6 @@ include "CrearPublicacion.php";
                 foreach ($publicaciones as $row){
                 $content = true;
                 $isInactive = $row['Estado'] == "Inactiva";
-                echo "<script>console.log('Mensaje desde PHP:  $isInactive');</script>";
                 ?>
 
                 <div class="card card-border post <?php echo $isInactive ? 'inactive' : ''; ?>">
@@ -240,6 +252,7 @@ include "CrearPublicacion.php";
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
 
         <?php
         include "DesconexionBS.php";

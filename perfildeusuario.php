@@ -44,15 +44,18 @@
     include 'agregar_actualizar_vehiculos.php';
     include 'cambiar_contraseña.php';
 
-    //consulta para ver si esta en pedido de revision o no y asi permitir o no pedir validacion de nuevo
-
     $usid = $_SESSION["idUser"]; 
-    $consultarevision = "SELECT *
-                        FROM validaciones
-                        WHERE IdUsuarioValidacion = $usid";
+    $consultarevision = "SELECT * FROM validaciones WHERE IdUsuarioValidacion = '$usid'";
     $usuariopedido = mysqli_query($conexion, $consultarevision);
-    while($row = mysqli_fetch_assoc($usuariopedido)){
-        $estadoconsulta = $row['Estado'];
+
+    if ($usuariopedido) {
+        $estadoconsulta = "null"; 
+
+        while ($row = mysqli_fetch_assoc($usuariopedido)) {
+            $estadoconsulta = $row['Estado'];
+        }
+    } else {
+        $estadoconsulta = "null";
     }
 
 ?>

@@ -87,7 +87,7 @@ include "CrearPublicacion.php";
                                         if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif'])) {
                                             echo '<img src="' . $archivo . '" alt="Archivo de validación" style="max-width: 100%;">';
                                         } elseif ($extension == 'pdf') {
-                                            echo '<a href="' . $archivo . '" target="_blank" class="botonpdf">Ver PDF</a>';
+                                            echo 'Se a enviado un archivo: <a href="' . $archivo . '" target="_blank" class="botonpdf">Ver PDF</a>';
                                         }
                                      ?>
                             </div><br><br>

@@ -1,4 +1,5 @@
 <?php
+session_start();
 include "ConexionBS.php";
 extract($_POST);
 
@@ -8,6 +9,8 @@ $deleteRes = mysqli_query($conexion, $delete);
 include "DesconexionBS.php";
 
 if($deleteRes){
+    $_SESSION['success'] = true;
+    $_SESSION['msg'] = "Se ha eliminado su mensaje.";
     header("Location: post.php?id=" .$idPost );
     exit();
 }else{

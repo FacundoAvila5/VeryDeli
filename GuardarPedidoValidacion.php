@@ -15,6 +15,8 @@ if(isset($dni) && isset($cuil) && isset($_FILES['boleta'])){
     $guardarValidacion = "INSERT INTO validaciones (IdUsuarioValidacion, DNIUsuarioValidacion, CUILUsuarioValidacion, ImagenValidacion)
     VALUES ('".$iduser."','".$dni."','".$cuil."','".$target_file."')";
     mysqli_query($conexion, $guardarValidacion);
+    $_SESSION['success'] = true;
+    $_SESSION['msg'] = "Se ha enviado su pedido, ¡se responderá lo antes posible!";
     header("Location: perfildeusuario.php?" . session_id());
     exit();
     }else{

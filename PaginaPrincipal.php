@@ -21,6 +21,7 @@
 <?php
 session_start();
 
+
 if (!isset($_SESSION['usuario'])) {
     header("Location: login.php");
     exit;
@@ -48,8 +49,12 @@ include "CrearPublicacion.php";
 
 
 <body>
+
+
+
     <!-- HEADER -->
     <?php
+        include 'MensajeExito.php';
         include 'header.php';
     ?>
 
@@ -62,8 +67,6 @@ include "CrearPublicacion.php";
             include 'sidebarleft.php';
             
         ?>
-        
-
         
         <!-- columna: publicaciones -->
         <div class="publicaciones col-lg-6 col-md-" id="conteni">
@@ -91,7 +94,21 @@ include "CrearPublicacion.php";
                         $content = true;
                     }
                 }
-             }   
+            } 
+            
+            if (isset($_SESSION['success']) && $_SESSION['success'] === true) {
+                include "BusquedasMobile.php";
+                $sql = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario, u.Validado
+                FROM publicaciones p
+                INNER JOIN usuarios u ON p.IdUsuario = u.IdUsuario 
+                ORDER BY p.IdPublicacion DESC";
+                $publicaciones = mysqli_query($conexion, $sql);
+                $content = true;
+                unset($_SESSION['success']);
+                unset($_SESSION['msg']);
+
+            }
+
             if ($content) {
                 foreach ($publicaciones as $row){
                 $content = true;
@@ -222,9 +239,8 @@ include "CrearPublicacion.php";
     <!-- FOOTER MOBILE -->
         <?php
             include 'footermobile.php';
-        
         ?>
-
+   
     <script>
         function limpiaDivParaBusqueda(){
         window.onload = function() {
@@ -232,6 +248,7 @@ include "CrearPublicacion.php";
         };
     }
     </script>
+
 
     <script src="https://kit.fontawesome.com/0ce357c188.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

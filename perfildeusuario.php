@@ -43,6 +43,18 @@
     include 'modificarinformacionpersonal.php';
     include 'agregar_actualizar_vehiculos.php';
     include 'cambiar_contraseña.php';
+
+    //consulta para ver si esta en pedido de revision o no y asi permitir o no pedir validacion de nuevo
+
+    $usid = $_SESSION["idUser"]; 
+    $consultarevision = "SELECT *
+                        FROM validaciones
+                        WHERE IdUsuarioValidacion = $usid";
+    $usuariopedido = mysqli_query($conexion, $consultarevision);
+    while($row = mysqli_fetch_assoc($usuariopedido)){
+        $estadoconsulta = $row['Estado'];
+    }
+
 ?>
 <?php if (isset($_GET['mensaje'])): ?>
     <div class="alert alert-success alert-dismissible fade show text-center" role="alert" style="position: fixed; bottom: 20px; right: 20px; z-index: 1050;">
@@ -61,6 +73,7 @@
 <body>
     <!-- HEADER -->
     <?php
+    include 'MensajeExito.php';
     include 'header.php';
     include "CrearPublicacion.php";
     ?>
@@ -85,7 +98,7 @@
             <!-- Card de información personal-->
             <div class="card mb-3" style="background-color: #ffffff; border-color: rgb(18, 146, 154);" id="misVehiculos">
                 <div class="card-header">
-                    <div class="row">
+                    <div class="row">    
                         <div class="col-10 d-flex">
                             <h2>Información Personal</h2>
                             <i class="bi bi-info-square-fill ms-3 align-self-center"></i>
@@ -182,9 +195,9 @@
                         </div>
                     <?php endif; ?>
                 </div>
-            </div>
+            </div>                        
 
-
+          <?php  if($estadoconsulta != 'En revision' && $usuario['Validado'] == 0 ){ ?>
             <!-- Card de verificar cuenta-->
             <div class="card mb-3" style="background-color: #ffffff; border-color: rgb(18, 146, 154)" id="verificarCuenta">
                 <div class="card-body">
@@ -200,6 +213,7 @@
                     </div>
                 </div>
             </div>
+            <?php } ?>
 
              <!-- Card de ver historial -->           
             <div class="card mb-3 d-lg-none" style="background-color: #ffffff; border-color: rgb(18, 146, 154)" id="verificarCuenta">

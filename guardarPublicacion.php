@@ -24,8 +24,10 @@ $fechaFormateada = $fech ? $fech-> format('d/m/Y'): '';
      '".$Localidaddestino."', '".$barriodestino."', '".$direcciondestino."', '".$fragil."', '".$peso."', '".$alto."', '".$ancho."',
      '".$largo."', '".$nombreremitente."', '".$celular."')";
      mysqli_query($conexion, $guardaPubli);
+     $_SESSION['success'] = true;
+     $_SESSION['msg'] = "¡Publicación realizada con éxito!";
      header("location: PaginaPrincipal.php?".session_id());
-                                                              
+     exit();                                                        
 }
 include "DesconexionBS.php";
 ?>

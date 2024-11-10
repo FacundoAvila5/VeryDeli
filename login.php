@@ -29,6 +29,7 @@ if(isset($correo) && isset($pass)){
         $_SESSION["idUser"] = $row['IdUsuario'];
         $_SESSION["fotoPerfil"] = $row['ImagenUsuario'];
         $_SESSION['tipoUser'] = $row['TipoUsuario']; 
+        
         if(password_verify($pass, $clave)){
             $auth = true;
         }
@@ -51,7 +52,7 @@ if(isset($correo) && isset($pass)){
                     <img src="logos\logo3.svg" alt="" width="90%">
                     <!-- mejores logos: logo3 logo-azul  -->
                      
-                     <h4 class="text-center slogan pt-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod</h4>
+                     <h4 class="text-center slogan pt-5">Tus paquetes se entregan con rapidez y confianza.</h4>
                 </div>
                 <div class="col-12 col-md-5 bg-opacity-75 inicio-sesion bg-light">
 

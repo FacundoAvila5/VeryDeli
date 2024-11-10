@@ -26,7 +26,8 @@ if(isset($monto) && isset($comentario)){
     $crearNoti = "INSERT INTO notificaciones (IdUsuario, TipoNotificacion, FechaDeNotificacion, Mensaje, IdPublicacion, Estado, IdUsuarioCalificar) 
                   VALUES ('$idUsuarioPublicacion', 'Normal', '$fechaHora', 'Tienes una nueva postulación en tu publicación', '$idPubli', 0 , 0)";
     mysqli_query($conexion, $crearNoti);
-
+    $_SESSION['success'] = true;
+    $_SESSION['msg'] = "¡Postulación realizada con éxito!";
     header("Location: PaginaPrincipal.php?". session_id());
 }
 

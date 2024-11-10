@@ -306,3 +306,8 @@ body{
 .rating input#meh:checked + label { color: rgb(18, 146, 154); } 
 .rating input#happy:checked + label { color: rgb(69, 191, 182); }
 .rating input#sohappy:checked + label { color: rgb(80, 216, 208); }
+
+
+#alert-box {
+    z-index: 1050 !important;
+}

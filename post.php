@@ -21,6 +21,7 @@
 
     $nombre = $_SESSION['usuario']; 
     $idusu =  $_SESSION['idUser'];
+    $idpost = $_GET['id'];
 ?>
 
 <body>
@@ -30,7 +31,7 @@
     ?>
 
     <!-- CONTENIDO -->
-    <div class="contenedor container-fluid">
+    <div class="contenedor container-fluid" id="colPost">
       <div class="row p-2 pt-3">
 
         <!-- columna: Usuario -->
@@ -41,9 +42,7 @@
         <!-- publicaciones -->
         <div class="publicaciones col-lg-6 col-md-">
             <?php
-                //obtener id publicacion
-                $idpost = $_GET['id'];
-
+                
                 $sql = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario, u.Validado
                 FROM publicaciones p
                 INNER JOIN usuarios u ON p.IdUsuario = u.IdUsuario
@@ -55,14 +54,20 @@
                 // id del dueño de la publicacion
                 $idUserPost = $post['IdUsuario'];
 
+                //revisa si el usuario en sesion es el dueño del post
+                $dueñoPost = false;
+                if ($idusu == $idUserPost)
+                    $dueñoPost = true;
+
                 //revisa si hay un postulante ya seleccionado
                 $postulanteElegido = false;
                 if($post['IdPostulante'] != 0)
                     $postulanteElegido = true;
 
-                $dueñoPost = false;
-                if ($idusu == $idUserPost)
-                    $dueñoPost = true;
+                //revisa si el postulante es el usuario en sesion
+                $postulanteActivo = false;
+                if($post['IdPostulante'] == $idusu)
+                    $postulanteActivo = true;
 
             ?>
 
@@ -82,23 +87,31 @@
                         </div>
                     </div>
                 </div>
+
+                <?php if($postulanteActivo){ ?>
+                <div class="alert alert-dismissible fade show m-0" role="alert" style="background-color: rgba(18, 145, 154, 0.502);">
+                    <i class="bi bi-info-circle"></i> Haz sido elegido para realizar este envío. Ahora puedes ver 
+                                                            información adicional para completar el mismo.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <?php } ?>
+
                 <div class="card-content">
-                    <div class="row" style="margin: auto;">
+                    <div class="row m-auto">
                         <!-- USER INFO -->
-                        <div class="col-10 p-0">
+                        <div class="col-10 p-0 d-flex flex-row align-items-center" id="infoUserPost">
                             <img class="postUserImg rounded-circle me-2" src="<?php echo $post['ImagenUsuario']; ?>">
-                            <span class="txt"><?php echo $post['NombreUsuario']. " " . $post['ApellidoUsuario']. " "?></span>
-                            <?php
-                                if ($post['Validado'] == 1) {
-                                    echo ' <i class="bi bi-patch-check-fill align-self-center user-check"></i>';      
-                                }
-                                if($postulanteElegido){
-                            ?>
-                                    <span class="badge text-bg-secondary">Publicación pausada</span>
-                            <?php
-                                }
-                            ?>
-                            
+                            <div id="nombreUserPost">
+                                <span class="txt"><?php echo $post['NombreUsuario']. " " . $post['ApellidoUsuario']. " "?></span>
+                                <?php
+                                    if ($post['Validado'] == 1) {
+                                        echo ' <i class="bi bi-patch-check-fill align-self-center user-check"></i>';      
+                                    }
+
+                                    if ($postulanteElegido && !$postulanteActivo){ ?>
+                                        <span class="badge text-bg-secondary">Publicación pausada</span>
+                                <?php } ?>
+                            </div>
                         </div>
                         <!-- POST LINKS -->
                         <div class="col p-0 d-flex justify-content-end">
@@ -137,22 +150,33 @@
                         </div>  
                     </div>
 
+                    <!-- Contenido del post -->
                     <div class="row">
-                        <div class="postDetails ms-5 col">
+                        <div class="postDetailsPost col">
                             <h6 class="card-title"><?php echo $post['Titulo']; ?></h6>
                                 <i class="fa-solid fa-location-dot"></i> 
                                 Origen: <?php
                                         echo $post['ProvinciaOrigen'].", ".$post['LocalidadOrigen'].", ".$post['BarrioOrigen'];
-                                        ?><span class="postExtraInfo d-none">, 
-                                            <span class="txtExtraInfo"><?php echo $post['DireccionOrigen']; ?></span>
-                                        </span>
+                                        
+                                            if($dueñoPost || $postulanteActivo){
+                                            ?>
+                                            <span class="postExtraInfo" id="buoy" data-value="<?php echo $postulanteActivo ?>">, 
+                                                <span class="sel-txtExtra"><?php echo $post['DireccionOrigen']; ?></span>
+                                            </span>
+                                            <?php } 
+                                        ?>
                                 <br>
                                 <i class="fa-solid fa-route"></i> 
                                 Destino: <?php
                                         echo $post['ProvinciaDestino'].", ".$post['LocalidadDestino'].", ".$post['BarrioDestino'];
-                                        ?><span class="postExtraInfo d-none">, 
-                                            <span class="txtExtraInfo"><?php echo $post['DireccionDestino']; ?></span>
-                                        </span>
+                                        
+                                            if($dueñoPost || $postulanteActivo){
+                                            ?>
+                                            <span class="postExtraInfo">, 
+                                                <span class="sel-txtExtra"><?php echo $post['DireccionDestino']; ?></span>
+                                            </span>
+                                            <?php } 
+                                        ?>
                                 <br>
                                 <i class="fa-solid fa-calendar-days"></i>
                                 Fecha límite para completar la entrega: <?php echo $post['FechaLimite'];?> <br>
@@ -162,13 +186,16 @@
                                 Alto: <?php echo $post['Alto']. ' cm'?> <br>
                                 <i class="fa-solid fa-weight-scale"></i> Peso: <?php echo $post['Peso']. ' g <br>';
                                 echo $post['Descripcion'];
+
+                                if($dueñoPost || $postulanteActivo){
                                 ?>
-                                 
-                                <div class="postExtraInfo d-none">
+                                <div class="postExtraInfo">
                                     <h6 class="card-subtitle mb-1 mt-2 text-body-secondary">Información del remitente</h6>
-                                    <span class="txtExtraInfo"><i class="fa-solid fa-user"></i> Nombre: <?php echo $post['NombreRemitente']; ?></span> <br>
-                                    <span class="txtExtraInfo"><i class="fa-solid fa-phone"></i> Teléfono: <?php echo $post['TelefonoRemitente']; ?></span> <br>
+                                    <span class="sel-txtExtra"><i class="fa-solid fa-user"></i> Nombre: <?php echo $post['NombreRemitente']; ?></span> <br>
+                                    <span class="sel-txtExtra"><i class="fa-solid fa-phone"></i> Teléfono: <?php echo $post['TelefonoRemitente']; ?></span> <br>
                                 </div>
+                                <?php } 
+                                ?>
                         </div>
                     </div>
                     
@@ -249,11 +276,9 @@
         </div>
 
         <!-- columna: Notificaciones -->
-        <div class="col-lg-3 col-md-3 col-3 d-none d-lg-block">
             <?php
                 include 'sidebarright.php'
             ?>
-        </div>
       </div>
 
     </div>

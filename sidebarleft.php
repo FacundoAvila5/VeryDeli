@@ -1,4 +1,3 @@
-<!-- columna: user -->
 <div class="col-lg-3 d-none d-lg-block">
             <!-- info -->
             <a href="perfildeusuario.php" class="link">

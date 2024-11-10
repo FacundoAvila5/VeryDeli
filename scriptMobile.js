@@ -12,9 +12,10 @@ document.addEventListener('DOMContentLoaded', () => {
             // if(!colPubli.classList.contains("d-none"))
             //     colPubli.classList.add("d-none");
 
-            if(colPubli != null && !colPubli.classList.contains("d-none"))
+            if(colPubli != null) // && !colPubli.classList.contains("d-none")
                 colPubli.classList.add("d-none");
-
+            
+            if(colNotifs != null)
             colNotifs.style.visibility = 'visible'
         }
     }

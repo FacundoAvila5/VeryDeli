@@ -1,29 +1,12 @@
-let screenWidth = screen.width;
-let windowWidth = window.innerWidth;
-
-function limpiaDivParaBusqueda(){
-    window.onload = function() {
-        document.getElementById('conteni').innerHTML = ''; 
-    };
-}
-
-// window.addEventListener('load', () => {
-//     if (screenWidth < 992 || windowWidth < 992) {
-//         console.log("yoo")
-//         colNotifs.classList.add("invisible")
-//     }
-// })
-
-// window.addEventListener('resize', () => {
-//     var colNotifs = document.getElementById("colNotificaciones");
-
-//     if (screenWidth < 992 || windowWidth < 992) {
-//         console.log("heyo")
-//         colNotifs.classList.add("invisible")
-//     }else{
-//         colNotifs.classList.remove("invisible")
-//     }
-// })
+window.addEventListener('load', () => {
+    buoy = document.getElementById('buoy')
+    active = buoy.getAttribute('data-value')
+        if(active)
+           txt = document.querySelectorAll('.sel-txtExtra')
+            txt.forEach(element => {
+                element.classList.add('txtExtraInfo')
+            });
+});
 
 var c = document.getElementById("comentarios");
 var p = document.getElementById("postulaciones");
@@ -52,10 +35,3 @@ function Responder(boton){
     rta = document.getElementById(idMensaje);
     rta.classList.toggle("d-none");
 }
-
-//  AGREGAR ESTE EVENTO onclick A LA NOTIFICACION <<TE HAN ELEGIDO PARA REALIZAR ESTE ENVIO>>:
-//  value="<?php echo $aquiVaElIdPostDePostulacion; ?>" onclick="mostrarInfoExtra(this)"
-
-// function mostrarInfoExtra(post){
-
-// }

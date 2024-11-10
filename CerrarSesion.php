@@ -1,5 +1,5 @@
 <?php
 session_start();
 session_destroy();
-header("Location:Login.php?".session_id());
+header("Location:login.php?".session_id());
 ?>

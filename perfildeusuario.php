@@ -17,7 +17,8 @@
         header("Location: login.php");
         exit;
     }
-    
+
+    $tipouser = $_SESSION['tipoUser'];
     $idUsuario = $_SESSION["idUser"];
     if (isset($_SESSION['mensaje'])) {
         echo "
@@ -134,6 +135,7 @@
             </div>
 
             <!-- Card de vehículos-->
+            <?php if($tipouser != "Administrador") { ?>
             <div class="card mb-3" style="background-color: #ffffff; border-color: rgb(18, 146, 154);">
                 <div class="card-header">
                     <div class="row">
@@ -233,6 +235,7 @@
                     </div>
                 </div>
             </div>
+            <?php  } ?>
 
             <!-- Card de cerrar sesion-->
             <div class="card mb-3 d-lg-none" style="background-color: #ffffff; border-color: rgb(18, 146, 154); width: 50%; margin:auto;" id="verificarCuenta">
@@ -246,7 +249,11 @@
             </div>           
 
         </div>
-        <?php include 'PiedePagina.php'; ?>
+       
+        <?php 
+        if($tipouser != "Administrador") { 
+        include 'PiedePagina.php'; 
+        }?>
     </div>
 
     <!-- FOOTER MOBILE -->

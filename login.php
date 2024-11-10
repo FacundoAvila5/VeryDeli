@@ -64,7 +64,7 @@ if(isset($correo) && isset($pass)){
                         </div>
                         <div class="mb-3">
                           <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña" name="pass">
-                          <p> <a href="recuperacion.html" class="link-offset-2 link-underline link-underline-opacity-0 small">Olvidé mi contraseña</a> </p>
+                          <p> <a href="Recuperar-contraseña/recuperacion.php" class="link-offset-2 link-underline link-underline-opacity-0 small">Olvidé mi contraseña</a> </p>
                         </div>
                         <!-- <div class="mb-3 form-check">
                           <input type="checkbox" class="form-check-input" id="exampleCheck1">

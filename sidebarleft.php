@@ -1,3 +1,4 @@
+<?php $tipouser = $_SESSION['tipoUser']; ?> 
 <!-- columna: user -->
 <div class="col-lg-3 d-none d-lg-block">
             <!-- info -->
@@ -10,9 +11,11 @@
                     ?>
                 </div>
             </a>
+            
             <!-- botones justify-content-end-->
             <div class="userBtns d-flex ms-5">
                 <!-- publicar -->
+                <?php if($tipouser != "Administrador") { ?>
                 <div class="row mb-1">
                     <div class="col">
                         <!-- <a href="#" class="link" data-bs-toggle="modal" data-bs-target="#publicarmodal"><i class="fa-solid fa-pen-to-square"></i> Publicar</a> -->
@@ -40,13 +43,12 @@
                         <a href="perfildeusuario.php#verificarCuenta" class="link"><i class="fa-solid fa-user-check"></i> Verificar mi cuenta</a>
                     </div>
                 </div>
-                
+              <?php  } ?>
                  <!-- Verificar usuarios -->
                   
                   <?php
-                  $tipouser = $_SESSION['tipoUser'];
                    if($tipouser == "Administrador"){ ?>
-                <br><div class="row">
+                <div class="row">
                     <div class="col">
                         <a href="VerificarUsuario.php" class="link"><i class="bi bi-patch-check-fill"></i> Verificar Usuarios</a>
                     </div>

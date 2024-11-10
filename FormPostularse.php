@@ -1,6 +1,25 @@
 <!-- Modal postularse -->
-
 <div class="modal fade" id="modalpostularse" tabindex="-1" aria-labelledby="publishModalLabel" aria-hidden="true">
+  <?php 
+    $idusu = $_SESSION['idUser'];
+
+    //CONTROLES PARA USUARIOS NO RESPONSABLESS
+
+    //nivel del usuario
+    ($_SESSION['tipoUser']=='Responsable') ? $responsable = true : $responsable = false;
+
+    $testt = $_SESSION['tipoUser'];
+    echo "<script> console.log('Postu| tipo: ". $testt. " - state: ". $responsable ."') </script>";
+
+    // postulaciones en publicaciones activas
+    $sql = "SELECT p.Estado
+            FROM publicaciones p
+            INNER JOIN postulaciones q ON p.IdPublicacion = q.IdPublicacion
+            WHERE IdUsuarioPostulacion = $idusu AND Estado != 'Inactiva'";
+    $estado = mysqli_query($conexion, $sql);
+
+    (mysqli_num_rows($estado) >= 1) ? $postLimit = true : $postLimit = false;
+  ?>
   <div class="modal-dialog">
     <div class="modal-content custom-modal-content">
       <div class="modal-header">
@@ -8,8 +27,15 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body body-postu">
-        <form id="publicacion" action="publicarmodalpostularse" method="post" class="needs-validation" novalidate>
 
+        <?php if(!$responsable && $postLimit){ ?>
+          <div class="alert alert-danger mb-2" role="alert">
+              Alcanzaste el límite de <strong>1</strong> postulación en curso para tu nivel de usuario.
+              <!-- Para más información haz <a href="#" class="alert-link">click aquí</a>. -->
+          </div>
+        <?php } ?>
+
+        <form id="publicacion" action="publicarmodalpostularse" method="post" class="needs-validation" novalidate>
           <!-- Campo de selección de vehículo
           <label for="vehiculo" class="form-label"><h4>Seleccionar vehículo</h4></label>
           <select class="form-select custom-input" id="vehiculo" name="vehiculo" required>
@@ -78,8 +104,8 @@
         </div>
 
         <div class="modal-footer d-flex justify-content-end">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button> <!-- style="background-color: rgb(70, 70, 70);" -->
-        <button type="submit" class="btn btn-deli">Postularme</button> <!-- style="background-color: white;" -->
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="submit" class="btn btn-deli <?php echo ($postLimit && !$responsable) ? 'disabled' : ''; ?>">Postularme</button>
       </div>
         </form>
       </div>

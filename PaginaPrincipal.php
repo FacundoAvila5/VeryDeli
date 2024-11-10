@@ -18,6 +18,7 @@
 
 <?php
 session_start();
+$idusu = $_SESSION['idUser'];
 
 if (!isset($_SESSION['usuario'])) {
     header("Location: login.php");
@@ -111,7 +112,7 @@ include "CrearPublicacion.php";
                             </div>
                             <!-- admin: icono publicacion denunciada -->
                             <?php
-                                if ($_SESSION['idUser']=='1') { //Si el usuario es admin !!! CORREGIR TIPO !!!
+                                if ($idusu=='1') { //Si el usuario es admin !!! CORREGIR TIPO !!!
                                     
                                     $sql2= "SELECT IdPublicacion FROM denuncias WHERE IdPublicacion = '".$row['IdPublicacion']."' ";
                                     $result= mysqli_query($conexion,$sql2);

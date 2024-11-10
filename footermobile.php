@@ -11,7 +11,7 @@
         </div>
         <!-- busqueda -->
         <div class="opcionbNav">
-            <a href="PaginaPrincipal.php" class="link"><i class="fa-solid fa-magnifying-glass"></i></a>
+            <a href="PaginaPrincipal.php#buscadormobile" class="link"><i class="fa-solid fa-magnifying-glass"></i></a>
         </div>
         <!-- postear -->
         <div class="opcionbNav">

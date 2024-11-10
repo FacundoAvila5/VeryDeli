@@ -64,16 +64,18 @@
                 if ($idusu == $idUserPost)
                     $dueñoPost = true;
 
+                //id postulante
+                $postulanteElegido = $post['IdPostulante'];
+
                 //revisa si hay un postulante ya seleccionado
-                $postulanteElegido = false;
-                if($post['IdPostulante'] != 0)
-                    $postulanteElegido = true;
+                // $postulanteExists = false;
+                // if($post['IdPostulante'] != 0)
+                //     $postulanteExists = true;
 
                 //revisa si el postulante es el usuario en sesion
                 $postulanteActivo = false;
                 if($post['IdPostulante'] == $idusu)
                     $postulanteActivo = true;
-
                 
                 $isInactive = $post['Estado'] == "Inactiva";
                 // $idPostulacion = $post['IdPostulante'];
@@ -250,12 +252,14 @@
                     ?>
 
                     <!-- Botón de "Finalizar envío" solo para el postulante -->
-                    <?php if ($postulanteElegido && $idusu == $idPostulanteElegido && $post['Estado'] !== "Inactiva") { ?>
+                    <?php if ($postulanteElegido && $idusu == $postulanteElegido && $post['Estado'] !== "Inactiva") { ?>
                         <div class="d-flex justify-content-end align-items-center me-3">
                             <form action="finalizar_envio.php" method="POST">
                                 <input type="hidden" name="idPublicacion" value="<?php echo $idpost; ?>">
                                 <input type="hidden" name="idPostulante" value="<?php echo $idPostulanteElegido; ?>">
-                                <button type="submit" class="btn btn-deli link">Finalizar envío</button>
+                                <button type="submit" class="btn btn-deli">
+                                    <span class="txt">Finalizar envío</span>
+                                </button>
                             </form>
                         </div>
                     <?php } ?>

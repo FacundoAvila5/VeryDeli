@@ -1,11 +1,13 @@
 window.addEventListener('load', () => {
     buoy = document.getElementById('buoy')
-    active = buoy.getAttribute('data-value')
-        if(active)
-           txt = document.querySelectorAll('.sel-txtExtra')
-            txt.forEach(element => {
-                element.classList.add('txtExtraInfo')
-            });
+    if(buoy != null){
+        active = buoy.getAttribute('data-value')
+            if(active)
+            txt = document.querySelectorAll('.sel-txtExtra')
+                txt.forEach(element => {
+                    element.classList.add('txtExtraInfo')
+                });
+    }
 });
 
 var c = document.getElementById("comentarios");

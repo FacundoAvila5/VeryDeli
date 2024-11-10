@@ -14,7 +14,8 @@
                                              </div>`;
                     }
                     if (!idsNotificacionesMostradas.has(noti.IdNotificacion) && noti.TipoNotificacion === "Envio") {
-                        output.innerHTML += `<div class="notif bg-white rounded text-center border" id="busqueda" style="border-color: aqua; cursor: pointer;">
+                        output.innerHTML += `<div class="notif bg-white rounded text-center border" id="busqueda" style="border-color: aqua; cursor: pointer;"
+                                                onclick="enviarDatosCalificacion(${noti.IdNotificacion}, '${noti.IdUsuarioCalificar}')">
                                                  <p>${noti.Mensaje} - ${noti.FechaDeNotificacion}</p>
                                              </div>`;
                     }
@@ -43,6 +44,11 @@
     })
     .catch(error => console.error('Error al marcar la notificación como vista:', error));
 }
+
+function enviarDatosCalificacion(idNotificacion, idUsuarioCalificar) {
+    window.location.href = `calificacion.php?IdNotificacion=${idNotificacion}&IdUsuarioCalificar=${idUsuarioCalificar}`;
+}
+
 
 
     setInterval(fetchNotificaciones, 1000);

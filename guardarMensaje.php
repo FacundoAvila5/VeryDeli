@@ -25,6 +25,8 @@ if(isset($mInput)){
 
     include "DesconexionBS.php";
 
+    $_SESSION['success'] = true;
+    $_SESSION['msg'] = "Su pregunta ha sido enviada con éxito.";
     header("Location: post.php?id=" .$idpost );
     exit();
 }

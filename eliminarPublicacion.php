@@ -1,4 +1,5 @@
 <?php
+session_start();
 include "ConexionBS.php";
 
 $idpost = $_GET['id'];
@@ -9,6 +10,8 @@ $deleteRes = mysqli_query($conexion, $delete);
 include "DesconexionBS.php";
 
 if($deleteRes){
+    $_SESSION['success'] = true;
+    $_SESSION['msg'] = "¡La publicación se ha eliminado con éxito!";
     header("Location: PaginaPrincipal.php");
     exit();
 }else{

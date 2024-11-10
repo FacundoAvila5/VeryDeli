@@ -47,7 +47,7 @@
             .then(data => {
                 const output = document.getElementById('notificaciones');
                 data.forEach(noti => {
-                    if (!idsNotificacionesMostradas.has(noti.IdNotificacion)) {
+                    if (!idsNotificacionesMostradas.has(noti.IdNotificacion) && noti.TipoNotificacion === "Normal") {
                         output.innerHTML += `<div class="notif bg-white rounded border d-flex flex-column justify-content-center p-2" id="busqueda" style="border-color: aqua; cursor: pointer;"
                                                 onclick="marcarComoVisto(${noti.IdNotificacion}, '${noti.IdPublicacion}')">
                                                 <span class="fecha d-flex justify-content-start">${noti.FechaDeNotificacion}</span>    
@@ -57,8 +57,15 @@
                                             //      onclick="marcarComoVisto(${noti.IdNotificacion}, '${noti.IdPublicacion}')">
                                             //      <p>${noti.Mensaje} - ${noti.FechaDeNotificacion}</p>
                                             //  </div>
-                        idsNotificacionesMostradas.add(noti.IdNotificacion);
                     }
+                    if (!idsNotificacionesMostradas.has(noti.IdNotificacion) && noti.TipoNotificacion === "Envio") {
+                        output.innerHTML += `<div class="notif bg-white rounded border d-flex flex-column justify-content-center p-2" id="busqueda" style="border-color: aqua; cursor: pointer;"
+                                                onclick="enviarDatosCalificacion(${noti.IdNotificacion}, '${noti.IdUsuarioCalificar}')">
+                                                <span class="fecha d-flex justify-content-start">${noti.FechaDeNotificacion}</span>    
+                                                <span>${noti.Mensaje}</span>
+                                            </div>`;
+                    }
+                    idsNotificacionesMostradas.add(noti.IdNotificacion);
                 });
             })
             .catch(error => console.error('Error al obtener notificaciones:', error));
@@ -83,6 +90,12 @@
     })
     .catch(error => console.error('Error al marcar la notificación como vista:', error));
 }
+
+function enviarDatosCalificacion(idNotificacion, idUsuarioCalificar) {
+    window.location.href = `calificacion.php?IdNotificacion=${idNotificacion}&IdUsuarioCalificar=${idUsuarioCalificar}`;
+}
+
+
 
     setInterval(fetchNotificaciones, 1000);
 

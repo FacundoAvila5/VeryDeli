@@ -5,7 +5,7 @@
         <h1 class="modal-title fs-5" id="exampleModalLabel">Denunciar publicación</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form action="post.php?id=<?php echo urlencode($_GET['id']); ?>" method="post">
+      <form action="GuardarDenuncia.php" method="post">
         <div class="modal-body">
                 <div class="row w-100">
                     <div class="col-12">
@@ -17,6 +17,7 @@
                             <option value="Disgusto">No me gusta ver esta publicacion.</option>
                             <option value="Otro">Otro.</option>
                         </select>
+                        <input type="hidden" value="<?php echo $idpost; ?>" name="idpostd">
                     </div>
                 </div>
                 <div class="row pt-4 w-100">
@@ -35,27 +36,3 @@
     </div>
   </div>
 </div>
-
-<?php 
-  // Subida a la BDD
-  if (isset($_POST['btn-denuncia'])) {
-    extract($_POST);
-    include 'ConexionBS.php';
-    session_start();
-    $idpostd= $_GET['id'];
-    $iduser =  $_SESSION['idUser'];
-
-    date_default_timezone_set('America/Argentina/Buenos_Aires');
-    $fechadenuncia = date('d/m/Y');
-
-    $sql = "INSERT INTO denuncias (IdPublicacion, IdUsuario, Motivo, ComentarioDenuncia, FechaDenuncia) 
-            VALUES ('".$idpostd."','".$iduser."','".$selectd."','".$commentd."','".$fechadenuncia."')";
-    $result = mysqli_query($conexion, $sql);
-
-    if (!$result) {
-      echo "Error: " . mysqli_error($conn);
-    }
-
-    include 'DesconexionBS.php';
-  }
-?>

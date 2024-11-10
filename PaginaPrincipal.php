@@ -18,9 +18,28 @@
 
 <?php
 session_start();
+
+if (!isset($_SESSION['usuario'])) {
+    header("Location: login.php");
+    exit;
+}
+
+$alert_message = $_SESSION['alert_message'] ?? '';
+unset($_SESSION['alert_message']); 
+
 include "ConexionBS.php";
 include "CrearPublicacion.php";
+
+
 ?>
+
+<!-- Alerta de Bootstrap en el centro de la pantalla -->
+<?php if ($alert_message): ?>
+    <div id="alert-box" class="alert alert-info alert-dismissible fade show position-fixed bottom-0 end-0 m-3" role="alert">
+        <strong>¡Éxito! </strong> <?php echo $alert_message; ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php endif; ?>
 
 
 <body>
@@ -70,20 +89,40 @@ include "CrearPublicacion.php";
             if ($content) {
                 foreach ($publicaciones as $row){
                     $content = true;
+                    $isInactive = $row['Estado'] == "Inactiva";
                 ?>
 
-                <div class="card card-border post">
+                <div class="card card-border post <?php echo $isInactive ? 'inactive' : ''; ?>">
                     <div class="card-body">
                         <div class="row user ms-0">
-                            <div class="col-12 p-0">
+                            <div class="col p-0">
                                 <img class="postUserImg rounded-circle me-2" src="<?php echo $row['ImagenUsuario']; ?>">
                                 <span class="txt"><?php echo $row['NombreUsuario']. " " . $row['ApellidoUsuario']. " "?></span>
                                 <?php
-                                if ($row['Validado'] == 1) {
-                                    echo ' <i class="bi bi-patch-check-fill align-self-center user-check"></i>'; //text-success
+                                    if ($row['Validado'] == 1) {
+                                        echo ' <i class="bi bi-patch-check-fill align-self-center user-check"></i>';      
                                 }
+                                    if ($row['Estado'] == "Inactiva") {
+                                ?>
+                                    <span class="badge" style="background-color: rgb(18, 146, 154);">Publicación finalizada</span>
+                                <?php
+                                    } 
                                 ?>
                             </div>
+                            <!-- admin: icono publicacion denunciada -->
+                            <?php
+                                if ($_SESSION['idUser']=='1') { //Si el usuario es admin !!! CORREGIR TIPO !!!
+                                    
+                                    $sql2= "SELECT IdPublicacion FROM denuncias WHERE IdPublicacion = '".$row['IdPublicacion']."' ";
+                                    $result= mysqli_query($conexion,$sql2);
+
+                                    if (mysqli_num_rows($result) > 0) { //Si hay denuncias en el post
+                                        echo "<div class='col-1'> 
+                                            <i class='fa-solid fa-triangle-exclamation' style='color:red;' title='Publicacion denunciada'></i> 
+                                        </div>";
+                                    }
+                                }
+                            ?>
                         </div>
 
 
@@ -193,6 +232,7 @@ include "CrearPublicacion.php";
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
 
         <?php
         include "DesconexionBS.php";

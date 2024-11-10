@@ -52,12 +52,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $targetFile = $currentImage;
         }
 
+        $queryNombre = "SELECT NombreUsuario, TipoUsuario, ImagenUsuario FROM usuarios WHERE IdUsuario = '$idUser'";
+        $resultNombre = mysqli_query($conexion, $queryNombre);
+        if ($resultNombre) {
+            $row = mysqli_fetch_assoc($resultNombre);
+            $currentNombreUsuario = $row['NombreUsuario'];
+            $currentTipoUsuario = $row['TipoUsuario'];
+            $currentImage = $row['ImagenUsuario'];
+        }
+
+        $tipoUsuarioNuevo = $currentTipoUsuario;
+        if ($nombreUsuario != $currentNombreUsuario) {
+            $tipoUsuarioNuevo = "Normal";
+        }
+
         $actualizacion = "UPDATE usuarios SET 
             NombreUsuario = '$nombreUsuario', 
             ApellidoUsuario = '$apellidoUsuario', 
             EmailUsuario = '$emailUsuario', 
             TelefonoUsuario = '$telefonoUsuario',
-            ImagenUsuario = '$targetFile'
+            ImagenUsuario = '$targetFile',
+            TipoUsuario = '$tipoUsuarioNuevo'
             WHERE IdUsuario = '$idUser'";
 
         if (mysqli_query($conexion, $actualizacion)) {

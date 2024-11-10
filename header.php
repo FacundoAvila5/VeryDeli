@@ -45,3 +45,8 @@
         document.getElementById("formBusqueda").submit();
     }
 </script>
+
+<!-- ACTUALIZACIÓN DE TIPO DE USUARIO -->
+ <?php
+    include 'actualizar_responsabilidad.php';
+ ?>

@@ -22,6 +22,12 @@
                         <div class="invalid-feedback">
                             Por favor, ingrese su nombre.
                         </div>
+
+                        <?php if ($usuario['TipoUsuario'] === 'Responsable') { ?>
+                            <small class="text-danger">
+                                Si cambia el nombre, perderá la categoría de usuario responsable.
+                            </small>
+                        <?php } ?>
                     </div>
                     <div class="mb-3">
                         <label for="apellidoUsuario" class="form-label">Apellido</label>

@@ -14,7 +14,11 @@
 <?php
     session_start();
     include "ConexionBS.php";
-
+    if (!isset($_SESSION['usuario'])) {
+        header("Location: login.php");
+        exit;
+    }
+    
     $idUsuario = $_SESSION["idUser"];
     if (isset($_SESSION['mensaje'])) {
         echo "

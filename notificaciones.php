@@ -24,4 +24,6 @@ usort($notificaciones, function($a, $b) {
 });
 
 echo json_encode($notificaciones);
+
+include "DesconexionBS.php";
 ?>

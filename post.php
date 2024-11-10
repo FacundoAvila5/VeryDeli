@@ -15,6 +15,10 @@
 
 <?php
     session_start();
+    if (!isset($_SESSION['usuario'])) {
+        header("Location: login.php");
+        exit;
+    }
     include "ConexionBS.php";
     // include "CrearPublicacion.php";
     include "FormPostularse.php";
@@ -32,6 +36,7 @@
 
     <!-- CONTENIDO -->
     <div class="contenedor container-fluid" id="colPost">
+
       <div class="row p-2 pt-3">
 
         <!-- columna: Usuario -->
@@ -69,13 +74,27 @@
                 if($post['IdPostulante'] == $idusu)
                     $postulanteActivo = true;
 
+                
+                $isInactive = $post['Estado'] == "Inactiva";
+                // $idPostulacion = $post['IdPostulante'];
+
+                // $sql = "SELECT IdUsuarioPostulacion
+                // FROM postulaciones
+                // WHERE IdPostulacion = $idPostulacion";
+                // $cons = mysqli_query($conexion, $sql);
+                // $result = mysqli_fetch_assoc($cons);
+
+                // if ($result) {
+                //     $idPostulanteElegido = $result['IdUsuarioPostulacion'];
+                // } 
+
             ?>
 
             <input type="hidden" id="idDeUser" value="<?php echo $idusu; ?>">
             <input type="hidden" id="idUserPost" value="<?php echo $idUserPost; ?>">
 
-            <div class="card card-border post">
-                <div class="card-header card-border bg-transparent" style="padding: 3px;">
+            <div class="card card-border post <?php echo $isInactive ? 'inactive-style' : ''; ?>">
+                <div class="card-header card-border bg-transparent" style="padding: 3px; background-color: white !important">
                     <div class="row" style="margin: auto;">
                         <!-- volver -->
                         <div class="col p-0">
@@ -86,6 +105,12 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Visualizacion de la denuncia para el admin -->
+                    <?php
+                        include 'postdenuncia_admin.php';
+                    ?>
+
                 </div>
 
                 <?php if($postulanteActivo){ ?>
@@ -96,7 +121,7 @@
                 </div>
                 <?php } ?>
 
-                <div class="card-content">
+                <div class="card-content <?php echo $isInactive ? 'inactive' : ''; ?>">
                     <div class="row m-auto">
                         <!-- USER INFO -->
                         <div class="col-10 p-0 d-flex flex-row align-items-center" id="infoUserPost">
@@ -107,10 +132,17 @@
                                     if ($post['Validado'] == 1) {
                                         echo ' <i class="bi bi-patch-check-fill align-self-center user-check"></i>';      
                                     }
+                                    if ($postulanteElegido && $post['Estado'] == "Activo" && !$postulanteActivo) {
+                                ?>
+                                    <span class="badge text-bg-secondary">Publicación pausada</span>
+                                <?php
+                                    } else if($post['Estado'] == "Inactiva"){
+                                ?>
+                                    <span class="badge" style="background-color: rgb(18, 146, 154);">Publicación finalizada</span>
+                                <?php
+                                    }
+                                ?>
 
-                                    if ($postulanteElegido && !$postulanteActivo){ ?>
-                                        <span class="badge text-bg-secondary">Publicación pausada</span>
-                                <?php } ?>
                             </div>
                         </div>
                         <!-- POST LINKS -->
@@ -204,16 +236,32 @@
                         if(!$dueñoPost && !$postulanteElegido){
                     ?>
                     <div class="d-flex justify-content-end align-items-center me-3">
-                        <button class="btn btn-deli link" data-bs-toggle="modal" data-bs-target="#modalpostularse">
-                            <span class="txt">Postularme</span>
-                        </button>
+                    <button class="btn btn-deli link" onclick="validarPostulacion()"> 
+                        <span class="txt">Postularme</span> 
+                    </button>
+
                     </div>
+                    <div id="vehiculoAlerta" class="alert alert-warning alert-dismissible fade show mt-2" role="alert" style="display:none;">
+                        Para poder postularse necesita cargar al menos un vehículo, podrá cargarlos <a href="perfildeusuario.php#vehiculos" class="alert-link">aquí</a>.
+                    </div>
+
                     <?php
                         }
                     ?>
+
+                    <!-- Botón de "Finalizar envío" solo para el postulante -->
+                    <?php if ($postulanteElegido && $idusu == $idPostulanteElegido && $post['Estado'] !== "Inactiva") { ?>
+                        <div class="d-flex justify-content-end align-items-center me-3">
+                            <form action="finalizar_envio.php" method="POST">
+                                <input type="hidden" name="idPublicacion" value="<?php echo $idpost; ?>">
+                                <input type="hidden" name="idPostulante" value="<?php echo $idPostulanteElegido; ?>">
+                                <button type="submit" class="btn btn-deli link">Finalizar envío</button>
+                            </form>
+                        </div>
+                    <?php } ?>
                 </div>
 
-                <div class="card-footer card-border d-flex">
+                <div class="card-footer card-border d-flex <?php echo $isInactive ? 'inactive' : ''; ?>">
                     <!-- numero comentarios -->
                     <?php 
                         $sqlC = "SELECT IdMensaje FROM mensajes WHERE IdPublicacionMensaje = $idpost";
@@ -264,14 +312,21 @@
             </div>
 
             <!-- comentarios y postulaciones -->
-            <div id="postBottom mb-4">
             <?php
-                include 'comentarios.php'
+                if ($post['Estado'] != "Inactiva") {
             ?>
+                <div id="postBottom mb-4">
+                    <?php
+                        include 'comentarios.php';
+                    ?>
+                    <?php
+                        include 'postulaciones.php';
+                    ?>
+                </div>
             <?php
-                include 'postulaciones.php'
+                }
             ?>
-            </div>
+
             
         </div>
 
@@ -352,6 +407,28 @@
         } else {
             formulario.classList.add('was-validated');
         }
+    }
+</script>
+<script>
+    function validarPostulacion() {
+        const formData = new FormData();
+        formData.append('usuarioId', <?php echo $_SESSION['idUser']; ?>);
+        
+        fetch('verificar_vehiculos.php', {
+            method: 'POST',
+            body: formData 
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.tieneVehiculos) {
+                var modal = new bootstrap.Modal(document.getElementById('modalpostularse'));
+                modal.show();
+            } else {
+                var alerta = document.getElementById('vehiculoAlerta');
+                alerta.style.display = 'block';
+            }
+        })
+        .catch(error => console.error('Error al verificar vehículos:', error));
     }
 </script>
 

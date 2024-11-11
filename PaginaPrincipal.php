@@ -18,7 +18,7 @@
 
 <?php
 session_start();
-$idusu = $_SESSION['idUser'];
+
 
 if (!isset($_SESSION['usuario'])) {
     header("Location: login.php");
@@ -44,8 +44,12 @@ include "CrearPublicacion.php";
 
 
 <body>
+
+
+
     <!-- HEADER -->
     <?php
+        include 'MensajeExito.php';
         include 'header.php';
     ?>
 
@@ -86,7 +90,21 @@ include "CrearPublicacion.php";
                         $content = true;
                     }
                 }
-             }   
+            } 
+            
+            if (isset($_SESSION['success']) && $_SESSION['success'] === true) {
+                include "BusquedasMobile.php";
+                $sql = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario, u.Validado
+                FROM publicaciones p
+                INNER JOIN usuarios u ON p.IdUsuario = u.IdUsuario 
+                ORDER BY p.IdPublicacion DESC";
+                $publicaciones = mysqli_query($conexion, $sql);
+                $content = true;
+                unset($_SESSION['success']);
+                unset($_SESSION['msg']);
+
+            }
+
             if ($content) {
                 foreach ($publicaciones as $row){
                     $content = true;
@@ -112,7 +130,7 @@ include "CrearPublicacion.php";
                             </div>
                             <!-- admin: icono publicacion denunciada -->
                             <?php
-                                if ($idusu=='1') { //Si el usuario es admin !!! CORREGIR TIPO !!!
+                                if ($_SESSION['idUser']=='1') { //Si el usuario es admin !!! CORREGIR TIPO !!!
                                     
                                     $sql2= "SELECT IdPublicacion FROM denuncias WHERE IdPublicacion = '".$row['IdPublicacion']."' ";
                                     $result= mysqli_query($conexion,$sql2);
@@ -215,9 +233,8 @@ include "CrearPublicacion.php";
     <!-- FOOTER MOBILE -->
         <?php
             include 'footermobile.php';
-        
         ?>
-
+   
     <script>
         function limpiaDivParaBusqueda(){
         window.onload = function() {
@@ -226,6 +243,7 @@ include "CrearPublicacion.php";
     }
     </script>
 
+
     <script src="https://kit.fontawesome.com/0ce357c188.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
@@ -233,7 +251,7 @@ include "CrearPublicacion.php";
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-        <script>
+    
 
         <?php
         include "DesconexionBS.php";

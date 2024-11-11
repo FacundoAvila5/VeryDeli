@@ -29,6 +29,7 @@ if(isset($correo) && isset($pass)){
         $_SESSION["idUser"] = $row['IdUsuario'];
         $_SESSION["fotoPerfil"] = $row['ImagenUsuario'];
         $_SESSION['tipoUser'] = $row['TipoUsuario']; 
+        
         if(password_verify($pass, $clave)){
             $auth = true;
         }
@@ -51,7 +52,7 @@ if(isset($correo) && isset($pass)){
                     <img src="logos\logo3.svg" alt="" width="90%">
                     <!-- mejores logos: logo3 logo-azul  -->
                      
-                     <h4 class="text-center slogan pt-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod</h4>
+                     <h4 class="text-center slogan pt-5">Tus paquetes se entregan con rapidez y confianza.</h4>
                 </div>
                 <div class="col-12 col-md-5 bg-opacity-75 inicio-sesion bg-light">
 
@@ -63,7 +64,7 @@ if(isset($correo) && isset($pass)){
                         </div>
                         <div class="mb-3">
                           <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña" name="pass">
-                          <p> <a href="recuperacion.html" class="link-offset-2 link-underline link-underline-opacity-0 small">Olvidé mi contraseña</a> </p>
+                          <p> <a href="Recuperar-contraseña/recuperacion.php" class="link-offset-2 link-underline link-underline-opacity-0 small">Olvidé mi contraseña</a> </p>
                         </div>
                         <!-- <div class="mb-3 form-check">
                           <input type="checkbox" class="form-check-input" id="exampleCheck1">

@@ -47,6 +47,8 @@
 </script>
 
 <!-- ACTUALIZACIÓN DE TIPO DE USUARIO -->
- <?php
-    include 'actualizar_responsabilidad.php';
- ?>
+<?php
+    if (basename($_SERVER['PHP_SELF']) !== 'perfildeusuario.php') {
+        include 'actualizar_responsabilidad.php';
+    }
+?>

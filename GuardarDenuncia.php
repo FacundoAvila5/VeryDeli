@@ -15,7 +15,8 @@
     $result = mysqli_query($conexion, $sql);
 
     include 'DesconexionBS.php';
-
+    $_SESSION['success'] = true;
+    $_SESSION['msg'] = "¡Denuncia realizada con éxito, se revisará lo más pronto posible!";
     header("Location: post.php?id= ".$idpostd);
   }
 ?>

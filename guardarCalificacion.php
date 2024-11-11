@@ -47,6 +47,24 @@ if (isset($_POST['calificacion']) && isset($_POST['idNotificacion'])) {
         if (mysqli_query($conexion, $sql_insert)) {
             $actualizacion = "UPDATE notificaciones SET Estado = 1 WHERE IdNotificacion = '$idNotificacion'";
             $resultado = mysqli_query($conexion, $actualizacion);
+
+            $sql_check = "SELECT * FROM calificaciones WHERE IdPublicacion = '$idPublicacion' AND IdCalificador = '$idUsuarioCalificar'";
+            $check_result = mysqli_query($conexion, $sql_check);
+
+            if (mysqli_num_rows($check_result) > 0) {
+                $calificacionResult = mysqli_fetch_assoc($check_result);
+                $puntaje = $calificacionResult['Puntaje'];
+                $comentarioResult = $calificacionResult['Comentario'];
+            
+                $crearNoti = "INSERT INTO notificaciones (IdUsuario, TipoNotificacion, FechaDeNotificacion, Mensaje, IdPublicacion, Estado, IdUsuarioCalificar) 
+                                VALUES ('$idusu', 'Normal', '$fechaHora', 'Fuiste calificado con un puntaje de: $puntaje% $comentarioResult. En una publicación.' , '$idPublicacion', 0, 0)";
+                mysqli_query($conexion, $crearNoti);
+
+                $crearNoti2 = "INSERT INTO notificaciones (IdUsuario, TipoNotificacion, FechaDeNotificacion, Mensaje, IdPublicacion, Estado, IdUsuarioCalificar) 
+                                VALUES ('$idUsuarioCalificar', 'Normal', '$fechaHora', 'Fuiste calificado con un puntaje de: $calificacion_final% $comentario. En una publicación', '$idPublicacion', 0, 0)";
+                mysqli_query($conexion, $crearNoti2);
+            }
+            
             $_SESSION['alert_message'] = "¡Gracias por calificar a tu socio!";
             header("Location: PaginaPrincipal.php");
             exit();

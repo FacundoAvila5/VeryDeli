@@ -3,14 +3,34 @@
     $insert_cal_negativa= mysqli_query ($conexion,$sql);
 -->
 <?php
+// echo "<script> alert ('Hola'); </script>";
 //Actualiza el estado de Usuario Responsable / Normal del dueño de la sesión
 
     include 'ConexionBS.php';
     $usuario= $_SESSION['idUser'];
     $tipo= $_SESSION['tipoUser'];
-    
+
+
     switch ($tipo) {
-        case 'Normal': //USUARIO NORMAL
+        case 'Normal': //USUARIO NORMAl
+
+            //Primero controla que no hayan 2 calificaciones negativas consecutivas (en las ultimas 5) para no dar responsable si eso pasa
+            $sql = "SELECT COUNT(*) as NumConsecutivasNegativas 
+            FROM ( SELECT c1.Puntaje as Puntaje1, LEAD(c1.Puntaje) 
+                OVER (ORDER BY c1.IdCalificacion DESC) as Puntaje2 
+                FROM calificaciones c1 WHERE c1.IdCalificado = ".$usuario." 
+                ORDER BY c1.IdCalificacion DESC LIMIT 5 
+            ) as Subquery 
+            WHERE Puntaje1 = -1 AND Puntaje2 = -1"; 
+            $result = mysqli_query($conexion, $sql); 
+            $row = mysqli_fetch_assoc($result); 
+            $numConsecutivasNegativas = $row['NumConsecutivasNegativas']; 
+            if ($numConsecutivasNegativas > 0) { 
+                $negativa=true; //HAY 2 NEGATIVAS SEGUIDAS
+            } else {
+                $negativa=false;
+            }
+
             //Controla ultimas 5 calificaciones para asignar tipo responsable
             $sql= "SELECT Puntaje 
                 FROM calificaciones 
@@ -25,12 +45,13 @@
                 }
                 $promedio= $suma / 5;
 
-                if ($promedio > 80) {
+                if ($promedio > 80 && !$negativa) {
                     $sql= "UPDATE usuarios SET TipoUsuario='Responsable'
                         WHERE IdUsuario=". $usuario;
                     $resultado= mysqli_query($conexion,$sql);
                     $_SESSION['tipoUser']='Responsable';
                     // ** CARTEL FELICIDADES ES USUARIO RESPONSABLE **
+                    
                     $_SESSION['success'] = true;
                     $_SESSION['msg'] = "¡Felicidades, ahora es usuario responsable!";
                 }

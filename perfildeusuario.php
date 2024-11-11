@@ -76,6 +76,25 @@
 <?php endif; ?>
 
 <body>
+
+    <style>
+        body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+
+    }
+
+/* Contenedor de todo el contenido de la página */
+.contenedor {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+    </style>
+
     <!-- HEADER -->
     <?php
     include 'MensajeExito.php';
@@ -251,12 +270,12 @@
 
         </div>
        
-        <?php 
+
+    </div>
+    <?php 
         if($tipouser != "Administrador") { 
         include 'PiedePagina.php'; 
         }?>
-    </div>
-
     <!-- FOOTER MOBILE -->
     <?php 
         include 'footermobile.php';

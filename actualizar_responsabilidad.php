@@ -53,7 +53,7 @@
                     // ** CARTEL FELICIDADES ES USUARIO RESPONSABLE **
                     
                     $_SESSION['success'] = true;
-                    $_SESSION['msg'] = "¡Felicidades, ahora es usuario responsable!";
+                    $_SESSION['mensg'] = "¡Felicidades, ahora es usuario responsable!";
                 }
             }
             break;
@@ -81,7 +81,7 @@
                     $_SESSION['tipoUser']='Normal';
                     // ** CARTEL PERDIO LA CATEGORIA DE RESPONSABLE (POR BAJAS CALIFICACIONES) **
                     $_SESSION['success'] = false;
-                    $_SESSION['msg'] = "¡Malas noticias! Ha perdido su categoría de responsable.";
+                    $_SESSION['mensg'] = "¡Malas noticias! Ha perdido su categoría de responsable.";
                 }
             }
 
@@ -104,7 +104,7 @@
                     $_SESSION['tipoUser']='Normal';
                     // ** CARTEL PERDIO LA CATEGORIA DE RESPONSABLE (POR NO CALIFICAR) **
                     $_SESSION['success'] = false;
-                    $_SESSION['msg'] = "¡Malas noticias! A perdido su categoría de responsable.";
+                    $_SESSION['mensg'] = "¡Malas noticias! A perdido su categoría de responsable.";
                 }
             }
             break;

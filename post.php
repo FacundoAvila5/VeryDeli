@@ -48,6 +48,16 @@
         <!-- publicaciones -->
         <div class="publicaciones col-lg-6 col-md-">
             <?php
+                $sql = "SELECT IdUsuarioPostulacion
+                FROM postulaciones
+                WHERE IdPublicacion = $idpost";
+                $queryPostulantes = mysqli_query($conexion, $sql);
+
+                $isPostulado = false ;
+                //verifica que el usuario aun no se haya postulado
+                while($postulantes = mysqli_fetch_assoc($queryPostulantes)){
+                    ($postulantes['IdUsuarioPostulacion'] == $idusu) ? $isPostulado = true : "" ; 
+                }
                 
                 $sql = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario, u.Validado
                 FROM publicaciones p
@@ -68,28 +78,13 @@
                 //id postulante
                 $postulanteElegido = $post['IdPostulante'];
 
-                //revisa si hay un postulante ya seleccionado
-                // $postulanteExists = false;
-                // if($post['IdPostulante'] != 0)
-                //     $postulanteExists = true;
-
                 //revisa si el postulante es el usuario en sesion
                 $postulanteActivo = false;
                 if($post['IdPostulante'] == $idusu)
                     $postulanteActivo = true;
                 
                 $isInactive = $post['Estado'] == "Inactiva";
-                // $idPostulacion = $post['IdPostulante'];
 
-                // $sql = "SELECT IdUsuarioPostulacion
-                // FROM postulaciones
-                // WHERE IdPostulacion = $idPostulacion";
-                // $cons = mysqli_query($conexion, $sql);
-                // $result = mysqli_fetch_assoc($cons);
-
-                // if ($result) {
-                //     $idPostulanteElegido = $result['IdUsuarioPostulacion'];
-                // } 
 
             ?>
 
@@ -135,7 +130,8 @@
                                     if ($post['Validado'] == 1) {
                                         echo ' <i class="bi bi-patch-check-fill align-self-center user-check"></i>';      
                                     }
-                                    if ($postulanteElegido && $post['Estado'] == "Activo" && !$postulanteActivo) {
+
+                                    if ($postulanteElegido && $post['Estado'] == "Activa" && !$postulanteActivo) {
                                 ?>
                                     <span class="badge text-bg-secondary">Publicación pausada</span>
                                 <?php
@@ -236,7 +232,7 @@
                     
                     <!-- BOTON POSTULACION -->
                     <?php
-                        if(!$dueñoPost && !$postulanteElegido){
+                        if(!$dueñoPost && !$postulanteElegido && !$isPostulado){
                     ?>
                     <div class="d-flex justify-content-end align-items-center me-3">
                     <button class="btn btn-deli link" onclick="validarPostulacion()"> 

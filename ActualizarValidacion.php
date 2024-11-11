@@ -17,6 +17,15 @@ extract($_POST);
                      SET Estado = 'Revisada' 
                      WHERE IdUsuarioValidacion = $idUsuario";
         mysqli_query($conexion, $revision);
+
+        date_default_timezone_set('America/Argentina/Buenos_Aires');
+        $fechaHora = date('d/m/Y H:i');
+
+        $crearNoti = "INSERT INTO notificaciones (IdUsuario, TipoNotificacion, FechaDeNotificacion, Mensaje, IdPublicacion, Estado, IdUsuarioCalificar) 
+                    VALUES ($idUsuario, 'verificado', '$fechaHora', 'Ya eres un usuario verificado', 0, 0 , 0)";
+        mysqli_query($conexion, $crearNoti);
+
+
         echo "Usuario rechazado correctamente.";
     }
 

@@ -31,7 +31,7 @@
         <?php if(!$responsable && $postLimit){ ?>
           <div class="alert alert-danger mb-2" role="alert">
               Alcanzaste el límite de <strong>1</strong> postulación en curso para tu nivel de usuario.
-              <!-- Para más información haz <a href="#" class="alert-link">click aquí</a>. -->
+              Para más información haz <a href="preguntasFrecuentes.php" class="alert-link">click aquí</a>.
           </div>
         <?php } ?>
 
@@ -68,7 +68,7 @@
 
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-deli" onclick="abrirSegundoModal()">Siguiente</button>
+        <button type="button" class="btn btn-deli <?php echo ($postLimit && !$responsable) ? 'disabled' : ''; ?>" onclick="abrirSegundoModal()">Siguiente</button>
       </div>
     </div>
   </div>
@@ -105,7 +105,7 @@
 
         <div class="modal-footer d-flex justify-content-end">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="submit" class="btn btn-deli <?php echo ($postLimit && !$responsable) ? 'disabled' : ''; ?>">Postularme</button>
+        <button type="submit" class="btn btn-deli">Postularme</button>
       </div>
         </form>
       </div>

@@ -8,12 +8,10 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <!-- favicon -->
     <link rel="shortcut icon" href="img\icons\loguito-fondoAzulV2.ico" type="image/x-icon">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 
         <title>Inicio</title>
 </head>
@@ -33,22 +31,6 @@ unset($_SESSION['alert_message']);
 include "ConexionBS.php";
 include "CrearPublicacion.php";
 
-
-
-
-// Obtener el ID del usuario desde la sesión
-// $usuario_id = $_SESSION['idUser'];
-
-// Realizar la consulta para obtener la imagen del usuario
-// $sql = "SELECT ImagenUsuario FROM usuarios WHERE IdUsuario = '$usuario_id'";
-// $result = mysqli_query($conexion, $sql);
-
-// if ($result->num_rows > 0) {
-//     $row = mysqli_fetch_assoc($result);
-//     $imagen = $row['ImagenUsuario'];
-// } else {
-//     $imagen = 'ruta/imagen/default.jpg'; // Imagen por defecto si no se encuentra el usuario
-// }
 
 ?>
 
@@ -73,16 +55,17 @@ include "CrearPublicacion.php";
 
     <!-- CONTENIDO -->
     <div class="contenedor container-fluid">
-      <div class="row p-2 pt-3">
+      <div class="row p-2 pt-3" id="contenido-principal">
 
         <!-- columna: Usuario -->
         <?php
             include 'sidebarleft.php';
             
         ?>
+
         
         <!-- columna: publicaciones -->
-        <div class="publicaciones col-lg-6 col-md-" id="conteni">
+        <div class="publicaciones col-lg-6 d-lg-block" id="conteni">
         <?php
             include "BusquedasMobile.php";
             $sql = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario, u.Validado
@@ -124,8 +107,8 @@ include "CrearPublicacion.php";
 
             if ($content) {
                 foreach ($publicaciones as $row){
-                $content = true;
-                $isInactive = $row['Estado'] == "Inactiva";
+                    $content = true;
+                    $isInactive = $row['Estado'] == "Inactiva";
                 ?>
 
                 <div class="card card-border post <?php echo $isInactive ? 'inactive' : ''; ?>">
@@ -239,12 +222,11 @@ include "CrearPublicacion.php";
         </div>
 
         <!-- columna: Notificaciones -->
-        <div class="col-lg-3 col-md-3 col-3 d-none d-lg-block">
             <?php
                 include 'sidebarright.php'
             ?>
-        </div>
-      </div>
+    </div>
+
      <?php include 'PiedePagina.php'; ?>
     </div>
 

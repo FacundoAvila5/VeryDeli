@@ -1,28 +1,28 @@
 <style>
-.opcionbNav .bi-person-check {
-        font-size: 1.3rem; /* Ajusta el tamaño del icono */
-    }
+    .opcionbNav .bi-mobile {
+    font-size: 1.3rem; /* Ajusta el tamaño del icono */
+}
 </style>
 <?php $tipouser = $_SESSION['tipoUser']; ?> 
 <div class="bNav container-fluid bg-body-tertiary d-block d-lg-none">
       <div class="bNavIcons d-flex">
         <!-- home -->
         <div class="opcionbNav">
-            <a href="PaginaPrincipal.php" class="link"><i class="fa-solid fa-house"></i></a>
+            <a href="PaginaPrincipal.php" class="link"><i class="bi bi-house bi-mobile txt"></i></a>
         </div>
 
         <!-- busqueda -->
         <?php if($tipouser != "Administrador") { ?>
         <div class="opcionbNav">
-            <a href="#buscadormobile" class="link"><i class="fa-solid fa-magnifying-glass"></i></a>
+            <a href="PaginaPrincipal.php#buscadormobile" class="link"><i class="fa-solid fa-magnifying-glass"></i></a>
         </div>
         <!-- postear -->
         <div class="opcionbNav">
             <a href="" class="link" data-bs-toggle="modal" data-bs-target="#publicarmodal"><i class="fa-regular fa-square-plus"></i></a>
         </div>
         <!-- notifs -->
-        <div class="opcionbNav">
-            <a href="notifmobile.php" class="link"><i class="fa-regular fa-bell"></i></a>
+        <div class="opcionbNav" id="btnNotif">
+            <button class="btn boton" id="btnNotif" ><i class="fa-regular fa-bell"></i></button>
         </div>
         <?php  } ?>
 
@@ -32,9 +32,9 @@
         <div class="opcionbNav">
         </div>
         <div class="opcionbNav">
-            <a href="VerificarUsuario.php" class="link"><i class="bi bi-person-check"></i></a>
         </div>
         <div class="opcionbNav">
+            <a href="VerificarUsuario.php" class="link"><i class="bi bi-person-check bi-mobile"></i></a>
         </div>
         <?php } ?>
 
@@ -45,4 +45,6 @@
         </div>
       </div>
     </div>
+
+    <script src="scriptMobile.js"></script>
     

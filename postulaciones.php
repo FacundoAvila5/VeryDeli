@@ -49,13 +49,19 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <span class="text-secondary">Comentario: <?php echo $pst['ComentarioPostulacion']; ?></span>
+                        <span class="text-secondary">Comentario: 
+                            <?php 
+                            if($pst['ComentarioPostulacion'] == ''){
+                                echo '-';
+                            }else{
+                            echo $pst['ComentarioPostulacion']; }?>
+                        </span>
                     </div>
                 </div>
             </div>
             <div class="col-2 d-flex align-items-center justify-content-end">
                 <form method="post" action="elegirPostulante.php">
-                    <input type="hidden" name="idpostu" value="<?php echo $pst['IdPostulacion']; ?>">
+                    <input type="hidden" name="idpostulante" value="<?php echo $pst['IdUsuarioPostulacion']; ?>">
                     <input type="hidden" name="idpost" value="<?php echo $idpost; ?>">
                     <button class="btn btn-deli btn-elegir" type="submit">Elegir</button>
                 </form>
@@ -63,7 +69,7 @@
         </div>
     </div>
     <?php
-            }else if($pst['IdPostulacion'] == $post['IdPostulante']){
+            }else if($pst['IdUsuarioPostulacion'] == $post['IdPostulante']){
     ?>
                 <div class="comment bg-white mb-3">
                     <div class="row d-flex flex-row m-2 p-2">
@@ -80,7 +86,7 @@
                                                 echo ' <i class="bi bi-patch-check-fill align-self-center text-success"></i>';      
                                             }
                                         ?>
-                                        para cubrir tu envío.
+                                        para cubrir tu envío por $<?php echo $pst['Monto'] ?>.
                                     </span>
                                 </div>
                             </div>

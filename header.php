@@ -1,6 +1,7 @@
 <!-- NAV -->
     <nav class="navbar bg-body-tertiary d-none d-lg-block">
         <div class="container-fluid d-flex justify-content-between">
+
             <!-- logo -->
             <div class="col-2 ms-5">
                 <a class="navbar-brand" href="ResultadoBusqueda.php?filtro=mostrar_todo">
@@ -36,7 +37,6 @@
             </div>
 
         </div>
-    </div>
     </nav>
 
     <script>

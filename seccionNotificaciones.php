@@ -129,6 +129,18 @@
                                                     <p>${noti.Mensaje} - ${noti.FechaDeNotificacion}</p>
                                                 </div>`;
                         }
+                        if (!idsNotificacionesMostradas.has(noti.IdNotificacion) && noti.TipoNotificacion === "validacion") {
+                            output.innerHTML += `<div class="notif bg-white rounded text-center border" id="busqueda" style="border-color: aqua; cursor: pointer;"
+                                                    onclick="enviar()">
+                                                    <p>${noti.Mensaje} - ${noti.FechaDeNotificacion}</p>
+                                                </div>`;
+                        }
+                        if (!idsNotificacionesMostradas.has(noti.IdNotificacion) && noti.TipoNotificacion === "verificado") {
+                            output.innerHTML += `<div class="notif bg-white rounded text-center border" id="busqueda" style="border-color: aqua; cursor: pointer;"
+                                                    onclick="enviarA()">
+                                                    <p>${noti.Mensaje} - ${noti.FechaDeNotificacion}</p>
+                                                </div>`;
+                        }
                         idsNotificacionesMostradas.add(noti.IdNotificacion);
                     });
                 })
@@ -159,7 +171,13 @@
         window.location.href = `calificacion.php?IdNotificacion=${idNotificacion}&IdUsuarioCalificar=${idUsuarioCalificar}`;
     }
 
+    function enviar() {
+        window.location.href = `VerificarUsuario.php`;
+    }
 
+    function enviarA() {
+        window.location.href = `perfildeusuario.php`;
+    }
 
         setInterval(fetchNotificaciones, 1000);
     </script>

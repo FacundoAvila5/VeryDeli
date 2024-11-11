@@ -112,7 +112,7 @@
 
                 <?php if($postulanteActivo && $post['Estado'] == "Activa"){ ?>
                 <div class="alert alert-dismissible fade show m-0" role="alert" style="background-color: rgba(18, 145, 154, 0.502);">
-                    <i class="bi bi-info-circle"></i>Ahora puedes ver información adicional para completar este envio.
+                    <i class="bi bi-info-circle"></i> Ahora puedes ver información adicional para completar este envio.
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 <?php } ?>

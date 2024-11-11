@@ -64,6 +64,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $tipoUsuarioNuevo = $currentTipoUsuario;
         if ($nombreUsuario != $currentNombreUsuario) {
             $tipoUsuarioNuevo = "Normal";
+            $eliminacion = "DELETE calificaciones
+            WHERE IdUsuario = '$idUser'";
+
+            mysqli_query($conexion, $eliminacion);
         }
 
         $actualizacion = "UPDATE usuarios SET 

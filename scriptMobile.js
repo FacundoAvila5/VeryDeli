@@ -20,6 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    btnNotif.addEventListener('click', toggleNotifs);
+    (btnNotif != null) ? btnNotif.addEventListener('click', toggleNotifs) : "";
 });
 

@@ -59,6 +59,7 @@
                     ($postulantes['IdUsuarioPostulacion'] == $idusu) ? $isPostulado = true : "" ; 
                 }
                 
+
                 $sql = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario, u.Validado
                 FROM publicaciones p
                 INNER JOIN usuarios u ON p.IdUsuario = u.IdUsuario
@@ -84,7 +85,6 @@
                     $postulanteActivo = true;
                 
                 $isInactive = $post['Estado'] == "Inactiva";
-
 
             ?>
 
@@ -113,8 +113,7 @@
 
                 <?php if($postulanteActivo){ ?>
                 <div class="alert alert-dismissible fade show m-0" role="alert" style="background-color: rgba(18, 145, 154, 0.502);">
-                    <i class="bi bi-info-circle"></i> Haz sido elegido para realizar este envío. Ahora puedes ver 
-                                                            información adicional para completar el mismo.
+                    <i class="bi bi-info-circle"></i>Ahora puedes ver información adicional para completar este envio.
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 <?php } ?>

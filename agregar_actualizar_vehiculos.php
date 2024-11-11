@@ -18,23 +18,23 @@
                             <div class="invalid-feedback">Por favor, ingresa la marca del vehículo.</div>
 
                             <label for="modelo<?php echo $i; ?>" class="form-label">Modelo</label>
-                            <input type="text" class="form-control mb-3" id="modelo<?php echo $i; ?>" name="vehiculos[<?php echo $i; ?>][Modelo]" value="<?php echo isset($vehiculos[$i]) ? $vehiculos[$i]['Modelo'] : ''; ?>">
+                            <input type="text" class="form-control mb-3" id="modelo<?php echo $i; ?>" name="vehiculos[<?php echo $i; ?>][Modelo]" value="<?php echo isset($vehiculos[$i]) ? $vehiculos[$i]['Modelo'] : ''; ?> ">
                             <div class="invalid-feedback">Por favor, ingresa el modelo del vehículo.</div>
 
                             <label for="alto<?php echo $i; ?>" class="form-label">Alto del lugar donde guardara los paquetes</label>
-                            <input type="text" class="form-control mb-3" id="alto<?php echo $i; ?>" name="vehiculos[<?php echo $i; ?>][Alto]" pattern="^\d+([.,]\d+)?$" value="<?php echo isset($vehiculos[$i]) ? $vehiculos[$i]['Alto'] : ''; ?>">
+                            <input type="text" class="form-control mb-3" id="alto<?php echo $i; ?>" placeholder="Alto (cm)" name="vehiculos[<?php echo $i; ?>][Alto]" pattern="^\d+([.,]\d+)?$" value="<?php echo isset($vehiculos[$i]) ? $vehiculos[$i]['Alto'] : ''; ?>">
                             <div class="invalid-feedback">Por favor, ingresa un alto válido (número con coma o punto).</div>
 
                             <label for="ancho<?php echo $i; ?>" class="form-label">Ancho del lugar donde guardara los paquetes</label>
-                            <input type="text" class="form-control mb-3" id="ancho<?php echo $i; ?>" name="vehiculos[<?php echo $i; ?>][Ancho]" pattern="^\d+([.,]\d+)?$" value="<?php echo isset($vehiculos[$i]) ? $vehiculos[$i]['Ancho'] : ''; ?>">
+                            <input type="text" class="form-control mb-3" id="ancho<?php echo $i; ?>" placeholder="Ancho (cm)" name="vehiculos[<?php echo $i; ?>][Ancho]" pattern="^\d+([.,]\d+)?$" value="<?php echo isset($vehiculos[$i]) ? $vehiculos[$i]['Ancho'] : ''; ?>">
                             <div class="invalid-feedback">Por favor, ingresa un ancho válido (número con coma o punto).</div>
 
                             <label for="largo<?php echo $i; ?>" class="form-label">Largo del lugar donde guardara los paquetes</label>
-                            <input type="text" class="form-control mb-3" id="largo<?php echo $i; ?>" name="vehiculos[<?php echo $i; ?>][Largo]" pattern="^\d+([.,]\d+)?$" value="<?php echo isset($vehiculos[$i]) ? $vehiculos[$i]['Largo'] : ''; ?>">
+                            <input type="text" class="form-control mb-3" id="largo<?php echo $i; ?>" placeholder="Largo (cm)" name="vehiculos[<?php echo $i; ?>][Largo]" pattern="^\d+([.,]\d+)?$" value="<?php echo isset($vehiculos[$i]) ? $vehiculos[$i]['Largo'] : ''; ?>">
                             <div class="invalid-feedback">Por favor, ingresa un largo válido (número con coma o punto).</div>
 
                             <label for="capacidad<?php echo $i; ?>" class="form-label">Capacidad de Peso</label>
-                            <input type="text" class="form-control mb-3" id="capacidad<?php echo $i; ?>" name="vehiculos[<?php echo $i; ?>][Capacidad_Peso]" pattern="^\d+([.,]\d+)?$" value="<?php echo isset($vehiculos[$i]) ? $vehiculos[$i]['Capacidad_Peso'] : ''; ?>">
+                            <input type="text" class="form-control mb-3" id="capacidad<?php echo $i; ?>" placeholder="Peso (gr)" name="vehiculos[<?php echo $i; ?>][Capacidad_Peso]" pattern="^\d+([.,]\d+)?$" value="<?php echo isset($vehiculos[$i]) ? $vehiculos[$i]['Capacidad_Peso'] : ''; ?>">
                             <div class="invalid-feedback">Por favor, ingresa una capacidad de peso válida (número con coma o punto).</div>
                         </div>
                         <?php if ($i === 0): ?>

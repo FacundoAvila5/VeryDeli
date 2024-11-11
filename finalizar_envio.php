@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'ConexionBS.php'; 
 
 if (isset($_POST['idPublicacion'])) {
@@ -23,7 +24,8 @@ if (isset($_POST['idPublicacion'])) {
         $crearNotificacion = "INSERT INTO notificaciones (IdUsuario, TipoNotificacion, FechaDeNotificacion, Mensaje, IdPublicacion, Estado, IdUsuarioCalificar) 
                     VALUES ('$idPostulante', 'Envio', '$fechaHora', 'Has finalizado el envio, por favor califica al creador de la publicación.', '$idPublicacion', 0 , '$idUsuarioPublicacion')";
         mysqli_query($conexion, $crearNotificacion);
-
+        $_SESSION['success'] = true;
+        $_SESSION['msg'] = "¡Envío finalizado con éxito!";
         header("Location: PaginaPrincipal.php");
         exit(); 
     } else {

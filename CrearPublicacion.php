@@ -39,7 +39,7 @@
                 <label for="tituloPubli" class="form-label">Título de la publicación</label>
                 <input type="text" class="form-control" id="tituloPubli" name="tituloPubli" placeholder="Título*" minlength="5" required>
                 <div class="invalid-feedback">
-                    El título de la publicación es obligatorio (mínimo 5 caracteres)
+                    El título de la publicación es obligatorio (mínimo 3 caracteres)
                 </div>
             </div>
 
@@ -49,16 +49,16 @@
                 <div class="row">
                     <div class="col-md-6">
                         <label for="provinciaorigen" class="form-label"> Provincia</label>
-                        <input type="text" class="form-control" id="provinciaorigen" name="provinciaorigen" placeholder="Provincia*" minlength="5" required>
+                        <input type="text" class="form-control" id="provinciaorigen" name="provinciaorigen" placeholder="Provincia*" minlength="3" required>
                         <div class="invalid-feedback">
-                            Por favor, ingrese la provincia de origen (mínimo 5 caracteres)
+                            Por favor, ingrese la provincia de origen (mínimo 3 caracteres)
                         </div>
                     </div>
                     <div class="col-md-6">
                         <label for="Localidadorigen" class="form-label">Localidad</label>
-                        <input type="text" class="form-control" id="Localidadorigen" name="Localidadorigen" placeholder="Localidad*" minlength="5" required>  
+                        <input type="text" class="form-control" id="Localidadorigen" name="Localidadorigen" placeholder="Localidad*" minlength="3" required>  
                         <div class="invalid-feedback">
-                            Por favor, ingrese la localidad de origen (mínimo 5 caracteres)
+                            Por favor, ingrese la localidad de origen (mínimo 3 caracteres)
                         </div>
                     </div>
                 </div>
@@ -66,16 +66,16 @@
                 <div class="row">
                     <div class="col-md-6">
                         <label for="barrioorigen" class="form-label"> Barrio</label>
-                        <input type="text" class="form-control" id="barrioorigen" name="barrioorigen" placeholder="Barrio*" minlength="5" required>
+                        <input type="text" class="form-control" id="barrioorigen" name="barrioorigen" placeholder="Barrio*" minlength="3" required>
                         <div class="invalid-feedback">
-                            Por favor, ingrese el barrio de origen (mínimo 5 caracteres)
+                            Por favor, ingrese el barrio de origen (mínimo 3 caracteres)
                         </div>
                     </div>
                     <div class="col-md-6">
                         <label for="direccionorigen" class="form-label"> Dirección</label>
-                        <input type="text" class="form-control" id="direccionorigen" name="direccionorigen" placeholder="Dirección de calle*" minlength="5" required>
+                        <input type="text" class="form-control" id="direccionorigen" name="direccionorigen" placeholder="Dirección de calle*" minlength="3" required>
                         <div class="invalid-feedback">
-                            Por favor, ingrese la dirección de origen (mínimo 5 caracteres)
+                            Por favor, ingrese la dirección de origen (mínimo 3 caracteres)
                         </div>
                     </div>
                 </div>
@@ -87,32 +87,32 @@
                 <div class="row">
                     <div class="col-md-6">
                         <label for="provinciadestino" class="form-label">Provincia</label>
-                        <input type="text" class="form-control" id="provinciadestino" name="provinciadestino" placeholder="Provincia*" minlength="5" required>
+                        <input type="text" class="form-control" id="provinciadestino" name="provinciadestino" placeholder="Provincia*" minlength="3" required>
                         <div class="invalid-feedback">
-                            Por favor, ingrese la provincia de destino (mínimo 5 caracteres)
+                            Por favor, ingrese la provincia de destino (mínimo 3 caracteres)
                         </div>
                     </div>
                     <div class="col-md-6">
                         <label for="Localidaddestino" class="form-label"> Localidad</label>
-                        <input type="text" class="form-control" id="Localidaddestino" name="Localidaddestino" placeholder="Localidad*" minlength="5" required>
+                        <input type="text" class="form-control" id="Localidaddestino" name="Localidaddestino" placeholder="Localidad*" minlength="3" required>
                         <div class="invalid-feedback">
-                            Por favor, ingrese la localidad de destino (mínimo 5 caracteres)
+                            Por favor, ingrese la localidad de destino (mínimo 3 caracteres)
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <label for="barriodestino" class="form-label"> Barrio</label>
-                        <input type="text" class="form-control" id="barriodestino" name="barriodestino" placeholder="Barrio*" minlength="5" required>
+                        <input type="text" class="form-control" id="barriodestino" name="barriodestino" placeholder="Barrio*" minlength="3" required>
                         <div class="invalid-feedback">
-                            Por favor, ingrese el barrio de destino (mínimo 5 caracteres)
+                            Por favor, ingrese el barrio de destino (mínimo 3 caracteres)
                         </div>
                     </div>
                     <div class="col-md-6">
                         <label for="direcciondestino" class="form-label"> Dirección</label>
-                        <input type="text" class="form-control" id="direcciondestino" name="direcciondestino" placeholder="Dirección de calle*" minlength="5" required>    
+                        <input type="text" class="form-control" id="direcciondestino" name="direcciondestino" placeholder="Dirección de calle*" minlength="3" required>    
                         <div class="invalid-feedback">
-                            Por favor, ingrese la dirección de destino (mínimo 5 caracteres)
+                            Por favor, ingrese la dirección de destino (mínimo 3 caracteres)
                         </div>
                     </div>
                 </div>

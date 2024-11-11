@@ -328,3 +328,14 @@ con el estilo que ya esta más arriba para el < btn-search > --------- */
 #alert-box {
     z-index: 1050 !important;
 }
+
+.notification-indicator {
+    position: absolute;
+    top: 0; 
+    right: 0;
+    width: 10px;
+    height: 10px;
+    background-color: green;
+    border-radius: 50%;
+    display: none; 
+}

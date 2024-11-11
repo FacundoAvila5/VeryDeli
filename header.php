@@ -33,8 +33,13 @@
                 </div>                 
             </div>
             <div class="col-2 text-end pe-3">
-                <a href="seccionNotificaciones.php"><i class="bi bi-bell-fill fs-2" style="color:rgb(7, 64, 113);"></i></a>
+                <a href="seccionNotificaciones.php" class="position-relative">
+                    <i class="bi bi-bell-fill fs-2" style="color:rgb(7, 64, 113);"></i>
+                    <!-- Indicador de notificación -->
+                    <span id="notificationIndicator" class="notification-indicator"></span>
+                </a>
             </div>
+
 
         </div>
     </nav>
@@ -45,6 +50,98 @@
         document.getElementById("formBusqueda").submit();
     }
 </script>
+
+<script>
+    const idsNotificacionesMostradas = new Set();
+    const notificationIndicator = document.getElementById("notificationIndicator");
+
+    function fetchNotificaciones() {
+        fetch('notificaciones.php')
+            .then(response => response.json())
+            .then(data => {
+                let hasNewNotifications = false;
+                const output = document.getElementById('notificaciones');
+
+                if (output) {
+                    output.innerHTML = ''; 
+                }
+
+                data.forEach(noti => {
+                    if (!idsNotificacionesMostradas.has(noti.IdNotificacion)) {
+                        idsNotificacionesMostradas.add(noti.IdNotificacion);
+                    }
+
+                    if (noti.Estado === "0") {
+                        hasNewNotifications = true;
+                        localStorage.setItem('noti', 'block');
+                    }
+
+                    if (output) {
+                        if (noti.TipoNotificacion === "Normal") {
+                            output.innerHTML += `<div class="notif bg-white rounded text-center border" id="busqueda" style="border-color: aqua; cursor: pointer;"
+                                onclick="marcarComoVisto(${noti.IdNotificacion}, '${noti.IdPublicacion}')">
+                                <p>${noti.Mensaje} - ${noti.FechaDeNotificacion}</p>
+                            </div>`;
+                        } else if (noti.TipoNotificacion === "Envio") {
+                            output.innerHTML += `<div class="notif bg-white rounded text-center border" id="busqueda" style="border-color: aqua; cursor: pointer;"
+                                onclick="enviarDatosCalificacion(${noti.IdNotificacion}, '${noti.IdUsuarioCalificar}')">
+                                <p>${noti.Mensaje} - ${noti.FechaDeNotificacion}</p>
+                            </div>`;
+                        } else if (noti.TipoNotificacion === "validacion") {
+                            output.innerHTML += `<div class="notif bg-white rounded text-center border" id="busqueda" style="border-color: aqua; cursor: pointer;"
+                                onclick="enviar()">
+                                <p>${noti.Mensaje} - ${noti.FechaDeNotificacion}</p>
+                            </div>`;
+                        } else if (noti.TipoNotificacion === "verificado") {
+                            output.innerHTML += `<div class="notif bg-white rounded text-center border" id="busqueda" style="border-color: aqua; cursor: pointer;"
+                                onclick="enviarA()">
+                                <p>${noti.Mensaje} - ${noti.FechaDeNotificacion}</p>
+                            </div>`;
+                        }
+                    }
+                });
+
+                notificationIndicator.style.display = hasNewNotifications ? "block" : "none";
+            })
+            .catch(error => console.error('Error al obtener notificaciones:', error));
+    }
+
+    function marcarComoVisto(idNotificacion, idPublicacion) {
+        const formData = new FormData();
+        formData.append('IdNotificacion', idNotificacion);
+        
+        fetch('notificacion_leida.php', {
+            method: 'POST',
+            body: formData 
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                window.location.href = `post.php?id=${idPublicacion}`;
+            } else {
+                console.error('Error al marcar la notificación como vista:', data.message);
+            }
+        })
+        .catch(error => console.error('Error al marcar la notificación como vista:', error));
+    }
+
+    function enviarDatosCalificacion(idNotificacion, idUsuarioCalificar) {
+        window.location.href = `calificacion.php?IdNotificacion=${idNotificacion}&IdUsuarioCalificar=${idUsuarioCalificar}`;
+    }
+
+    function enviar() {
+        window.location.href = `VerificarUsuario.php`;
+    }
+
+    function enviarA() {
+        window.location.href = `perfildeusuario.php`;
+    }
+
+    setInterval(fetchNotificaciones, 100);
+</script>
+
+
+
 
 <!-- ACTUALIZACIÓN DE TIPO DE USUARIO -->
 <?php

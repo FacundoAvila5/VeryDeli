@@ -330,7 +330,7 @@
 
         <!-- columna: Notificaciones -->
             <?php
-                include 'sidebarright.php'
+                // include 'sidebarright.php'
             ?>
       </div>
 

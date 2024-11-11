@@ -23,7 +23,7 @@
         </div>
         <!-- notifs -->
         <div class="opcionbNav" id="btnNotif">
-            <button class="btn boton" id="btnNotif" ><i class="fa-regular fa-bell"></i></button>
+            <a href="seccionNotificaciones.php" class="link"><i class="fa-regular fa-bell"></i></a>
         </div>
         <?php  } ?>
 

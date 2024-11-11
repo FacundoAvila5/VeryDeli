@@ -32,8 +32,8 @@
                     </form>
                 </div>                 
             </div>
-            <div class="col-2">
-                <!-- div vacio para centrar. aca podría ir la ubicacion/direccion/etc -->
+            <div class="col-2 text-end pe-3">
+                <a href="seccionNotificaciones.php"><i class="bi bi-bell-fill fs-2" style="color:rgb(7, 64, 113);"></i></a>
             </div>
 
         </div>

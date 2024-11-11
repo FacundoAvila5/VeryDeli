@@ -4,6 +4,7 @@
 }
 </style>
 <?php $tipouser = $_SESSION['tipoUser']; ?> 
+
 <div class="bNav container-fluid bg-body-tertiary d-block d-lg-none">
       <div class="bNavIcons d-flex">
         <!-- home -->
@@ -35,6 +36,10 @@
         </div>
         <div class="opcionbNav">
             <a href="VerificarUsuario.php" class="link"><i class="bi bi-person-check bi-mobile"></i></a>
+        </div>
+        <div class="opcionbNav">
+        </div>
+        <div class="opcionbNav">
         </div>
         <?php } ?>
 

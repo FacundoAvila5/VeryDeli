@@ -20,7 +20,6 @@
         exit;
     }
     include "ConexionBS.php";
-    // include "CrearPublicacion.php";
     include "FormPostularse.php";
 
     $nombre = $_SESSION['usuario']; 
@@ -48,7 +47,18 @@
         <!-- publicaciones -->
         <div class="publicaciones col-lg-6 col-md-">
             <?php
+                $sql = "SELECT IdUsuarioPostulacion
+                FROM postulaciones
+                WHERE IdPublicacion = $idpost";
+                $queryPostulantes = mysqli_query($conexion, $sql);
+
+                $isPostulado = false ;
+                //verifica que el usuario aun no se haya postulado
+                while($postulantes = mysqli_fetch_assoc($queryPostulantes)){
+                    ($postulantes['IdUsuarioPostulacion'] == $idusu) ? $isPostulado = true : "" ; 
+                }
                 
+
                 $sql = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario, u.Validado
                 FROM publicaciones p
                 INNER JOIN usuarios u ON p.IdUsuario = u.IdUsuario
@@ -68,28 +78,12 @@
                 //id postulante
                 $postulanteElegido = $post['IdPostulante'];
 
-                //revisa si hay un postulante ya seleccionado
-                // $postulanteExists = false;
-                // if($post['IdPostulante'] != 0)
-                //     $postulanteExists = true;
-
                 //revisa si el postulante es el usuario en sesion
                 $postulanteActivo = false;
                 if($post['IdPostulante'] == $idusu)
                     $postulanteActivo = true;
                 
                 $isInactive = $post['Estado'] == "Inactiva";
-                // $idPostulacion = $post['IdPostulante'];
-
-                // $sql = "SELECT IdUsuarioPostulacion
-                // FROM postulaciones
-                // WHERE IdPostulacion = $idPostulacion";
-                // $cons = mysqli_query($conexion, $sql);
-                // $result = mysqli_fetch_assoc($cons);
-
-                // if ($result) {
-                //     $idPostulanteElegido = $result['IdUsuarioPostulacion'];
-                // } 
 
             ?>
 
@@ -118,8 +112,7 @@
 
                 <?php if($postulanteActivo && $post['Estado'] == "Activa"){ ?>
                 <div class="alert alert-dismissible fade show m-0" role="alert" style="background-color: rgba(18, 145, 154, 0.502);">
-                    <i class="bi bi-info-circle"></i> Haz sido elegido para realizar este envío. Ahora puedes ver 
-                                                            información adicional para completar el mismo.
+                    <i class="bi bi-info-circle"></i>Ahora puedes ver información adicional para completar este envio.
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 <?php } ?>
@@ -236,7 +229,7 @@
                     
                     <!-- BOTON POSTULACION -->
                     <?php
-                        if(!$dueñoPost && !$postulanteElegido){
+                        if(!$dueñoPost && !$postulanteElegido && !$isPostulado){
                     ?>
                     <div class="d-flex justify-content-end align-items-center me-3">
                     <button class="btn btn-deli link" onclick="validarPostulacion()"> 

@@ -81,7 +81,7 @@
                     $_SESSION['tipoUser']='Normal';
                     // ** CARTEL PERDIO LA CATEGORIA DE RESPONSABLE (POR BAJAS CALIFICACIONES) **
                     $_SESSION['success'] = false;
-                    $_SESSION['msg'] = "¡Malas noticias! A perdido su categoría de responsable.";
+                    $_SESSION['msg'] = "¡Malas noticias! Ha perdido su categoría de responsable.";
                 }
             }
 

@@ -23,7 +23,10 @@ if (isset($_GET['id'])) {
                 $sql_update = "UPDATE usuarios SET Contrasenia = '$nueva_contrasenia_encriptada' WHERE IdUsuario = '$idUsu'";
                 if (mysqli_query($conexion, $sql_update)) {
                     $_SESSION['success_message'] = "Tu contraseña ha sido cambiada exitosamente."; 
-                    header("Location: ../login.php"); 
+                    echo "<script>
+                        alert('Tu contraseña ha sido cambiada exitosamente.');
+                        window.location.href = '../login.php';
+                    </script>";
                     exit();
                 } else {
                     $message = "Hubo un error al cambiar la contraseña. Intenta nuevamente.";
@@ -64,7 +67,7 @@ include "../DesconexionBS.php";
                             <div class="alert alert-success"><?php echo $success_message; ?></div>
                         <?php endif; ?>
 
-                        <form method="POST" action="resetear-contraseña.php?id=<?php echo urlencode($idUsu); ?>">
+                        <form method="POST" action="resetear-contrasenia.php?id=<?php echo urlencode($idUsu); ?>">
                             <div class="mb-3">
                                 <label for="nueva_contrasenia" class="form-label">Nueva Contraseña</label>
                                 <input type="password" class="form-control" id="nueva_contrasenia" name="nueva_contrasenia" required>

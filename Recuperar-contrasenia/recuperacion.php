@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $nombre_usuario = $user['NombreUsuario'];
             $idUsu = $user['IdUsuario'];
 
-            $reset_link = "http://localhost/VeryDeli/VeryDeli/Recuperar-contraseña/resetear-contraseña.php?id=" . urlencode($idUsu);
+            $reset_link = "http://localhost/VeryDeli/VeryDeli/Recuperar-contrasenia/resetear-contrasenia.php?id=" . urlencode($idUsu);
 
             $mail = new PHPMailer(true);
 

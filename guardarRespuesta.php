@@ -16,10 +16,10 @@ if(isset($rInput)){
     date_default_timezone_set('America/Argentina/Buenos_Aires');
     $fechaHora = date('d/m/Y H:i');
 
-    $queryIdPublicacion = "SELECT IdPublicacionMensaje FROM mensajes WHERE IdMensaje = '$idMje'";
+    $queryIdPublicacion = "SELECT IdUsuarioMensaje FROM mensajes WHERE IdMensaje = '$idMje'";
     $resultado = mysqli_query($conexion, $queryIdPublicacion);
     $fila = mysqli_fetch_assoc($resultado);
-    $idPublicacionMensaje = $fila['IdPublicacionMensaje'];
+    $idPublicacionMensaje = $fila['IdUsuarioMensaje'];
 
     $crearNoti = "INSERT INTO notificaciones (IdUsuario, TipoNotificacion, FechaDeNotificacion, Mensaje, IdPublicacion, Estado, IdUsuarioCalificar) 
                   VALUES ('$idPublicacionMensaje', 'Normal', '$fechaHora', 'Han respondido a tu consulta', '$idpost', 0 , 0)";

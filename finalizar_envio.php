@@ -1,9 +1,8 @@
 <?php
-include 'ConexionBS.php'; // Asegúrate de que este archivo tiene la conexión a la base de datos
+include 'ConexionBS.php'; 
 
-// Verifica que el ID de la publicación se haya recibido correctamente
 if (isset($_POST['idPublicacion'])) {
-    $idPublicacion = intval($_POST['idPublicacion']); // Convertir a entero para evitar inyección SQL
+    $idPublicacion = intval($_POST['idPublicacion']); 
     $idPostulante = intval($_POST['idPostulante']);
 
     $sql = "UPDATE publicaciones SET Estado = 'Inactiva' WHERE IdPublicacion = $idPublicacion";

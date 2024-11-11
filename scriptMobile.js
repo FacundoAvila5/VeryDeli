@@ -9,8 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (screenWidth < 992 || windowWidth < 992) {
             console.log('Toggling notifications');
-            // if(!colPubli.classList.contains("d-none"))
-            //     colPubli.classList.add("d-none");
 
             if(colPubli != null) // && !colPubli.classList.contains("d-none")
                 colPubli.classList.add("d-none");

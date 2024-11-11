@@ -4,6 +4,7 @@
 }
 </style>
 <?php $tipouser = $_SESSION['tipoUser']; ?> 
+
 <div class="bNav container-fluid bg-body-tertiary d-block d-lg-none">
       <div class="bNavIcons d-flex">
         <!-- home -->

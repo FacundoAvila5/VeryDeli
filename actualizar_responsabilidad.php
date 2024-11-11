@@ -11,6 +11,7 @@
     
     switch ($tipo) {
         case 'Normal': //USUARIO NORMAL
+            
             //Controla ultimas 5 calificaciones para asignar tipo responsable
             $sql= "SELECT Puntaje 
                 FROM calificaciones 

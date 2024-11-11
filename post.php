@@ -20,7 +20,6 @@
         exit;
     }
     include "ConexionBS.php";
-    // include "CrearPublicacion.php";
     include "FormPostularse.php";
 
     $nombre = $_SESSION['usuario']; 

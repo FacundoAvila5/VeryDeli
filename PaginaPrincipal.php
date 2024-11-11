@@ -222,10 +222,7 @@ include "CrearPublicacion.php";
             
         </div>
 
-        <!-- columna: Notificaciones -->
-            <?php
-                include 'sidebarright.php'
-            ?>
+            
     </div>
 
      <?php include 'PiedePagina.php'; ?>

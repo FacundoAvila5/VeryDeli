@@ -76,6 +76,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             WHERE IdUsuario = '$idUser'";
 
         if (mysqli_query($conexion, $actualizacion)) {
+
+            $_SESSION["usuario"] = $nombreUsuario." ".$apellidoUsuario;
+
             header("Location: perfildeusuario.php");
             exit();
         } else {

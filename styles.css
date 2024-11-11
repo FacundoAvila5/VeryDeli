@@ -1,10 +1,22 @@
-body{
-    background-color: rgb(243, 243, 243) !important;
-}
 #logo{
     height: 50px;
     width: auto;
     margin: 5px;
+}
+.btn-deli{ 
+    background-color: rgb(18, 146, 154) !important;
+    color: white !important; 
+}
+body{
+    background-color: rgb(243, 243, 243) !important;
+}
+#contenido-principal{
+    min-height: 100vh;
+}
+@media (min-width: 1439px) {
+    #contenido-principal{
+        min-height: 90vh;
+    }
 }
 
 /* TEXTO */
@@ -22,20 +34,14 @@ body{
 
 .txtExtraInfo{ 
     /* azul chillon */
-    /* color: rgb(7, 64, 113); */
-
-    /* cyan */
-    /* color: rgb(18, 146, 154); */
-
-    /* azul oscuro */
-    /* color: rgb(13, 40, 75); */
+    color: rgb(7, 64, 113);
 
     /* highlight */
-    background: linear-gradient(
+    /* background: linear-gradient(
         to bottom,
         transparent 50%,
         rgba(18, 145, 154, 0.301) 50%
-    );
+    ); */
 }
 .fecha{
     font-size: small;
@@ -109,9 +115,22 @@ body{
     width: 40px;
     height: 40px;
 }
-.btn-deli{ 
-    background-color: rgb(18, 146, 154) !important;
-    color: white !important; 
+.postDetailsPost{
+    margin-left: 2.5rem;
+}
+@media (max-width: 425px) {
+    .postDetailsPost{
+        margin-left: 1rem;
+    }
+    #infoUserPost{
+        margin-bottom: 0.5rem;
+    }
+    #nombreUserPost{
+        display: flex;
+        flex-direction: column;
+        align-items: unset;
+        justify-content: center;
+    }
 }
 
 /* COMENTARIOS */
@@ -133,6 +152,10 @@ body{
 }
 
 /* NOTIFICACIONES */
+#notificaciones{
+    max-height: 20rem;
+    overflow-y: auto;
+}
 .notif{
     margin: 10px 2px;
 }
@@ -226,6 +249,20 @@ body{
     text-align: center;
 }
 
+@media (max-width: 768px) {
+    .container-principal {
+        padding-bottom: 60px; 
+    }
+    #pieDePagina{
+        padding-bottom: 13%; 
+    }
+}
+@media (min-width: 769px) and (max-width: 991px) {
+    #pieDePagina{
+        padding-bottom: 7%; 
+    }
+}
+
 /* Validar usuarios */
 .botonpdf{
     /* text-decoration: none; */
@@ -242,9 +279,10 @@ body{
     background-color: transparent;
 }
 
-
+/* -------- no entiendo pq esta esto. si hay algo importante combinarlo 
+con el estilo que ya esta más arriba para el < btn-search > --------- */
 /* busquedas */
-.btn-search {
+/* .btn-search {
     background-color: rgb(245, 244, 244)!important;
     color: black !important;
     padding: 7px 16px !important;
@@ -253,28 +291,7 @@ body{
     text-align: left !important;
     z-index: 4 !important;
     position: relative !important;
-}
-
-
-/* No lee los estilos. Los puse en footermobile.php*/
- /* .opcionbNav .bi-person-check {
-    font-size: 1.3rem; 
 } */
-
-
-@media (max-width: 768px) {
-    .container-principal {
-        padding-bottom: 60px; 
-    }
-    #pieDePagina{
-        padding-bottom: 13%; 
-    }
-}
-@media (min-width: 769px) and (max-width: 991px) {
-    #pieDePagina{
-        padding-bottom: 7%; 
-    }
-}
 
 .inactive {
     background-color: #e2e4e6 !important; 

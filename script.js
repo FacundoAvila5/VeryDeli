@@ -1,7 +1,19 @@
+window.addEventListener('load', () => {
+    buoy = document.getElementById('buoy')
+    if(buoy != null){
+        active = buoy.getAttribute('data-value')
+            if(active)
+            txt = document.querySelectorAll('.sel-txtExtra')
+                txt.forEach(element => {
+                    element.classList.add('txtExtraInfo')
+                });
+    }
+});
+
 var c = document.getElementById("comentarios");
 var p = document.getElementById("postulaciones");
 var d = document.getElementById("linkBtnPostu");
-var iduser = document.getElementById("idUser").value;
+var iduser = document.getElementById("idDeUser").value;
 var iduserpost = document.getElementById("idUserPost").value;
 
 if(iduser == iduserpost){
@@ -19,15 +31,9 @@ if(iduser == iduserpost){
     }
 }
 
+//mostrar y ocultar interfaz de respuesta
 function Responder(boton){
     const idMensaje = boton.value
     rta = document.getElementById(idMensaje);
     rta.classList.toggle("d-none");
 }
-
-//  AGREGAR ESTE EVENTO onclick A LA NOTIFICACION <<TE HAN ELEGIDO PARA REALIZAR ESTE ENVIO>>:
-//  value="<?php echo $aquiVaElIdPostDePostulacion; ?>" onclick="mostrarInfoExtra(this)"
-
-// function mostrarInfoExtra(post){
-
-// }

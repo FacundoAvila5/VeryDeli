@@ -10,10 +10,10 @@
     <?php if(($idUserPost != $idusu) && !$postulanteElegido){ ?>
     <div class="comment bg-white">
         <div class="row p-2 mb-3">
-            <div class="col-1 d-flex justify-content-start">
+            <div class="col-2 col-md-1 d-flex justify-content-start me-lg-3 me-xl-0">
                 <img class="postUserImg rounded-circle" src="<?php echo $foto; ?>">
             </div>
-            <div class="col-11">
+            <div class="col-10 col-md-11 col-lg-10 col-xl-11">
                 <form method="post" action="guardarMensaje.php" class="cForm">
                     <input type="hidden" name="idpost" value="<?php echo $idpost; ?>">
                     <input type="hidden" name="fecha" value="<?php echo $fecha; ?>">
@@ -40,10 +40,10 @@
     <!-- mensaje -->
     <div class="comment bg-white">
         <div class="row p-2 mb-3">
-            <div class="col-1 d-flex justify-content-start">
+            <div class="col-2 col-md-1 d-flex justify-content-start me-lg-3 me-xl-0">
                 <img class="postUserImg rounded-circle" src="<?php echo $mje['ImagenUsuario']; ?>">
             </div>
-            <div class="col-11 d-flex align-items-center">
+            <div class="col-10 col-md-11 col-lg-10 col-xl-11 d-flex align-items-center">
                 <div class="row">
                     <div class="col-12">
                         <span class="txt">
@@ -105,10 +105,10 @@
                 <div class="col">
                     <div class="comment bg-white">
                         <div class="row p-2">
-                            <div class="col-1 d-flex justify-content-start">
+                            <div class="col-2 col-md-1 d-flex justify-content-start me-lg-3 me-xl-0">
                                 <img class="postUserImg rounded-circle" src="<?php echo $rta['ImagenUsuario']; ?>">
                             </div>
-                            <div class="col-11 d-flex align-items-center">
+                            <div class="col-10 col-md-11 col-lg-10 col-xl-11 d-flex align-items-center">
                                 <div class="row">
                                     <div class="col-12">
                                         <span class="txt">
@@ -124,9 +124,11 @@
                                     <div class="col-12">
                                         <?php echo $rta['ContenidoRespuesta']; ?>
                                     </div>
-                                    <div class="col-12">
-                                        <button class="btn btn-sm boton redLink" data-bs-toggle="modal" data-bs-target="#modalDeleteReply">Eliminar</button>
-                                    </div>
+                                    <?php if($rta['IdUsuarioRespuesta'] == $idusu){ ?>
+                                        <div class="col-12">
+                                            <button class="btn btn-sm boton redLink" data-bs-toggle="modal" data-bs-target="#modalDeleteReply">Eliminar</button>
+                                        </div>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>
@@ -144,10 +146,10 @@
         <div class="col">
             <div class="comment bg-white">
                 <div class="row p-2">
-                    <div class="col-1 d-flex justify-content-start">
+                    <div class="col-2 col-md-1 d-flex justify-content-start me-lg-3 me-xl-0">
                         <img class="postUserImg rounded-circle" src="<?php echo $foto; ?>">
                     </div>
-                    <div class="col-11">
+                    <div class="col-10 col-md-11 col-lg-10 col-xl-11">
                         <form method="post" action="guardarRespuesta.php" class="cForm">
                             <input type="hidden" name="idpost" value="<?php echo $idpost; ?>">
                             <input type="hidden" name="idMje" value="<?php echo $idMje; ?>">
@@ -170,10 +172,6 @@
     <div class="modal fade" id="modalDeleteMessage" tabindex="-1" aria-labelledby="modalDeleteMessage" aria-hidden="true">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
-                <!-- <div class="modal-header">
-                    <h1 class="modal-title fs-5">¿Eliminar comentario?</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div> -->
                 <div class="modal-body">
                         ¿Eliminar comentario?
                 </div>

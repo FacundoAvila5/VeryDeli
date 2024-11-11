@@ -52,8 +52,8 @@
     $user= $_SESSION["idUser"];
 
     $con_pub = "SELECT 'publicacion' AS tipo, IdPublicacion AS Id, IdUsuario, FechaPublicacion AS Fecha, Titulo, IdPublicacion 
-    FROM publicaciones 
-    WHERE IdUsuario = '".$user."' ";
+                FROM publicaciones 
+                WHERE IdUsuario = '".$user."' ";
     $con_post = "SELECT 'postulacion' AS tipo, p.IdPostulacion AS Id, p.IdUsuarioPostulacion AS IdUsuario, p.FechaPostulacion AS Fecha, pp.Titulo, pp.IdPublicacion 
                 FROM postulaciones p 
                 JOIN publicaciones pp ON p.IdPublicacion = pp.IdPublicacion

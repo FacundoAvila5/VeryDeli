@@ -49,8 +49,9 @@ include "CrearPublicacion.php";
 
     <!-- HEADER -->
     <?php
-        include 'MensajeExito.php';
         include 'header.php';
+        include 'MensajeExito.php';
+
     ?>
 
     <!-- CONTENIDO -->

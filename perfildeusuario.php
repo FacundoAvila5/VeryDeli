@@ -44,7 +44,7 @@
     $vehiculos = mysqli_fetch_all($resultadoVehiculos, MYSQLI_ASSOC);
     include 'modificarinformacionpersonal.php';
     include 'agregar_actualizar_vehiculos.php';
-    include 'cambiar_contraseña.php';
+    include 'cambiar_contrasenia.php';
 
     $usid = $_SESSION["idUser"]; 
     $consultarevision = "SELECT * FROM validaciones WHERE IdUsuarioValidacion = '$usid'";
@@ -128,7 +128,7 @@
                     </div>
                     <div class="row">
                         <div class="col-12 d-flex align-items-center">
-                            <button class="btn text-white" style="background-color: rgb(18, 146, 154); border-color: rgb(18, 146, 154);" data-bs-toggle="modal" data-bs-target="#cambiarContraseña">
+                            <button class="btn text-white" style="background-color: rgb(18, 146, 154); border-color: rgb(18, 146, 154);" data-bs-toggle="modal" data-bs-target="#cambiarContrasenia">
                             <i class="bi bi-eye-slash-fill"> </i>Cambiar Contraseña</button>
                         </div>
                     </div>

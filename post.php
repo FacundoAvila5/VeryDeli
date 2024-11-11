@@ -110,7 +110,7 @@
 
                 </div>
 
-                <?php if($postulanteActivo){ ?>
+                <?php if($postulanteActivo && $post['Estado'] == "Activa"){ ?>
                 <div class="alert alert-dismissible fade show m-0" role="alert" style="background-color: rgba(18, 145, 154, 0.502);">
                     <i class="bi bi-info-circle"></i>Ahora puedes ver información adicional para completar este envio.
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -128,7 +128,6 @@
                                     if ($post['Validado'] == 1) {
                                         echo ' <i class="bi bi-patch-check-fill align-self-center user-check"></i>';      
                                     }
-
                                     if ($postulanteElegido && $post['Estado'] == "Activa" && !$postulanteActivo) {
                                 ?>
                                     <span class="badge text-bg-secondary">Publicación pausada</span>
@@ -251,7 +250,7 @@
                         <div class="d-flex justify-content-end align-items-center me-3">
                             <form action="finalizar_envio.php" method="POST">
                                 <input type="hidden" name="idPublicacion" value="<?php echo $idpost; ?>">
-                                <input type="hidden" name="idPostulante" value="<?php echo $idPostulanteElegido; ?>">
+                                <input type="hidden" name="idPostulante" value="<?php echo $postulanteElegido; ?>">
                                 <button type="submit" class="btn btn-deli">
                                     <span class="txt">Finalizar envío</span>
                                 </button>

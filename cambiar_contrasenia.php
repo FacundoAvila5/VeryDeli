@@ -1,5 +1,5 @@
 <body>
-    <div class="modal fade" id="cambiarContraseña" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+    <div class="modal fade" id="cambiarContrasenia" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -7,7 +7,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="w-75 needs-validation" id="changePasswordForm" method="POST" action="actualizar_contraseña.php" novalidate>
+                    <form class="w-75 needs-validation" id="changePasswordForm" method="POST" action="actualizar_contrasenia.php" novalidate>
                         <div class="mb-3">
                             <label for="nuevaContrasena" class="form-label">Nueva Contraseña</label>
                             <input type="password" class="form-control" id="nuevaContrasena" name="nuevaContrasena" required>

@@ -147,5 +147,8 @@
 <?php
     if (basename($_SERVER['PHP_SELF']) !== 'perfildeusuario.php') {
         include 'actualizar_responsabilidad.php';
+
+        // ELIMINAR NOTIFICACIONES DE CALIFICACION CADUCADAS
+        include 'verificar_7DiasCalificacion.php';
     }
 ?>

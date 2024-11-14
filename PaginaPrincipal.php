@@ -221,6 +221,9 @@ include "CrearPublicacion.php";
             ?>
             
         </div>
+        <div class="col-lg-3 d-none d-lg-block text-center p-3">
+            <!-- div utilizado para que no se desplacen las publicaciones -->
+        </div>
 
             
     </div>

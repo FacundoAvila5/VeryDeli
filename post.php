@@ -121,7 +121,7 @@
                     <div class="row m-auto">
                         <!-- USER INFO -->
                         <div class="col-10 p-0 d-flex flex-row align-items-center" id="infoUserPost">
-                            <img class="postUserImg rounded-circle me-2" src="<?php echo $post['ImagenUsuario']; ?>">
+                            <img class="postUserImg rounded-circle me-2" src="<?php echo $post['ImagenUsuario']; ?> ">
                             <div id="nombreUserPost">
                                 <span class="txt"><?php echo $post['NombreUsuario']. " " . $post['ApellidoUsuario']. " "?></span>
                                 <?php
@@ -315,7 +315,14 @@
             ?>
                 <div id="postBottom mb-4">
                     <?php
-                        include 'comentarios.php';
+                        // CONTROL: MUESTRA COMENTARIOS SI ESTA POSTULADO
+                        $consulta_sql= "SELECT * FROM postulaciones 
+                                        WHERE IdPublicacion = '".$idpost."' AND IdUsuarioPostulacion = '".$idusu."'";
+                        $controlar_postulante= mysqli_query ($conexion, $consulta_sql);
+
+                        if (mysqli_num_rows($controlar_postulante)>0) {
+                            include 'comentarios.php';
+                        }
                     ?>
                     <?php
                         include 'postulaciones.php';

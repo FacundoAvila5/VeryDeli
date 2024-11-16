@@ -31,7 +31,7 @@
         <?php if(!$responsable && $postLimit){ ?>
           <div class="alert alert-danger mb-2" role="alert">
               Alcanzaste el límite de <strong>1</strong> postulación en curso para tu nivel de usuario.
-              Para más información haz <a href="preguntasFrecuentes.php" class="alert-link">click aquí</a>.
+              Para más información haz <a href="preguntasFrecuentes.php#why_responsable" class="alert-link">click aquí</a>.
           </div>
         <?php } ?>
 

@@ -32,7 +32,7 @@
         }
     </style>
 
-    <title>VeryDeli</title>
+    <title>Actividad</title>
 </head>
 <body>
     <?php 

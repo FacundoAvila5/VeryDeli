@@ -3,11 +3,20 @@
 
     date_default_timezone_set('America/Argentina/Buenos_Aires');
     $fecha = date('d/m/Y');
+
+    // CONTROL: MUESTRA COMENTARIOS SI ESTA POSTULADO
+    $consulta_sql= "SELECT * FROM postulaciones 
+    WHERE IdPublicacion = '".$idpost."' AND IdUsuarioPostulacion = '".$idusu."'";
+    $controlar_postulante= mysqli_query ($conexion, $consulta_sql);
+
+    (mysqli_num_rows($controlar_postulante)>0) ? $postulado = true : $postulado = false;
 ?>
 
-<div id="comentarios">
-    <!-- *** PREGUNTA/MENSAJE = no es dueño de la publi = usuario en sesion -->
-    <?php if(($idUserPost != $idusu) && !$postulanteElegido){ ?>
+<div id="comentarios"> 
+    <?php if(($dueñoPost || $postulado || $postulanteActivo)){ 
+
+    // *** PREGUNTA/MENSAJE = no es dueño de la publi || esta postulado
+    if(!$dueñoPost){ ?>
     <div class="comment bg-white">
         <div class="row p-2 mb-3">
             <div class="col-2 col-md-1 d-flex justify-content-start me-lg-3 me-xl-0">
@@ -206,5 +215,6 @@
             </div>
         </div>
     </div>
+    <?php } ?>
 
 </div>

@@ -246,7 +246,7 @@
                     ?>
 
                     <!-- Botón de "Finalizar envío" solo para el postulante -->
-                    <?php if ($postulanteElegido && $idusu == $postulanteElegido && $post['Estado'] !== "Inactiva") { ?>
+                    <?php if ($postulanteActivo && $post['Estado'] !== "Inactiva") { ?>
                         <div class="d-flex justify-content-end align-items-center me-3">
                             <form action="finalizar_envio.php" method="POST">
                                 <input type="hidden" name="idPublicacion" value="<?php echo $idpost; ?>">
@@ -315,14 +315,7 @@
             ?>
                 <div id="postBottom mb-4">
                     <?php
-                        // CONTROL: MUESTRA COMENTARIOS SI ESTA POSTULADO
-                        $consulta_sql= "SELECT * FROM postulaciones 
-                                        WHERE IdPublicacion = '".$idpost."' AND IdUsuarioPostulacion = '".$idusu."'";
-                        $controlar_postulante= mysqli_query ($conexion, $consulta_sql);
-
-                        if (mysqli_num_rows($controlar_postulante)>0) {
                             include 'comentarios.php';
-                        }
                     ?>
                     <?php
                         include 'postulaciones.php';

@@ -25,7 +25,7 @@
 
                         <?php if ($usuario['TipoUsuario'] === 'Responsable') { ?>
                             <small class="text-danger">
-                                Si cambia el nombre, perderá la categoría de usuario responsable.  <a href="preguntasFrecuentes.php" class="alert-link">Más información.</a>
+                                Si cambia el nombre, perderá el nivel de usuario responsable.  <a href="preguntasFrecuentes.php#lost_responsable" class="alert-link">Más información.</a>
                             </small>
                         <?php } ?>
                     </div>

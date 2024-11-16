@@ -73,7 +73,9 @@ include "CrearPublicacion.php";
             FROM publicaciones p
             INNER JOIN usuarios u ON p.IdUsuario = u.IdUsuario
             WHERE Estado = 'Activa' 
-            ORDER BY p.IdPublicacion DESC";
+            ORDER BY p.IdPublicacion DESC 
+            ";
+            //LIMIT 10
             $publicaciones = mysqli_query($conexion, $sql);
             $content = true;
 
@@ -206,6 +208,10 @@ include "CrearPublicacion.php";
 
                 <?php
                 }
+
+                echo '<div class="d-flex justify-content-center align-items-center">
+                        <a href="" class="link">Cargar más publicaciones</a>
+                    </div>';
             } 
                 
             if (!$content) { ?>

@@ -28,7 +28,7 @@ if(isset($monto) && isset($comentario)){
     mysqli_query($conexion, $crearNoti);
     $_SESSION['success'] = true;
     $_SESSION['msg'] = "¡Postulación realizada con éxito!";
-    header("Location: PaginaPrincipal.php?". session_id());
+    header("Location: post.php?id=" .$idPubli);
 }
 
 include "DesconexionBS.php"

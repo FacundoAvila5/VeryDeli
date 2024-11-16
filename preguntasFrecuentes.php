@@ -32,7 +32,7 @@
         }
     </style>
 
-    <title>VeryDeli</title>
+    <title>Preguntas frecuentes</title>
 </head>
 <body>
     <?php 
@@ -44,26 +44,8 @@
     }
     
     include "ConexionBS.php";
-
     include 'header.php';
-
     include "CrearPublicacion.php";
-    
-    $user= $_SESSION["idUser"];
-
-    $con_pub = "SELECT 'publicacion' AS tipo, IdPublicacion AS Id, IdUsuario, FechaPublicacion AS Fecha, Titulo, IdPublicacion 
-                FROM publicaciones 
-                WHERE IdUsuario = '".$user."' ";
-    $con_post = "SELECT 'postulacion' AS tipo, p.IdPostulacion AS Id, p.IdUsuarioPostulacion AS IdUsuario, p.FechaPostulacion AS Fecha, pp.Titulo, pp.IdPublicacion 
-                FROM postulaciones p 
-                JOIN publicaciones pp ON p.IdPublicacion = pp.IdPublicacion
-                WHERE p.IdUsuarioPostulacion = '".$user."' ";
-
-
-    // tipo / Id / IdUsuario / Fecha / Titulo(publicacion)
-    $con_historial = "($con_pub) UNION ($con_post) ORDER BY Fecha DESC"; 
-
-    $resultado = mysqli_query($conexion, $con_historial); 
 
     ?>
     <div class="contenedor container-fluid">
@@ -73,18 +55,47 @@
             ?>
 
             <div class="mx-auto p-0 col-11 col-md-5 mb-3" > 
-                <div class="text-center justify-content-start mx-auto pt-4 pb-3"> 
-                    <h3>Preguntas Frecuentes</h3>
+                <div class="text-center mx-auto pt-4 pb-2"> 
+                    <h4>Preguntas Frecuentes</h4>
                 </div>    
                 <div id="seccion-faq">
-                    <h5>¿Qué es un 'usuario responsable'?</h5>
-                        Un usuario responsable es aquel usuario que cuente con más de 5 calificaciones con un 80% de puntaje.
-                        Al ser un usuario responsable, podrás publicar y postularte sin ninguna limitación. Por el contrario, los usuarios no responsables
-                        sólo pueden tener un total de (3) publicaciones y (1) postulación activa.
-                    <h5>¿Por qué perdí mi nivel de 'usuario responsable'?</h5>
-                        Tu nivel de usuario se verá afectado en todo momento por el puntaje de tus calificaciones. Intenta de ofrecer siempre un buen servicio!
-                        Al mismo tiempo, cambiar tu nombre en nuestra plataforma también te quitará el nivel de responsable. Tenlo en cuenta a la hora de tomar
-                        esta decisión.
+                    <div id="what_responsable" class="pt-1">
+                        <h5>¿Qué es un usuario responsable?</h5>
+                        Un usuario responsable es aquel que cuente con más de 5 calificaciones que en promedio den una puntuación del 80% o más.
+                        Es decir, todo usuario con una puntuación de 4 estrellas (4★) o superior es considerado un usuario responsable. <br>
+                    </div>
+                    <div id="why_responsable" class="pt-3">
+                    <h5>¿Por qué ser un usuario responsable?</h5>
+                        Al ser un usuario responsable, podrás publicar y postularte sin limitación alguna. Por el contrario, los usuarios no cuenten con el nivel de «Responsable»
+                        sólo podrán tener un total de <span class="link">3</span> publicaciones activas y <span class="link">1</span> postulación en curso.
+                    </div>
+                    <div id="how_responsable" class="pt-3">
+                        <h5>¿Cómo ser un usuario responsable?</h5>
+                        Para alcanzar el nivel de usuario responsable, sólo tienes que asegurarte de obtener 5 calificaciones consecutivas con un puntaje positivo. 
+                        ¡Es así de simple! 
+                    </div>
+                    <div id="lost_responsable" class="pt-3">
+                        <h5>¿Por qué perdí mi nivel de usuario responsable?</h5>
+                        <p>Tu nivel de usuario se verá afectado en todo momento por el promedio de tus calificaciones. Si tu promedio es 
+                        menor a 4 estrellas (4★), perderás tu nivel de «Responsable». ¡Intenta ofrecer siempre un buen servicio!</p>
+                        Al mismo tiempo, los siguientes eventos harán que pierdas tu nivel de «usuario responsable»:
+                        <ul>
+                            <li>
+                                Cambiar tu nombre en nuestra plataforma. Tenlo en cuenta a la hora de tomar esta decisión.
+                            </li>
+                            <li>
+                                Recibir 2 penalizaciones consecutivas.
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="penalizacion" class="pt-2">
+                        <h5>¿Por qué he sido penalizado?</h5>
+                        Una vez que finalices un envío, o que el postulante a quién hayas elegido finaliza el tuyo, debes calificar tu experiencia con el servicio.
+                        Se otorga el tiempo total de <span class="link">una semana</span> para completar esta acción, o de lo contrario 
+                        tu cuenta será penalizada con 1 calificación negativa. <br>
+                        Las calificaciones negativas no impactan directamente en tu promedio de puntuaciones, pero obtener 
+                        2 penalizaciones consecutivas harán que pierdas tu nivel de «Responsable».
+                    </div>
                 </div>
             </div>
 

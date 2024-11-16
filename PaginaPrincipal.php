@@ -71,7 +71,8 @@ include "CrearPublicacion.php";
             include "BusquedasMobile.php";
             $sql = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario, u.Validado
             FROM publicaciones p
-            INNER JOIN usuarios u ON p.IdUsuario = u.IdUsuario 
+            INNER JOIN usuarios u ON p.IdUsuario = u.IdUsuario
+            WHERE Estado = 'Activa' 
             ORDER BY p.IdPublicacion DESC";
             $publicaciones = mysqli_query($conexion, $sql);
             $content = true;
@@ -98,6 +99,7 @@ include "CrearPublicacion.php";
                 $sql = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario, u.Validado
                 FROM publicaciones p
                 INNER JOIN usuarios u ON p.IdUsuario = u.IdUsuario 
+                WHERE Estado = 'Activa'
                 ORDER BY p.IdPublicacion DESC";
                 $publicaciones = mysqli_query($conexion, $sql);
                 $content = true;

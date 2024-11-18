@@ -9,7 +9,6 @@
         ($_SESSION['tipoUser']=='Responsable') ? $responsable = true : $responsable = false;
 
         $testt = $_SESSION['tipoUser'];
-        echo "<script> console.log('Post| tipo: ". $testt. " - state: ". $responsable ."') </script>";
 
         // publicaciones activas
         $sql = "SELECT Estado
@@ -162,7 +161,7 @@
             <label class="form-label">¿Es frágil?</label>
             <div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="fragil" id="fragilSi" value="sí" required>
+                    <input class="form-check-input" type="radio" name="fragil" id="fragilSi" value="si" required>
                     <label class="form-check-label" for="fragilSi">Sí</label>
                 </div>
                 <div class="form-check form-check-inline">

@@ -100,6 +100,8 @@
     include 'MensajeExito.php';
     include 'header.php';
     include "CrearPublicacion.php";
+    include 'calcular_prom.php';
+    $promedio = calcularPromedio($_SESSION['idUser']);
     ?>
 
     <!-- <div class="container-principal"> -->
@@ -133,13 +135,19 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="row">
+                    <div class="row mb-1">
+                        <div class="col-12">
+                            <i class="bi bi-star-fill" style="color: rgb(18, 146, 154);"></i>
+                            <span class="txt"><?php echo ($promedio == '-') ? 0 : $promedio ?></span>
+                        </div>
+                    </div>
+                    <div class="row mb-1">
                         <div class="col-12">
                             <i class="bi bi-envelope-fill me-2"></i>
                             <span><?php echo $usuario['EmailUsuario'] ?></span>
                         </div>
                     </div>
-                    <div class="row mb-1">
+                    <div class="row mb-2">
                         <div class="col-12">
                             <i class="bi bi-telephone-fill me-2"></i>
                             <span><?php echo $usuario['TelefonoUsuario'] ?></span>

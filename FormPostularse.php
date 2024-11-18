@@ -9,7 +9,7 @@
     ($_SESSION['tipoUser']=='Responsable') ? $responsable = true : $responsable = false;
 
     $testt = $_SESSION['tipoUser'];
-    echo "<script> console.log('Postu| tipo: ". $testt. " - state: ". $responsable ."') </script>";
+    //echo "<script> console.log('Postu| tipo: ". $testt. " - state: ". $responsable ."') </script>";
 
     // postulaciones en publicaciones activas
     $sql = "SELECT p.Estado

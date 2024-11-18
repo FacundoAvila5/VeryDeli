@@ -17,6 +17,9 @@
             flex-direction: column;
             min-height: 100vh;
             margin: 0;
+        }
+
+        body, .bNav{
             overflow-x: hidden;
         }
 

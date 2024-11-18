@@ -67,13 +67,19 @@
                 $consulta = mysqli_query($conexion, $sql);
                 $post = mysqli_fetch_assoc($consulta);
 
+
                 // id del dueño de la publicacion
                 $idUserPost = $post['IdUsuario'];
 
-                //revisa si el usuario en sesion es el dueño del post
+                //calcula el promedio del dueño de la publicacion
+                include 'calcular_prom.php';
+                $promedio = calcularPromedio($idUserPost);
+
+                // revisa si el usuario en sesion es el dueño del post
                 $dueñoPost = false;
                 if ($idusu == $idUserPost)
                     $dueñoPost = true;
+
 
                 //id postulante
                 $postulanteElegido = $post['IdPostulante'];
@@ -83,6 +89,7 @@
                 if($post['IdPostulante'] == $idusu)
                     $postulanteActivo = true;
                 
+
                 $isInactive = $post['Estado'] == "Inactiva";
 
             ?>
@@ -127,7 +134,12 @@
                                 <?php
                                     if ($post['Validado'] == 1) {
                                         echo ' <i class="bi bi-patch-check-fill align-self-center user-check"></i>';      
-                                    }
+                                    } 
+                                ?>
+
+                                    <span class="badge text-bg-secondary" ><?php echo ($promedio != '-') ? $promedio. ' ★' : $promedio ?></span>
+
+                                <?php
                                     if ($postulanteElegido && $post['Estado'] == "Activa" && !$postulanteActivo) {
                                 ?>
                                     <span class="badge text-bg-secondary">Publicación pausada</span>
@@ -152,11 +164,6 @@
                                 <?php
                                     if($dueñoPost){
                                 ?>
-                                    <!-- <li>
-                                        <a href="" id="editP" class="dropdown-item" data-bs-toggle="modal" data-bs-target="">
-                                            <i class="fa-solid fa-pen"></i> Editar
-                                        </a>
-                                    </li>  -->
                                     <li>
                                         <a href="" class="dropdown-item redLink" data-bs-toggle="modal" data-bs-target="#modalDeletePost">
                                             <i class="fa-solid fa-trash-can"></i> Eliminar
@@ -209,10 +216,14 @@
                                 <i class="fa-solid fa-calendar-days"></i>
                                 Fecha límite para completar la entrega: <?php echo $post['FechaLimite'];?> <br>
                                 <i class="fa-solid fa-ruler"></i> Volumen <br>
-                                Longitud: <?php echo $post['Largo']. ' cm'?> <br>
-                                Ancho: <?php echo $post['Ancho']. ' cm'?> <br>
-                                Alto: <?php echo $post['Alto']. ' cm'?> <br>
+                                    Longitud: <?php echo $post['Largo']. ' cm'?> <br>
+                                    Ancho: <?php echo $post['Ancho']. ' cm'?> <br>
+                                    Alto: <?php echo $post['Alto']. ' cm'?> <br>
                                 <i class="fa-solid fa-weight-scale"></i> Peso: <?php echo $post['Peso']. ' g <br>';
+                                if ($post['Fragil'] == 'si') { ?>
+                                    <span class="txt redLink">FRAGIL</span><br>
+                                <?php
+                                }
                                 echo $post['Descripcion'];
 
                                 if($dueñoPost || $postulanteActivo){
@@ -318,7 +329,9 @@
                             include 'comentarios.php';
                     ?>
                     <?php
-                        include 'postulaciones.php';
+                            
+
+                            include 'postulaciones.php';
                     ?>
                 </div>
             <?php

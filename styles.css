@@ -335,7 +335,7 @@ con el estilo que ya esta más arriba para el < btn-search > --------- */
     right: 0;
     width: 10px;
     height: 10px;
-    background-color: green;
+    background-color: rgb(69, 191, 182);
     border-radius: 50%;
     display: none; 
 }

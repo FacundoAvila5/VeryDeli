@@ -37,7 +37,7 @@
                     $promedio = ($pre_promedio / 100) * 5;
                     $promedio = round($promedio, 2);
                 }else{
-                    $promedio = '-';
+                    $promedio = 'Sin calificaciones';
                 }
 
         ?>

@@ -138,7 +138,7 @@
                     <div class="row mb-1">
                         <div class="col-12">
                             <i class="bi bi-star-fill" style="color: rgb(18, 146, 154);"></i>
-                            <span class="txt"><?php echo ($promedio == '-') ? 0 : $promedio ?></span>
+                            <span class="txt"><?php echo $promedio ?></span>
                         </div>
                     </div>
                     <div class="row mb-1">

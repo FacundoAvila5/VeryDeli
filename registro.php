@@ -1,4 +1,6 @@
 <?php
+include "ConexionBS.php";
+
 if (isset($_POST['btn-reg'])) {
     extract($_POST);
     $nameError = $apeError = $emailError = $telError = $pass1Error = $pass2Error = $imageError = "";
@@ -48,14 +50,9 @@ if (isset($_POST['btn-reg'])) {
         $imageError = "Por favor, cargue una imagen.";
     }
 
-    // Conexión con la base de datos
-    $conn = mysqli_connect('localhost', 'root');
-    if (!$conn) { die("Conexión fallida: " . mysqli_connect_error()); }
-    mysqli_select_db($conn, 'verydeli');
-
     // Verificar si el email ya existe
     $sql = "SELECT IdUsuario FROM usuarios WHERE EmailUsuario = '$email'";
-    $result = mysqli_query($conn, $sql);
+    $result = mysqli_query($conexion, $sql);
     if (mysqli_num_rows($result) > 0) {
         $emailError = "El email ya está registrado.";
     }
@@ -65,14 +62,14 @@ if (isset($_POST['btn-reg'])) {
         $hashed_password = password_hash($pass1, PASSWORD_DEFAULT);
         $sql = "INSERT INTO usuarios (NombreUsuario, ApellidoUsuario, EmailUsuario, TelefonoUsuario, Contrasenia, TipoUsuario, Validado, imagenUsuario) 
                 VALUES ('".$name."','".$ape."','".$email."','".$tel."','".$hashed_password."','Normal','0', '$targetFile')";
-        $result = mysqli_query($conn, $sql);
+        $result = mysqli_query($conexion, $sql);
         if ($result) {
             $showModal = true;
         } else {
-            echo "Error: " . mysqli_error($conn);
+            echo "Error: " . mysqli_error($conexion);
         }
 
-        mysqli_close($conn);
+        mysqli_close($conexion);
     } 
 }
 ?>

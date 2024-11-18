@@ -31,9 +31,13 @@ while ($row = mysqli_fetch_assoc($resultado)) {
         $insert_cal_negativa= mysqli_query ($conexion,$sql);
         //... y notificar al usuario de la penalizacion
         if ($resultado2) {
+            date_default_timezone_set('America/Argentina/Buenos_Aires');
+            $fechaHora = date('d/m/Y H:i');
+
+            $crearNoti = "INSERT INTO notificaciones (IdUsuario, TipoNotificacion, FechaDeNotificacion, Mensaje, IdPublicacion, Estado, IdUsuarioCalificar) 
+                        VALUES ( '".$_SESSION['idUser']."' , 'Penalizacion', '$fechaHora', 'Lo sentimos, fuiste penalizado con calificación negativa.', 0 , 0 , 0)";
+            mysqli_query($conexion, $crearNoti);
             echo "<script> alert ('Fuiste penalizado'); </script>"; //Test
-
-
         }
 
     }

@@ -84,6 +84,7 @@ if (isset($_POST['btn-reg'])) {
     <title>Registrarse - Very Deli</title>
     <link rel="stylesheet" href="stylelogin.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="shortcut icon" href="img\icons\loguito-fondoAzulV2.ico" type="image/x-icon">
     <style>
         @media (max-width:768px) {
             #cont {

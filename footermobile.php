@@ -50,6 +50,4 @@
         </div>
       </div>
     </div>
-
-    <script src="scriptMobile.js"></script>
     

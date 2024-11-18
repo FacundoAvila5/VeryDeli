@@ -28,7 +28,6 @@
           echo "<h5 class='card-title'>Califica a tu socio ".$row['NombreUsuario']."</h5>";
       }
       ?>
-      <button type="button" class="btn-close float-end" aria-label="Close" onclick="closeCard()"></button>
     </div>
     
     <form action="" method="post">
@@ -71,10 +70,6 @@
 </div>
 
 <script>
-    function closeCard() {
-        document.querySelector('.card').style.display = 'none';
-    }
-
     document.addEventListener('DOMContentLoaded', function() {
       const radioButtons = document.querySelectorAll('input[name="calificacion"]');
       const feedbackText = document.getElementById('feedbackText');

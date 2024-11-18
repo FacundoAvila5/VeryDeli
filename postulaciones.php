@@ -12,62 +12,83 @@
 
         while ($pst = mysqli_fetch_assoc($postulaciones)) {
             if(!$postulanteElegido){
-
                 if($date == ''){
                     $date = $pst['FechaPostulacion'];
                 }
                 else if ($date != $pst['FechaPostulacion']){
                     $date = $pst['FechaPostulacion'];
                 }
+
+                //calcula el promedio del postulante
+                $id4prom = $pst['IdUsuarioPostulacion'];
+
+                $sql_prom= "SELECT Puntaje 
+                            FROM calificaciones 
+                            WHERE IdCalificado = ".$id4prom." AND Puntaje <> -1";
+                $resultado = mysqli_query($conexion, $sql_prom);
+                $num = mysqli_num_rows($resultado);
+
+                if($num > 0) { 
+                    $suma=0;
+                    while ($row = mysqli_fetch_assoc($resultado)){
+                        $suma += $row['Puntaje'];
+                    }
+                    $pre_promedio= $suma / $num;
+                    $promedio = ($pre_promedio / 100) * 5;
+                    $promedio = round($promedio, 2);
+                }else{
+                    $promedio = '-';
+                }
+
         ?>
             <span class="fecha"><?php echo $pst['FechaPostulacion']; ?></span>
             <hr style="margin-top: 0.2rem;">
 
-    <div class="comment bg-white mb-3">
-        <div class="row m-2 p-2">
-            <div class="col-1 d-flex align-items-center justify-content-start p-0">
-                <img class="postUserImg rounded-circle" src="<?php echo $pst['ImagenUsuario']; ?>">
-            </div>
-            <div class="col-9 d-flex flex-column align-items-start">
-                <div class="row">
-                    <div class="col-12">
-                        <span>
-                            <span class="txt"><?php echo $pst['NombreUsuario'] ." ". $pst['ApellidoUsuario']; ?></span>
-                            <?php
-                                if ($pst['Validado'] == 1) {
-                                    echo ' <i class="bi bi-patch-check-fill align-self-center text-success"></i>';      
-                                }
-                            ?>
-                        </span>
+            <div class="comment bg-white mb-3">
+                <div class="row m-2 p-2">
+                    <div class="col-1 d-flex align-items-center justify-content-start p-0">
+                        <img class="postUserImg rounded-circle" src="<?php echo $pst['ImagenUsuario']; ?>">
+                    </div>
+                    <div class="col-9 d-flex flex-column align-items-start">
+                        <div class="row">
+                            <div class="col-12">
+                                <span>
+                                    <span class="txt"><?php echo $pst['NombreUsuario'] ." ". $pst['ApellidoUsuario']; ?></span>
+                                    <?php
+                                        if ($pst['Validado'] == 1) {
+                                            echo ' <i class="bi bi-patch-check-fill align-self-center user-check"></i>';      
+                                        }
+                                    ?>
+                                    <span class="badge text-bg-secondary" ><?php echo ($promedio != '-') ? $promedio. ' ★' : $promedio ?></span> 
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <span class="">Monto: $<?php echo $pst['Monto']; ?></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <span class="text-secondary">Comentario: 
+                                    <?php 
+                                    if($pst['ComentarioPostulacion'] == ''){
+                                        echo '-';
+                                    }else{
+                                    echo $pst['ComentarioPostulacion']; }?>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2 d-flex align-items-center justify-content-end">
+                        <form method="post" action="elegirPostulante.php">
+                            <input type="hidden" name="idpostulante" value="<?php echo $pst['IdUsuarioPostulacion']; ?>">
+                            <input type="hidden" name="idpost" value="<?php echo $idpost; ?>">
+                            <button class="btn btn-deli btn-elegir" type="submit">Elegir</button>
+                        </form>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <!-- <span class="text-secondary">Monto: <span class="txt">$<?php //echo $pst['Monto']; ?></span></span> -->
-                        <span class="">Monto: $<?php echo $pst['Monto']; ?></span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <span class="text-secondary">Comentario: 
-                            <?php 
-                            if($pst['ComentarioPostulacion'] == ''){
-                                echo '-';
-                            }else{
-                            echo $pst['ComentarioPostulacion']; }?>
-                        </span>
-                    </div>
-                </div>
             </div>
-            <div class="col-2 d-flex align-items-center justify-content-end">
-                <form method="post" action="elegirPostulante.php">
-                    <input type="hidden" name="idpostulante" value="<?php echo $pst['IdUsuarioPostulacion']; ?>">
-                    <input type="hidden" name="idpost" value="<?php echo $idpost; ?>">
-                    <button class="btn btn-deli btn-elegir" type="submit">Elegir</button>
-                </form>
-            </div>
-        </div>
-    </div>
     <?php
             }else if($pst['IdUsuarioPostulacion'] == $post['IdPostulante']){
     ?>

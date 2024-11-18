@@ -34,8 +34,8 @@
             </div>
             <div class="col-2 text-end pe-3">
                 <a href="seccionNotificaciones.php" class="position-relative">
-                    <i class="bi bi-bell-fill fs-2" style="color:rgb(7, 64, 113);"></i>
-                    <!-- Indicador de notificación -->
+                    <i class="bi bi-bell-fill fs-2" style="color:rgb(13, 44, 85);"></i>
+                    <!-- Indicador de notificación rgb(33, 65, 105) rgb(10, 25, 44)-->
                     <span id="notificationIndicator" class="notification-indicator"></span>
                 </a>
             </div>
@@ -78,24 +78,32 @@
 
                     if (output) {
                         if (noti.TipoNotificacion === "Normal") {
-                            output.innerHTML += `<div class="notif bg-white rounded text-center border" id="busqueda" style="border-color: aqua; cursor: pointer;"
+                            output.innerHTML += 
+                            `<div class="notif bg-white rounded border d-flex flex-column justify-content-center p-2" id="busqueda" style="border-color: aqua; cursor: pointer;"
                                 onclick="marcarComoVisto(${noti.IdNotificacion}, '${noti.IdPublicacion}')">
-                                <p>${noti.Mensaje} - ${noti.FechaDeNotificacion}</p>
+                                <span class="fecha d-flex justify-content-start">${noti.FechaDeNotificacion}</span>    
+                                <span>${noti.Mensaje}</span>
                             </div>`;
                         } else if (noti.TipoNotificacion === "Envio") {
-                            output.innerHTML += `<div class="notif bg-white rounded text-center border" id="busqueda" style="border-color: aqua; cursor: pointer;"
+                            output.innerHTML += 
+                            `<div class="notif bg-white rounded border d-flex flex-column justify-content-center p-2" id="busqueda" style="border-color: aqua; cursor: pointer;"
                                 onclick="enviarDatosCalificacion(${noti.IdNotificacion}, '${noti.IdUsuarioCalificar}')">
-                                <p>${noti.Mensaje} - ${noti.FechaDeNotificacion}</p>
+                                <span class="fecha d-flex justify-content-start">${noti.FechaDeNotificacion}</span>    
+                                <span>${noti.Mensaje}</span>
                             </div>`;
                         } else if (noti.TipoNotificacion === "validacion") {
-                            output.innerHTML += `<div class="notif bg-white rounded text-center border" id="busqueda" style="border-color: aqua; cursor: pointer;"
+                            output.innerHTML += 
+                            `<div class="notif bg-white rounded border d-flex flex-column justify-content-center p-2" id="busqueda" style="border-color: aqua; cursor: pointer;"
                                 onclick="enviar()">
-                                <p>${noti.Mensaje} - ${noti.FechaDeNotificacion}</p>
+                                <span class="fecha d-flex justify-content-start">${noti.FechaDeNotificacion}</span>    
+                                <span>${noti.Mensaje}</span>
                             </div>`;
                         } else if (noti.TipoNotificacion === "verificado") {
-                            output.innerHTML += `<div class="notif bg-white rounded text-center border" id="busqueda" style="border-color: aqua; cursor: pointer;"
+                            output.innerHTML += 
+                            `<div class="notif bg-white rounded border d-flex flex-column justify-content-center p-2" id="busqueda" style="border-color: aqua; cursor: pointer;"
                                 onclick="enviarA()">
-                                <p>${noti.Mensaje} - ${noti.FechaDeNotificacion}</p>
+                                <span class="fecha d-flex justify-content-start">${noti.FechaDeNotificacion}</span>    
+                                <span>${noti.Mensaje}</span>
                             </div>`;
                         }
                     }
@@ -141,8 +149,6 @@
 </script>
 
 
-
-
 <!-- ACTUALIZACIÓN DE TIPO DE USUARIO -->
 <?php
     if (basename($_SERVER['PHP_SELF']) !== 'perfildeusuario.php') {
@@ -151,4 +157,5 @@
         // ELIMINAR NOTIFICACIONES DE CALIFICACION CADUCADAS
         include 'verificar_7DiasCalificacion.php';
     }
+
 ?>

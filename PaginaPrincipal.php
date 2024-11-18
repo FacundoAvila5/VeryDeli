@@ -19,7 +19,6 @@
 <?php
 session_start();
 
-
 if (!isset($_SESSION['usuario'])) {
     header("Location: login.php");
     exit;
@@ -30,7 +29,6 @@ unset($_SESSION['alert_message']);
 
 include "ConexionBS.php";
 include "CrearPublicacion.php";
-
 
 ?>
 
@@ -44,8 +42,6 @@ include "CrearPublicacion.php";
 
 
 <body>
-
-
 
     <!-- HEADER -->
     <?php
@@ -72,7 +68,7 @@ include "CrearPublicacion.php";
             $sql = "SELECT p.*, u.NombreUsuario, u.ApellidoUsuario, u.ImagenUsuario, u.Validado
             FROM publicaciones p
             INNER JOIN usuarios u ON p.IdUsuario = u.IdUsuario
-            WHERE Estado = 'Activa' 
+            WHERE Estado = 'Activa'
             ORDER BY p.IdPublicacion DESC 
             ";
             //LIMIT 10
@@ -169,7 +165,7 @@ include "CrearPublicacion.php";
                                     ?> <br>
                                 <i class="i fa-solid fa-weight-scale"></i>
                                 Peso: <?php echo $row['Peso']. 'g <br>';
-                                if ($row['Fragil'] == 'sí') { ?>
+                                if ($row['Fragil'] == 'si') { ?>
                                     <span class="txt redLink">FRAGIL</span><br>
                                 <?php
                                 }
@@ -209,9 +205,9 @@ include "CrearPublicacion.php";
                 <?php
                 }
 
-                echo '<div class="d-flex justify-content-center align-items-center">
-                        <a href="" class="link">Cargar más publicaciones</a>
-                    </div>';
+                // echo '<div class="d-flex justify-content-center align-items-center">
+                //         <a href="" class="link">Cargar más publicaciones</a>
+                //     </div>';
             } 
                 
             if (!$content) { ?>
@@ -236,10 +232,11 @@ include "CrearPublicacion.php";
             
     </div>
 
-     <?php include 'PiedePagina.php'; ?>
+            <!-- FOOTER -->
+        <?php include 'PiedePagina.php'; ?>
     </div>
 
-    <!-- FOOTER MOBILE -->
+    <!-- MENU MOBILE (footer mobile) -->
         <?php
             include 'footermobile.php';
         ?>

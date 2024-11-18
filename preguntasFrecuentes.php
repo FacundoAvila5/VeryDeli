@@ -66,13 +66,13 @@
                     </div>
                     <div id="why_responsable" class="pt-3">
                     <h5>¿Por qué ser un usuario responsable?</h5>
-                        Al ser un usuario responsable, podrás publicar y postularte sin limitación alguna. Por el contrario, los usuarios no cuenten con el nivel de «Responsable»
+                        Al ser un usuario responsable, podrás publicar y postularte sin limitación alguna. Por el contrario, los usuarios que no cuenten con el nivel de «Responsable»
                         sólo podrán tener un total de <span class="link">3</span> publicaciones activas y <span class="link">1</span> postulación en curso.
                     </div>
                     <div id="how_responsable" class="pt-3">
                         <h5>¿Cómo ser un usuario responsable?</h5>
-                        Para alcanzar el nivel de usuario responsable, sólo tienes que asegurarte de obtener 5 calificaciones consecutivas con un puntaje positivo. 
-                        ¡Es así de simple! 
+                        Para alcanzar el nivel de usuario responsable, sólo tienes que obtener 5 calificaciones consecutivas que te otorguen
+                        un promedio de puntaje del 80% o más. ¡Es así de simple! 
                     </div>
                     <div id="lost_responsable" class="pt-3">
                         <h5>¿Por qué perdí mi nivel de usuario responsable?</h5>
@@ -90,7 +90,7 @@
                     </div>
                     <div id="penalizacion" class="pt-2">
                         <h5>¿Por qué he sido penalizado?</h5>
-                        Una vez que finalices un envío, o que el postulante a quién hayas elegido finaliza el tuyo, debes calificar tu experiencia con el servicio.
+                        Una vez finalizas un envío, o que el postulante a quién hayas elegido finaliza el tuyo, debes calificar tu experiencia con el servicio.
                         Se otorga el tiempo total de <span class="link">una semana</span> para completar esta acción, o de lo contrario 
                         tu cuenta será penalizada con 1 calificación negativa. <br>
                         Las calificaciones negativas no impactan directamente en tu promedio de puntuaciones, pero obtener 

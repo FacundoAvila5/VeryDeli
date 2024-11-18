@@ -182,7 +182,7 @@
         .catch(error => console.error('Error en la solicitud:', error));
     }
 
-    function enviarASeccion($idNotificacion) {
+    function enviarASeccion(idNotificacion) {
         const formData = new FormData();
         formData.append('IdNotificacion', idNotificacion);
 
@@ -193,7 +193,7 @@
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                window.location.href = `preguntasFrecuentes.php#penalizacion.php`;
+                window.location.href = `preguntasFrecuentes.php#penalizacion`;
             } else {
                 console.error('Error al actualizar notificación:', data.message);
             }

@@ -94,14 +94,21 @@
                         } else if (noti.TipoNotificacion === "validacion") {
                             output.innerHTML += 
                             `<div class="notif bg-white rounded border d-flex flex-column justify-content-center p-2" id="busqueda" style="border-color: aqua; cursor: pointer;"
-                                onclick="enviar()">
+                                onclick="enviar(${noti.IdNotificacion})">
                                 <span class="fecha d-flex justify-content-start">${noti.FechaDeNotificacion}</span>    
                                 <span>${noti.Mensaje}</span>
                             </div>`;
                         } else if (noti.TipoNotificacion === "verificado") {
                             output.innerHTML += 
                             `<div class="notif bg-white rounded border d-flex flex-column justify-content-center p-2" id="busqueda" style="border-color: aqua; cursor: pointer;"
-                                onclick="enviarA()">
+                                onclick="enviarA(${noti.IdNotificacion})">
+                                <span class="fecha d-flex justify-content-start">${noti.FechaDeNotificacion}</span>    
+                                <span>${noti.Mensaje}</span>
+                            </div>`;
+                        } else if (noti.TipoNotificacion === "Penalizacion") {
+                            output.innerHTML += 
+                            `<div class="notif bg-white rounded border d-flex flex-column justify-content-center p-2" id="busqueda" style="border-color: aqua; cursor: pointer;"
+                                onclick="enviarASeccion(${noti.IdNotificacion})">
                                 <span class="fecha d-flex justify-content-start">${noti.FechaDeNotificacion}</span>    
                                 <span>${noti.Mensaje}</span>
                             </div>`;
@@ -137,12 +144,64 @@
         window.location.href = `calificacion.php?IdNotificacion=${idNotificacion}&IdUsuarioCalificar=${idUsuarioCalificar}`;
     }
 
-    function enviar() {
+    function enviar($idNotificacion) {
+        <?php
+
+        if ($idNotificacion) {
+            $actualizacion = "UPDATE notificaciones SET Estado = 1 WHERE IdNotificacion = '$idNotificacion'";
+            $resultado = mysqli_query($conexion, $actualizacion);
+
+            if (mysqli_affected_rows($conexion) > 0) {
+                echo json_encode(['success' => true]);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'No se pudo actualizar la notificación.']);
+            }
+        } else {
+            echo json_encode(['success' => false, 'message' => 'ID de notificación no válido.']);
+        }
+
+        ?>
         window.location.href = `VerificarUsuario.php`;
     }
 
-    function enviarA() {
+    function enviarA($idNotificacion) {
+        <?php
+
+        if ($idNotificacion) {
+            $actualizacion = "UPDATE notificaciones SET Estado = 1 WHERE IdNotificacion = '$idNotificacion'";
+            $resultado = mysqli_query($conexion, $actualizacion);
+
+            if (mysqli_affected_rows($conexion) > 0) {
+                echo json_encode(['success' => true]);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'No se pudo actualizar la notificación.']);
+            }
+        } else {
+            echo json_encode(['success' => false, 'message' => 'ID de notificación no válido.']);
+        }
+
+        ?>
         window.location.href = `perfildeusuario.php`;
+    }
+
+    function enviarASeccion($idNotificacion) {
+        <?php
+
+        if ($idNotificacion) {
+            $actualizacion = "UPDATE notificaciones SET Estado = 1 WHERE IdNotificacion = '$idNotificacion'";
+            $resultado = mysqli_query($conexion, $actualizacion);
+
+            if (mysqli_affected_rows($conexion) > 0) {
+                echo json_encode(['success' => true]);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'No se pudo actualizar la notificación.']);
+            }
+        } else {
+            echo json_encode(['success' => false, 'message' => 'ID de notificación no válido.']);
+        }
+
+        ?>
+        window.location.href = `preguntasFrecuentes.php#penalizacion`;
     }
 
     setInterval(fetchNotificaciones, 100);

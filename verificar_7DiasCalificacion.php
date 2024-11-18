@@ -37,8 +37,6 @@ while ($row = mysqli_fetch_assoc($resultado)) {
             $crearNoti = "INSERT INTO notificaciones (IdUsuario, TipoNotificacion, FechaDeNotificacion, Mensaje, IdPublicacion, Estado, IdUsuarioCalificar) 
                         VALUES ( '".$_SESSION['idUser']."' , 'Penalizacion', '$fechaHora', 'Lo sentimos, fuiste penalizado con calificación negativa.', 0 , 0 , 0)";
             mysqli_query($conexion, $crearNoti);
-            echo "<script> alert ('Fuiste penalizado'); </script>"; //Test
         }
-
     }
 }

@@ -144,67 +144,64 @@
         window.location.href = `calificacion.php?IdNotificacion=${idNotificacion}&IdUsuarioCalificar=${idUsuarioCalificar}`;
     }
 
-    function enviar($idNotificacion) {
-        <?php
+    function enviar(idNotificacion) {
+        const formData = new FormData();
+        formData.append('IdNotificacion', idNotificacion);
 
-        if ($idNotificacion) {
-            $actualizacion = "UPDATE notificaciones SET Estado = 1 WHERE IdNotificacion = '$idNotificacion'";
-            $resultado = mysqli_query($conexion, $actualizacion);
-
-            if (mysqli_affected_rows($conexion) > 0) {
-                echo json_encode(['success' => true]);
+        fetch('notificacion_leida.php', {
+            method: 'POST',
+            body: formData 
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                window.location.href = `VerificarUsuario.php`;
             } else {
-                echo json_encode(['success' => false, 'message' => 'No se pudo actualizar la notificación.']);
+                console.error('Error al actualizar notificación:', data.message);
             }
-        } else {
-            echo json_encode(['success' => false, 'message' => 'ID de notificación no válido.']);
-        }
-
-        ?>
-        window.location.href = `VerificarUsuario.php`;
+        })
+        .catch(error => console.error('Error en la solicitud:', error));
     }
 
-    function enviarA($idNotificacion) {
-        <?php
+    function enviarA(idNotificacion) {
+        const formData = new FormData();
+        formData.append('IdNotificacion', idNotificacion);
 
-        if ($idNotificacion) {
-            $actualizacion = "UPDATE notificaciones SET Estado = 1 WHERE IdNotificacion = '$idNotificacion'";
-            $resultado = mysqli_query($conexion, $actualizacion);
-
-            if (mysqli_affected_rows($conexion) > 0) {
-                echo json_encode(['success' => true]);
+        fetch('notificacion_leida.php', {
+            method: 'POST',
+            body: formData 
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                window.location.href = `perfildeusuario.php`;
             } else {
-                echo json_encode(['success' => false, 'message' => 'No se pudo actualizar la notificación.']);
+                console.error('Error al actualizar notificación:', data.message);
             }
-        } else {
-            echo json_encode(['success' => false, 'message' => 'ID de notificación no válido.']);
-        }
-
-        ?>
-        window.location.href = `perfildeusuario.php`;
+        })
+        .catch(error => console.error('Error en la solicitud:', error));
     }
 
     function enviarASeccion($idNotificacion) {
-        <?php
+        const formData = new FormData();
+        formData.append('IdNotificacion', idNotificacion);
 
-        if ($idNotificacion) {
-            $actualizacion = "UPDATE notificaciones SET Estado = 1 WHERE IdNotificacion = '$idNotificacion'";
-            $resultado = mysqli_query($conexion, $actualizacion);
-
-            if (mysqli_affected_rows($conexion) > 0) {
-                echo json_encode(['success' => true]);
+        fetch('notificacion_leida.php', {
+            method: 'POST',
+            body: formData 
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                window.location.href = `preguntasFrecuentes.php#penalizacion.php`;
             } else {
-                echo json_encode(['success' => false, 'message' => 'No se pudo actualizar la notificación.']);
+                console.error('Error al actualizar notificación:', data.message);
             }
-        } else {
-            echo json_encode(['success' => false, 'message' => 'ID de notificación no válido.']);
-        }
-
-        ?>
-        window.location.href = `preguntasFrecuentes.php#penalizacion`;
+        })
+        .catch(error => console.error('Error en la solicitud:', error));
     }
 
-    setInterval(fetchNotificaciones, 100);
+    setInterval(fetchNotificaciones, 500);
 </script>
 
 
